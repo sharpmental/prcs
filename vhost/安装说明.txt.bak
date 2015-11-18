@@ -1,0 +1,42 @@
+安装分成以下几步
+
+1. 首先安装和设置mysql, php, apache环境。
+建议直接使用xampp套件，不需要分别设置各个部件。否则，请自行参考mysql，php和apache的一般设置文档。
+调试环境下，建议将系统安装至单独的虚拟主机目录下面。为虚拟主机打开访问权限。
+工作环境则将系统直接放置到主机根目录下。将CI环境安装至主机或者虚拟主机的根目录下不需要额外的设置，反之请上网自行查找所需要的设置步骤。
+
+访问/info.php，如果有显示，则表示php+apache可以正常工作。
+
+2. 找到 application/config.php 中
+ 	将 
+   	$config['base_url'] = '';
+   	换成你的域名或者IP如 $config['base_url'] = 'http://www.xxx.com'; $config['base_url'] = 'http://locahost:portnumber'; 
+   	* 暂不支持将系统安装至子目录下
+
+ 3. 找到 application/database.php中
+ 	将
+ 	'hostname' => 'localhost',
+	'username' => '',
+	'password' => '',
+	'database' => '',
+	换成你真实数据库信息，分别为主机名称，数据库用户名，数据库密码，数据库名称
+
+ 4. 找到 application/constant.php中
+ 	将
+ 	define('SITE_URL', '/');
+ 	换成和你相对于站点的根目录，如果网站目录就是当前是根目录不需要修改。
+	如果是子类目，就换成你的子目录如 define('SITE_URL', '/prcs/');
+
+  5. 将“init_mysql.sql” 导入到你的数据库中
+如果有旧的prcs数据库，建议先删除旧的，重建数据库，再导入sql脚本。
+
+  6. 找到 application/aci.php中
+ 	将
+ 	$config['aci_status'] = array (
+	  'systemVersion' => '1.0.0',
+	  'installED' => false,
+	);
+	改成 'installED'=>true;
+
+7. 进入后台，运行 http://localhost/adminpanel/manage/cache ，会更新一下栏目缓存，如果需要登录则参考No.8条目。
+8. 用户为admin 密码0002
