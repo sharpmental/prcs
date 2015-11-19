@@ -390,7 +390,7 @@ insert into `tb_people_detail` values (2, '3308070716', '韦吉明', '1986-12-03
 drop table if exists `tb_people_inout`;
 
 create table `tb_people_inout` (
-  `inout_id` int(11) not null,
+  `inout_id` int(11) not null auto_increment,
   `people_id` int(11) not null,
   `watch_id` int(11) default null,
   `area_id` int(11) default null,

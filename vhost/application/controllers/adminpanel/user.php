@@ -105,7 +105,9 @@ class User extends Admin_Controller {
 			if($repassword!=$password)
 				exit(json_encode(array('status'=>false,'tips'=>'密码输入不一样')));
 			
-			if(trim($password)!="")$password = md5(md5($password.$data_info['encrypt']));
+			if(trim($password)!="")
+// 				$password = md5(md5($password.$data_info['encrypt']));
+				$password = $password.$data_info['encrypt'];
 			else
 				$password = $data_info['password'];
 			
@@ -196,7 +198,7 @@ class User extends Admin_Controller {
 
 			$fullname= isset($_POST["fullname"])?trim(safe_replace($_POST["fullname"])):exit(json_encode(array('status'=>false,'tips'=>'全名不能为空')));
 // 			$thumb= isset($_POST["thumb"])?trim(safe_replace($_POST["thumb"])):exit(json_encode(array('status'=>false,'tips'=>'成员图像不能为空')));
-			$is_lock= isset($_POST["is_lock"])?intval($_POST["is_lock"]):exit(json_encode(array('status'=>false,'tips'=>'是否锁定登录不能为空')));
+// 			$is_lock= isset($_POST["is_lock"])?intval($_POST["is_lock"]):exit(json_encode(array('status'=>false,'tips'=>'是否锁定登录不能为空')));
 			
 			if($this->check_username($username))
 				exit(json_encode(array('status'=>false,'tips'=>'用户名已经存在')));

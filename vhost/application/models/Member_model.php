@@ -44,7 +44,7 @@ class Member_model extends Base_Model {
 			$password = $password.$encrypt;
 			$status = $this->update(
 					array('encrypt'=>$encrypt,
-							'operator_pwd'=>$password,
+						  	'operator_pwd'=>$password,
 							'update_timestamp'=>date('Y-m-d H:i:s')),
 					array('operator_name'=>$username));
 			
