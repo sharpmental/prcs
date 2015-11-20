@@ -202,7 +202,8 @@ VALUES
 	(40,'全局缓存',5,40,0,'manage','adminpanel','cache','0',1,0,1,1,'','0,1,5','40',0,1),
 	(41,'详细信息', 4, 41, 0, 'manage', 'adminpanel', 'detailinfo', '0', 1, 0, 1, 1, '', '0,4,41', '41', 0, 1),
 	(42,'外出', 4, 42, 0, 'manage', 'adminpanel', 'leave', '0', 1, 0, 1, 1, '', '0,4,42', '42', 0, 1),
-	(43,'轨迹', 4, 43, 0, 'manage', 'adminpanel', 'trace', '0', 1, 0, 1, 1, '', '0,4,43', '43', 0, 1);
+	(43,'轨迹', 4, 43, 0, 'manage', 'adminpanel', 'trace', '0', 1, 0, 1, 1, '', '0,4,43', '43', 0, 1),
+	(44,'显示数据表', 38, 44, 0, 'edittable', 'adminpanel', 'viewtable', '0', 1, 0, 1, 1, '', '0,4,15,38', '44', 0, 1);
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;
 
@@ -285,7 +286,7 @@ CREATE TABLE `tb_times` (
 drop table if exists `tb_logging`;
 
 create table `tb_logging` (
-  `log_id` int(11) not null,
+  `log_id` int(11) not null auto_increment,
   `operator_id` int(11) not null,
   `name` varchar(64) default null,
   `user` varchar(64) default null,
@@ -389,7 +390,7 @@ insert into `tb_people_detail` values (2, '3308070716', '韦吉明', '1986-12-03
 drop table if exists `tb_people_inout`;
 
 create table `tb_people_inout` (
-  `inout_id` int(11) not null,
+  `inout_id` int(11) not null auto_increment,
   `people_id` int(11) not null,
   `watch_id` int(11) default null,
   `area_id` int(11) default null,
@@ -474,7 +475,7 @@ insert into `tb_alarm_loc` values
 drop table if exists `tb_record_flow`;
 
 create table `tb_record_flow` (
-  `rec_id` int(11) not null,
+  `rec_id` int(11) not null auto_increment,
   #如果id表示条目，并且是循环覆盖的，不适合用作索引。可以用watch_id和area_id做索引
   `rec_time` datetime not null,
   `watch_id` int(11) not null,
@@ -555,7 +556,7 @@ insert into `tb_alarm_mon` values
 drop table if exists `tb_department_info`;
 
 create table `tb_department_info` (
-  `dep_id` int(11) not null,
+  `dep_id` int(11) not null auto_increment,
   `dep_name` varchar(64) not null,
   `update_timestamp` datetime not null,
   primary key  (`dep_id`)

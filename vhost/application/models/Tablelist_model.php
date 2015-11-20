@@ -29,4 +29,10 @@ class Tablelist_model extends Base_model{
 		$fields = $this->db->list_fields($table_name);
 		return $fields;
 	}
+	
+	public function gettablestatus($table_name, $where){
+		$data = $this->query("select * from ".$table_name." where ".$where);
+		return $data;
+	}
+	
 }

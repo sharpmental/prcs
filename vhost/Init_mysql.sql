@@ -286,7 +286,7 @@ CREATE TABLE `tb_times` (
 drop table if exists `tb_logging`;
 
 create table `tb_logging` (
-  `log_id` int(11) not null,
+  `log_id` int(11) not null auto_increment,
   `operator_id` int(11) not null,
   `name` varchar(64) default null,
   `user` varchar(64) default null,
@@ -452,7 +452,7 @@ drop table if exists `tb_alarm_loc`;
 
 create table `tb_alarm_loc` (
 `watch_id` int(11) not null comment '腕带标识，腕带表键值',
-`alarm_type` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
+`alarm_state` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
 `locarea_id` int(11) not null default '0' comment '腕带所在定位区域id, 如果id=0就是区域位置未知',
 `monarea_id` int(11) not null default '0' comment '腕带所在监控区域id, 门禁天线报警会带监控区域id',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间',
@@ -475,7 +475,7 @@ insert into `tb_alarm_loc` values
 drop table if exists `tb_record_flow`;
 
 create table `tb_record_flow` (
-  `rec_id` int(11) not null,
+  `rec_id` int(11) not null auto_increment,
   #如果id表示条目，并且是循环覆盖的，不适合用作索引。可以用watch_id和area_id做索引
   `rec_time` datetime not null,
   `watch_id` int(11) not null,
@@ -556,7 +556,7 @@ insert into `tb_alarm_mon` values
 drop table if exists `tb_department_info`;
 
 create table `tb_department_info` (
-  `dep_id` int(11) not null,
+  `dep_id` int(11) not null auto_increment,
   `dep_name` varchar(64) not null,
   `update_timestamp` datetime not null,
   primary key  (`dep_id`)
