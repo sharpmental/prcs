@@ -208,8 +208,11 @@ class User extends Admin_Controller {
 													'operator_power'=>$group_id,
 													'operator_user'=>$fullname,
 													'reg_time'=>date('Y-m-d H:i:s'),
-													'encrypt'=>$encrypt,
+													'encrypt'=>"",
 													'reg_ip'=>$this->input->ip_address(),
+            										'last_login_ip' => '',
+            										'last_login_time' => '',
+            										'update_timestamp' => date('Y-m-d H:i:s')
 											));
             if($new_id)
             {

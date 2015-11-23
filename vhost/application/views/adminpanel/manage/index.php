@@ -4,7 +4,11 @@
 	<div class='panel-heading'>
 		<i class='glyphicon glyphicon-th-list'></i>人员列表
 		<div class='panel-filter '>
+
 			<form class="form-inline" role="form" method="get" name="searchform" action="<?php echo current_url();?>">
+				<button type="button" class="btn btn-default" id="refreshBtn">
+					<span class="glyphicon glyphicon-refresh">刷新</span>
+                </button>
 				<div class="form-group">
 					<label for="keyword" class="form-control-static control-label">关键词</label>
 					<input class="form-control input-sm" type="text" name="keyword" id="keyword" placeholder="请输入关键词" />

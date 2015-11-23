@@ -22,7 +22,7 @@ class Prisonerinfo_model extends Base_model{
 	
 	public function getfromkeyword($keyword){
 		if($keyword)
-			$data = $this->query("select * from people_view where people_name = '".$keyword."' or people_id = '".$keyword."'");
+			$data = $this->query("select * from people_view where people_name like %".$keyword."% or people_id like  %".$keyword."%");
 		else 
 			$data = $this->query("select * from people_view");
 		

@@ -295,7 +295,8 @@ create table `tb_logging` (
   `ip` varchar(20) not null,
   `login_time` datetime default null,
   `logout_time` datetime default null,
-  `update_timestamp` datetime default null
+  `update_timestamp` datetime default null,
+  primary key (`log_id`)
 ) engine=myisam default charset=utf8 comment='登录记录表';
 
 -- 
@@ -452,7 +453,7 @@ drop table if exists `tb_alarm_loc`;
 
 create table `tb_alarm_loc` (
 `watch_id` int(11) not null comment '腕带标识，腕带表键值',
-`alarm_state` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
+`alarm_type` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
 `locarea_id` int(11) not null default '0' comment '腕带所在定位区域id, 如果id=0就是区域位置未知',
 `monarea_id` int(11) not null default '0' comment '腕带所在监控区域id, 门禁天线报警会带监控区域id',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间',

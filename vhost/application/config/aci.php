@@ -407,32 +407,6 @@ $config['aci_module'] = array (
 );
 
 $config['menu_notify'] = array(
-		'person_count' => array (
-				'title' => '人数统计',
-				'submenu' => array(
-						'#',
-						'在册人数',
-						'prison_totalnumber' =>'0',
-						'#',
-						'失联人数',
-						'prison_lostconnection'=>'0',
-						'#',
-						'外出人数',
-						'prison_outer' =>'0',
-						'#',
-						'实到人数',
-						'prison_avaliable'=> '0',
-						'#',
-						'重点区域',
-						'prison_monarea_person'=> '0'
-// 						'工间',
-// 						'prison_working_person'=> '0',
-// 						'监舍',
-// 						'prison_house_person'=> '0',
-// 						'其他区域',
-// 						'prison_otherarea_person'=> '0'
-				),
-		),
 		'device_count' => array (
 				'title' => '设备统计',
 				'submenu' => array(
@@ -452,7 +426,33 @@ $config['menu_notify'] = array(
 						'监控模块报警',
 						'mon_alarm' => '0'
 				)
-		)
+		),
+		'person_count' => array (
+				'title' => '人数统计',
+				'submenu' => array(
+						'#',
+						'在册人数',
+						'prison_totalnumber' =>'0',
+						'#',
+						'失联人数',
+						'prison_lostconnection'=>'0',
+						'#',
+						'外出人数',
+						'prison_outer' =>'0',
+						'#',
+						'实到人数',
+						'prison_avaliable'=> '0',
+						'#',
+						'重点区域',
+						'prison_monarea_person'=> '0'
+						// 						'工间',
+		// 						'prison_working_person'=> '0',
+		// 						'监舍',
+		// 						'prison_house_person'=> '0',
+		// 						'其他区域',
+		// 						'prison_otherarea_person'=> '0'
+				),
+		),
 );
 
 $config['watch_status'] = array(

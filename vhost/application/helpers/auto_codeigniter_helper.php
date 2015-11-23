@@ -287,7 +287,8 @@
 			global $CI;
 			if($CI->current_role_priv_arr){
 				$found=false;
-				if($CI->group_id==SUPERADMIN_GROUP_ID)$found= true;
+				if($CI->group_id==SUPERADMIN_GROUP_ID)
+					$found= true;
 				if(!$found)
 					foreach($CI->current_role_priv_arr as $k=>$v){
 						if($v['method']==$method&&$v['controller']==$controller&&$v['folder']==$folder){
@@ -333,7 +334,8 @@
 			global $CI;
 			if($CI->current_role_priv_arr){
 				$found=false;
-				if($CI->group_id==SUPERADMIN_GROUP_ID)$found= true;
+				if($CI->group_id==SUPERADMIN_GROUP_ID)
+					$found= true;
 				if(!$found)
 				foreach($CI->current_role_priv_arr as $k=>$v){
 					if($v['method']==$method&&$v['controller']==$controller&&$v['folder']==$folder){
