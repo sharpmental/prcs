@@ -182,7 +182,7 @@ class Manage extends Admin_Controller {
 // 			if($r['is_lock'])
 // 				exit(json_encode(array('status'=>false,'tips'=>' 您的帐号已被锁定，暂时无法登录')));
 
-			$this->Member_model->update(array('last_login_ip'=>$ip,'last_login_time'=>SYS_DATEsTIME),array('operator_id'=>$r['operator_id']));
+			$this->Member_model->update(array('last_login_ip'=>$ip,'last_login_time'=>SYS_DATETIME),array('operator_id'=>$r['operator_id']));
 			$this->session->set_userdata('user_id',$r['operator_id']);
 			$this->session->set_userdata('user_fullname',$r['operator_name']);
 			$this->session->set_userdata('user_name',$username);
