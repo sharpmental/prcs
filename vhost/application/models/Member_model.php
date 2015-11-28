@@ -25,10 +25,10 @@ class Member_model extends Base_Model {
 							'operator_pwd'=>$password,
 							'operator_power'=>1,
 							'reg_ip'=>$this->input->ip_address(),
-							'reg_time'=>SYS_TIME,
+							'reg_time'=>SYS_DATETIME,
 							'encrypt'=>$encrypt,
 							'last_login_ip'=>$this->input->ip_address(),
-							'last_login_time'=>SYS_TIME,
+							'last_login_time'=>SYS_DATETIME,
 							'update_timestamp'=>date('Y-m-d H:i:s')));
 			
 			return $newid;

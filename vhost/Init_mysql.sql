@@ -254,7 +254,7 @@ CREATE TABLE `tb_sessions` (
   `user_agent` varchar(120) NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
+  `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
