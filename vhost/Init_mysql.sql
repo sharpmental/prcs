@@ -251,7 +251,7 @@ DROP TABLE IF EXISTS `tb_sessions`;
 CREATE TABLE `tb_sessions` (
   `id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
+  `user_agent` varchar(120) default '' NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
   `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,

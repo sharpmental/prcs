@@ -29,14 +29,6 @@ class Member_role_model extends Base_Model {
      */
     function init()
     {
-    	$this->query("CREATE TABLE `t_aci_role`
-(
-`role_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-`role_name` varchar(250) DEFAULT NULL COMMENT '用户组名',
-`description` text COMMENT '用户组描述',
-PRIMARY KEY (`role_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
-");
     }
 
     function default_info(){
