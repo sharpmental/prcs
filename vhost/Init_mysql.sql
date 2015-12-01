@@ -47,7 +47,7 @@ create table `tb_operator_info` (
   #加密 现在不使用
   `last_login_ip` varchar(64), 
   #最近一次登录使用的ip地址
-  `last_login_time` datetime not null, 
+  `last_login_time` datetime default null, 
   #最近一次登录的时间
   `update_timestamp` datetime not null, 
   #最近一次修改的时间
@@ -385,8 +385,6 @@ insert into `tb_people_detail` values (2, '3308070716', '韦吉明', '1986-12-03
 -- 表的结构 `tb_people_inout`
 -- 
 #记录犯人的外出和返回
-#问题，犯人A外出后返回，再外出，覆盖前一条记录还是新增一条记录？
-#覆盖表示每个犯人最多一条记录，新增则表示查找状态的时候要遍历此犯人全部状态
 
 drop table if exists `tb_people_inout`;
 
@@ -407,6 +405,31 @@ create table `tb_people_inout` (
 -- 
 -- 导出表中的数据 `tb_people_inout`
 -- 
+
+
+-- --------------------------------------------------------
+
+-- 
+-- 表的结构 `tb_people_inout_detail`
+-- 
+#记录犯人的外出和返回
+
+drop table if exists `tb_people_inout_detail`;
+
+create table `tb_people_inout_detail` (
+  `inout_id` int(11) not null auto_increment,
+  `people_id` int(11) not null,
+  `watch_id` int(11) default null,
+  `area_id` int(11) default null,
+  `intime` datetime default null,
+  `outtime` datetime default null,
+  `memo` varchar(200) default null,
+  `status` smallint default 0,
+  #0=返回 1=外出
+  `update_timestamp` datetime default null,
+  primary key  (`inout_id`)
+) engine=myisam default charset=utf8 comment='人员出入历史记录表';
+
 
 -- --------------------------------------------------------
 

@@ -19,6 +19,7 @@ class Prisonerinout_model extends Base_model{
 					"update_timestamp" => date("Y-m-d h:i:s")
 					);
 			$this->insert($result);
+			$this->query("insert into tb_people_inout_detail (people_id, watch_id, area_id, outtime, status, update_timestamp) "." values (".$id.", 0, 0, '".date("Y-m-d h:i:s")."', 1,'".date("Y-m-d h:i:s")."')");
 		}
 		else if($data['status'] == 0){
 			$data['outtime'] = date("Y-m-d h:i:s");
@@ -26,6 +27,7 @@ class Prisonerinout_model extends Base_model{
 			$data['update_timestamp'] = date("Y-m-d h:i:s");
 			$data['memo'] = 'approved by admin';
 			$this->update($data, 'people_id ='.$id);
+			$this->query("insert into tb_people_inout_detail (people_id, watch_id, area_id, outtime, status, update_timestamp) "." values (".$id.", ".$data['watch_id'].", ".$data['area_id'].", '".date("Y-m-d h:i:s")."', 1, '".date("Y-m-d h:i:s")."')");
 		}
 		else{
 			$data['intime'] = date("Y-m-d h:i:s");
@@ -33,6 +35,7 @@ class Prisonerinout_model extends Base_model{
 			$data['update_timestamp'] = date("Y-m-d h:i:s");
 			$data['memo'] = 'back checked by admin';
 			$this->update($data, 'people_id ='.$id);
+			$this->query("insert into tb_people_inout_detail (people_id, watch_id, area_id, outtime, status, update_timestamp) "." values (".$id.", ".$data['watch_id'].", ".$data['area_id'].", '".date("Y-m-d h:i:s")."', 0, '".date("Y-m-d h:i:s")."')");
 		}
 	}
 }

@@ -53,9 +53,11 @@ class Role extends Admin_Controller {
 		{
         	//接收POST参数
 			$_arr['role_name'] = isset($_POST["role_name"])?trim(safe_replace($_POST["role_name"])):exit(json_encode(array('status'=>false,'tips'=>'s')));
-			if($_arr['role_name']=='')exit(json_encode(array('status'=>false,'tips'=>'s')));
+			if($_arr['role_name']=='')
+				exit(json_encode(array('status'=>false,'tips'=>'s')));
 			$_arr['description'] = isset($_POST["description"])?trim(safe_replace($_POST["description"])):exit(json_encode(array('status'=>false,'tips'=>'s')));
-			if($_arr['description']=='')exit(json_encode(array('status'=>false,'tips'=>'s')));
+			if($_arr['description']=='')
+				exit(json_encode(array('status'=>false,'tips'=>'s')));
 			
             $new_id = $this->Member_role_model->insert($_arr);
             if($new_id)

@@ -47,7 +47,7 @@ create table `tb_operator_info` (
   #加密 现在不使用
   `last_login_ip` varchar(64), 
   #最近一次登录使用的ip地址
-  `last_login_time` datetime not null, 
+  `last_login_time` datetime default null, 
   #最近一次登录的时间
   `update_timestamp` datetime not null, 
   #最近一次修改的时间
@@ -251,10 +251,10 @@ DROP TABLE IF EXISTS `tb_sessions`;
 CREATE TABLE `tb_sessions` (
   `id` varchar(40) NOT NULL DEFAULT '0',
   `ip_address` varchar(16) NOT NULL DEFAULT '0',
-  `user_agent` varchar(120) NOT NULL,
+  `user_agent` varchar(120) default '' NOT NULL,
   `last_activity` int(10) unsigned NOT NULL DEFAULT '0',
   `data` text NOT NULL,
-  `timestamp` timestamp NULL DEFAULT NULL,
+  `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
   PRIMARY KEY (`id`),
   KEY `last_activity_idx` (`last_activity`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -453,7 +453,7 @@ drop table if exists `tb_alarm_loc`;
 
 create table `tb_alarm_loc` (
 `watch_id` int(11) not null comment '腕带标识，腕带表键值',
-`alarm_state` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
+`alarm_type` int(11) not null default '0' comment '腕带报警状态: 0是正常, 其它报警类开型',
 `locarea_id` int(11) not null default '0' comment '腕带所在定位区域id, 如果id=0就是区域位置未知',
 `monarea_id` int(11) not null default '0' comment '腕带所在监控区域id, 门禁天线报警会带监控区域id',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间',
