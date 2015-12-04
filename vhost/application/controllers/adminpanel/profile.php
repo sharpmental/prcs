@@ -17,7 +17,8 @@ class Profile extends Admin_Controller {
 	function change_pwd()
 	{
 		$datainfo = $this->Member_model->get_one(array('operator_id'=>$this->user_id));
-		if(!$datainfo)$this->Member_model('系统错误',base_url('/member/manage/logout'));
+		if(!$datainfo)
+			$this->Member_model('系统错误',base_url('/member/manage/logout'));
 		if(isset($_POST['password1'])) {
 			
 			$password1 =  isset($_POST['password1'])?$_POST['password1']:exit(json_encode(array('status'=>false,'tips'=>'旧密码不能为空')));
@@ -31,11 +32,12 @@ class Profile extends Admin_Controller {
 				exit(json_encode(array('status'=>false,'tips'=>'两次密码不一致')));
 			
 // 			$password1 = md5(md5($password1));
-			$c= $this->Member_model->count(array('user_id'=>$this->user_id,'password'=>$password1));
-			if(intval($c)!=1)exit(json_encode(array('status'=>false,'tips'=>'旧密码错误')));
+			$c= $this->Member_model->count(array('operator_id'=>$this->user_id,'operator_pwd'=>$password1));
+			if(intval($c)!=1)
+				exit(json_encode(array('status'=>false,'tips'=>'旧密码错误')));
 			
 // 			$password2 = md5(md5($password2));
-			$status=$this->Member_model->update(array('password'=>$password2),array('operator_id'=>$this->user_id));
+			$status=$this->Member_model->update(array('operator_pwd'=>$password2),array('operator_id'=>$this->user_id));
 			if($status)
 			{
 				exit(json_encode(array('status'=>true,'tips'=>'密码修改成功，请重新登录')));

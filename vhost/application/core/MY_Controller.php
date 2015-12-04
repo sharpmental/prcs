@@ -670,13 +670,9 @@ class API_Controller extends Front_Controller{
 			if($this->GET['token']==""){
 				exit(json_encode(array('status_id'=>-99991,'tips'=>' 登录失败，缺少token')));
 			}
-
-
 		}else{
-
-
-			if(!$rawpostdata)exit(json_encode(array('status_id'=>-99992,'tips'=>' 登录失败，缺少token')));
-
+			if(!$rawpostdata)
+				exit(json_encode(array('status_id'=>-99992,'tips'=>' 登录失败，缺少token')));
 
 			$post = json_decode($rawpostdata, true);
 			$this->POST  = $post['params'];
@@ -696,15 +692,17 @@ class API_Controller extends Front_Controller{
 
 		$decode_token = $this->encrypt->decode($token);
 
-		if($decode_token=="")exit(json_encode(array('status_id'=>-9998,'tips'=>' token 无效')));
+		if($decode_token=="")
+			exit(json_encode(array('status_id'=>-9998,'tips'=>' token 无效')));
 		$decode_token_arr = explode("_",$decode_token);
-		if(count($decode_token_arr)!=4)exit(json_encode(array('status_id'=>-9997,'tips'=>' token 无效')));
+		if(count($decode_token_arr)!=4)
+			exit(json_encode(array('status_id'=>-9997,'tips'=>' token 无效')));
 		$user_id =  $decode_token_arr[0];
 		$user_name =  $decode_token_arr[2];
 		$user_password =  $decode_token_arr[1];
 		$user_login_time =  $decode_token_arr[3];
 		$this->current_member_info = $this->Member_model->get_one(array('operator_name'=>$user_name,'operator_pwd'=>$user_password));
-		if(!$this->current_member_info)exit(json_encode(array('status_id'=>-1000,'tips'=>' token 无效')));
-		//
+		if(!$this->current_member_info)
+			exit(json_encode(array('status_id'=>-1000,'tips'=>' token 无效')));
 	}
 }
