@@ -192,9 +192,13 @@ class Front_Controller extends MY_Controller{
 
 
 class Member_Controller extends Front_Controller{
-	public $module_info,$user_id,$group_id,$current_member_info,$menu_side_list,$cache_module_menu_arr,$current_role_priv_arr;
+    
+	public $module_info,$user_id,$group_id,$current_member_info,$menu_side_list;
+	public $cache_module_menu_arr,$current_role_priv_arr;
+	
 	function __construct(){
 		parent::__construct();
+		
 		define("IN_MEMBER", TRUE);
 		$this->module_info = $this->config->item('module');
 		$this->cache_module_menu_arr =  getcache('cache_module_menu_all');
@@ -206,9 +210,7 @@ class Member_Controller extends Front_Controller{
 		$this->current_role_priv_arr = $this->group_id==SUPERADMIN_GROUP_ID?$this->cache_module_menu_arr:(isset($_cache_member_role_priv_arr[$this->group_id])?$_cache_member_role_priv_arr[$this->group_id]:NULL);
 
 		$this->check_member();
-		$this->check_priv();
-
-
+// 		$this->check_priv();
 	}
 
 	/**
@@ -228,10 +230,17 @@ class Member_Controller extends Front_Controller{
 
 	protected function check_priv()
 	{
-		$cache_member_role_priv = getcache('cache_member_role_priv');
-		if($this->page_data['folder_name'] =='member' && $this->page_data['controller_name'] =='manage' && in_array($this->page_data['method_name'], array('login', 'logout','manage'))) return true;
-		if($this->group_id == SUPERADMIN_GROUP_ID) return true;
-		if(preg_match('/^public_/',$this->page_data['method_name'])) return true;
+// 		$cache_member_role_priv = getcache('cache_member_role_priv');
+		if($this->page_data['folder_name'] =='member' 
+		    && $this->page_data['controller_name'] =='manage' 
+		    && in_array($this->page_data['method_name'], array('login', 'logout', 'manage'))) 
+		    return true;
+		    
+		if($this->group_id == SUPERADMIN_GROUP_ID) 
+		    return true;
+		
+		if(preg_match('/^public_/',$this->page_data['method_name'])) 
+		    return true;
 
 		// 如果有缓存，缓存优先
 		if($this->current_role_priv_arr)
@@ -359,7 +368,7 @@ class Member_Controller extends Front_Controller{
 		if($this->group_id == SUPERADMIN_GROUP_ID) 
 			return $result;
 		
-		//权限检查
+		//check_priv
 		$array = array();
 		foreach($result as $v) {
 			$action = base_url($v['folder'].'/'.$v['controller'].'/'.$v['method']);
@@ -437,22 +446,31 @@ class Admin_Controller extends Member_Controller{
 
 	protected function check_priv()
 	{
-		if($this->page_data['folder_name'] =='adminpanel' && $this->page_data['controller_name'] =='manage' && in_array($this->page_data['method_name'], array('login', 'logout','manage'))) return true;
-		if($this->group_id == SUPERADMIN_GROUP_ID) return true;
-		if(preg_match('/^public_/',$this->page_data['method_name'])||($this->page_data['method_name']=="go"&&$this->page_data['controller_name']=="manage")) return true;
+		if($this->page_data['folder_name'] =='adminpanel' 
+		    && $this->page_data['controller_name'] =='manage' 
+		    && in_array($this->page_data['method_name'], array('login', 'logout','manage'))) 
+		    return true;
+		
+		if($this->group_id == SUPERADMIN_GROUP_ID) 
+		    return true;
+		
+		if(preg_match('/^public_/',$this->page_data['method_name'])||($this->page_data['method_name']=="go"&&$this->page_data['controller_name']=="manage")) 
+		    return true;
 
 		// 如果有缓存，缓存优先
 		if($this->current_role_priv_arr)
 		{
 			$found=false;
 			foreach($this->current_role_priv_arr as $k=>$v){
-	
-				if($v['method']==$this->page_data['method_name']&&$v['controller']==$this->page_data['controller_name']&&$v['folder']==$this->page_data['folder_name']){
+				if($v['method']==$this->page_data['method_name']
+				    && $v['controller']==$this->page_data['controller_name']
+				    && $v['folder']==$this->page_data['folder_name']){
 					$found=true;
 					break;
 				}
 			}
-			if(!$found) $this->showmessage('您没有权限操作该项','blank');
+			if(!$found) 
+			    $this->showmessage('您没有权限操作该项','blank');
 		}else{
 
 			$r =$this->Member_role_priv_model->get_one(array('method'=>$this->page_data['method_name'],'controller'=>$this->page_data['controller_name'] ,'folder'=>$this->page_data['folder_name'],'role_id'=>$this->group_id ));
