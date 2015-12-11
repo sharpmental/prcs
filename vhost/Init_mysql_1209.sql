@@ -6,7 +6,7 @@
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.5.33)
-# Database: prcs
+# Database: ACI
 # Generation Time: 2015-10-18 02:25:59 +0000
 # ************************************************************
 
@@ -600,6 +600,7 @@ insert into `tb_department_info` values (4, '四中队', '0000-00-00 00:00:00');
 -- 
 -- 表的结构 `tb_locarea_info`
 -- 
+#统计各个区域人数使用？
 
 drop table if exists `tb_locarea_info`;
 
@@ -792,41 +793,6 @@ create table `tb_watch_area_info` (
 
 insert into `tb_watch_area_info` values (1, 0, 1, 1111, '2015-10-22 14:45:21');
 insert into `tb_watch_area_info` values (2, 0, 2, 1112, '2015-10-22 14:45:43');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `tb_dep_locarea_param`
---
-drop table if exists `tb_dep_locarea_param` ;
-
-create table `tb_dep_locarea_param` (
-  `dep_id` Int(11) Not Null,
-  `locarea_id` Int(11) Not Null,
-  `delay_ratio` Int(11) Not Null Default '100',
-  `night_delay_ratio` Int(11) Not Null Default '100',
-  `update_timestamp` Datetime Not Null Default Current_timestamp On Update Current_timestamp
-) engine=Myisam Default Charset=utf8 Comment='部门定位参数表';
-
--- --------------------------------------------------------
-
---
--- 表的结构 `tb_server_info`
---
-drop table if exists `tb_server_info`;
-
-create table `tb_server_info` (
-  `server_id` int(11) not null,
-  `server_type` tinyint(4) not null,
-  `server_name` varchar(64) not null,
-  `server_ip` varchar(64) not null,
-  `powerlow_times` int(11) not null default '2',
-  `location_decision_interval` int(11) not null default '5',
-  `location_lost_ms` int(11) not null default '5000',
-  `monitor_lost_ms` int(11) not null default '5000',
-  `prohibit_lost` int(11) not null default '1',
-  `update_timestamp` datetime not null default current_timestamp on update current_timestamp
-) engine=myisam default charset=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
