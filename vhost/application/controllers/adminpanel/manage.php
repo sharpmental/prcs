@@ -53,7 +53,7 @@ class Manage extends Admin_Controller {
 			'table_open' => '<table class="table table-hover dataTable">'
 		);
 		$this->table->set_template($template);
-		$this->table->set_heading('编号','姓名', '操作','部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息', '活动轨迹');
+		$this->table->set_heading('编号','姓名', '操作','部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
 		
 		$data_t = array();
 		foreach ($data->result_array() as $k => $v){
@@ -71,7 +71,8 @@ class Manage extends Admin_Controller {
 					$this->config->item('watch_status')[$v['watch_status']],
 					$v['update_timestamp'],
 					'<a class="btn btn-info btn-sm" href="'.base_url().'adminpanel/manage/detailinfo/'.$v['people_id'].'" role="button">详情</a>',
-					'<a class="btn btn-info btn-sm" href=# role="button">定位信息</a>',
+					$v['locarea_id'],
+			        $v['monarea_id'],
 			        '<a class="btn btn-info btn-sm" href="'.base_url().'adminpanel/manage/trace/'.$v['people_id'].'" role="button">活动轨迹</a>'
 			);
 			array_push($data_t, $temp);

@@ -217,30 +217,36 @@ create table `tb_table_edit_list` (
 	`id` smallint(6) unsigned not null auto_increment,
 	`table_name` varchar(40) not null,
 	`editable` smallint(1) not null, # 0=只显示 1=显示+添加+删除 2=显示+添加+删除+修改
+	`actionaddurl` varchar(128) default '#',
+	`actionaddtext` varchar(64) default 'Add',
+	`actionmodifyurl` varchar(128) default '#',
+	`actionmodifytext` varchar(64) default 'Modify',
+	`actiondeleteurl` varchar(128) default '#',
+	`actiondeletetext` varchar(64) default 'Delete',
 	`comments` varchar(128),
     PRIMARY KEY (`id`)
 )engine=myisam default charset=utf8;
 
 insert into `tb_table_edit_list` values
-	(1,  'tb_people_info', 0, '人员和对应腕表'),
-	(2, 'tb_people_detail', 0, '人员详细信息’'),
-	(3, 'tb_watch_info', 0, '腕表启用信息'),
-	(4, 'tb_alarm_general', 0,  '腕表基础状态'),
-	(5, 'tb_alarm_loc', 0, '腕表定位信息表'),
-	(6, 'tb_alarm_prohibit', 0, '腕表警戒信息表'),
-	(7, 'tb_alarm_enter', 0, '腕表进入信息表'),
-	(8, 'tb_alarm_mon', 0, '腕表监控信息表'),
-	(9, 'tb_department_info', 0, '部门信息表'),
-	(10, 'tb_locarea_info', 0, '定位区域信息表'),
-	(11, 'tb_recvunit_info', 0, '接收单元信息表'),
-	(12, 'tb_loccoor_info', 0, '定位坐标信息表'),
-	(13, 'tb_dep_ru_location', 0, '接收单元定位信息'),
-	(14, 'tb_dep_ru_prohibit', 0, '接收单元警戒信息'),
-	(15, 'tb_dep_ru_enter', 0, '接收单元进入信息'),
-	(16, 'tb_dep_ru_door', 0, '接收单元门禁信息'),
-	(17, 'tb_dep_ru_monitor', 0, '接收单元监控信息'),
-	(18, 'tb_monarea_info', 0, '监控区域信息'),
-	(19, 'tb_watch_area_info', 0, '重点区域信息');
+	(1,  'tb_people_info', 0, '#', '增加', '#', '修改', '#', '删除', '人员和对应腕表'),
+	(2, 'tb_people_detail', 0, '#', '增加', '#', '修改', '#', '删除', '人员详细信息’'),
+	(3, 'tb_watch_info', 0, '#', '增加', '#', '修改', '#',  '删除', '腕表启用信息'),
+	(4, 'tb_alarm_general', 0,  '#', '增加', '#', '修改', '#',  '删除', '腕表基础状态'),
+	(5, 'tb_alarm_loc', 0, '#', '增加', '#', '无', '#', '清除报警',  '腕表定位信息表'),
+	(6, 'tb_alarm_prohibit', 0, '#', '增加', '#', '无', '#', '清除报警',  '腕表警戒信息表'),
+	(7, 'tb_alarm_enter', 0, '#', '增加', '#', '无', '#', '清除报警',  '腕表进入信息表'),
+	(8, 'tb_alarm_mon', 0, '#', '增加', '#', '无', '#',  '清除报警', '腕表监控信息表'),
+	(9, 'tb_department_info', 0, '#', '增加', '#', '修改', '#',  '删除', '部门信息表'),
+	(10, 'tb_locarea_info', 0, '#', '增加', '#', '修改', '#',  '删除', '定位区域信息表'),
+	(11, 'tb_recvunit_info', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元信息表'),
+	(12, 'tb_loccoor_info', 0, '#', '增加', '#', '修改', '#',  '删除', '定位坐标信息表'),
+	(13, 'tb_dep_ru_location', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元定位信息'),
+	(14, 'tb_dep_ru_prohibit', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元警戒信息'),
+	(15, 'tb_dep_ru_enter', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元进入信息'),
+	(16, 'tb_dep_ru_door', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元门禁信息'),
+	(17, 'tb_dep_ru_monitor', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元监控信息'),
+	(18, 'tb_monarea_info', 0, '#', '增加', '#', '修改', '#',  '删除', '监控区域信息'),
+	(19, 'tb_watch_area_info', 0, '#', '增加', '#', '修改', '#',  '删除', '重点区域信息');
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------
@@ -487,7 +493,9 @@ comment='腕带定位表';
 
 insert into `tb_alarm_loc` values
 	(1, 0, 100, 101, '2011-11-11 01:01:01'),
-	(2, 0, 100, 101, '2011-11-11 01:01:01');
+	(2, 0, 100, 101, '2011-11-11 01:01:01'),
+	(4, 1, 100, 101, '2011-11-11 01:01:01'),
+	(5, 1, 100, 101, '2011-11-11 01:01:01');
 -- --------------------------------------------------------
 
 -- 
@@ -849,12 +857,16 @@ select
 	a.init_locarea_id,
 	b.watch_status,
 	b.update_timestamp,
-	c.status 
+	c.status,
+	d.locarea_id,
+	d.monarea_id
 from tb_people_info a
 left join tb_watch_info b
 on a.watch_id = b.watch_id
 left join tb_people_inout c
-on a.people_id = c.people_id;
+on a.people_id = c.people_id
+left join tb_alarm_loc d
+on a.watch_id = d.watch_id;
 
 drop view if exists `people_count_view`;
 

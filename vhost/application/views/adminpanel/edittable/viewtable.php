@@ -23,9 +23,9 @@
 				<button type="button" class="btn btn-default" id="refreshBtn">
 					<span class="glyphicon glyphicon-refresh">刷新</span>
                 </button>
-				<button type="button" class="btn btn-default" id="newBtn">
+				<a type="button" class="btn btn-default" id="newBtn" href=<?php echo $add_action ?>>
 					<span class="glyphicon glyphicon-plus">添加</span>
-                </button>
+                </a>
 
 			</div>
 		</div>

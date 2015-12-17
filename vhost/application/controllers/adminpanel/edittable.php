@@ -44,8 +44,12 @@ class Edittable extends Admin_Controller {
 			exit ( "Can not find the table. Check your database!" );
 		
 		$table_name = $table_row->row_array()['table_name'];
-		$table_actiona = $table_row->row_array()['actionaurl'];
-		$table_actionb = $table_row->row_array()['actionburl'];
+		$table_actiona = ($table_row->row_array()['actionmodifyurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actionmodifyurl'].'/');
+		$table_texta = $table_row->row_array()['actionmodifytext'];
+		$table_actionb = ($table_row->row_array()['actiondeleteurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actiondeleteurl'].'/');
+		$table_textb = $table_row->row_array()['actiondeletetext'];
+		$table_actionc = ($table_row->row_array()['actionaddurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actionaddurl'].'/');
+		$table_textc = $table_row->row_array()['actionaddtext'];
 		
 		$data = $this->Tablelist_model->gettablelimit ( $table_name, $start, 20 );
 		if(!isset($data)){
@@ -61,14 +65,15 @@ class Edittable extends Admin_Controller {
 		$fields = $data->list_fields();
 		if(!isset($fields))
 			exit("Can not get the table data from: ".$table_name.". Check your database!");
-		array_push($fields, 'Action', 'Action');
+		array_push($fields, '修改', '删除');
 		$this->table->set_heading ( $fields );
 		
 		$data_t = array ();
 		if ($data->result_array()){
 			foreach ( $data->result_array () as $k => $v ) {
-				array_push($v, '<a class="btn btn-info btn-sm" href="'.base_url().$table_actiona.'/'.$v[reset($fields)].'" role="button">修改</a>');
-				array_push($v, '<a class="btn btn-info btn-sm" href="'.base_url().$table_actionb.'/'.$v[reset($fields)].'" role="button">删除</a>');
+				array_push($v, '<a class="btn btn-info btn-sm" href="'.$table_actiona.'/'.$v[reset($fields)].'" role="button">'.$table_texta.'</a>');
+				$href_delete = sprintf("href=\"javascript:if(confirm('确定要删除吗')) window.location.href='%s';\"", $table_actionb.'/'.$v[reset($fields)]);
+ 				array_push($v, '<a class="btn btn-info btn-sm" '.$href_delete.' role="button">'.$table_textb.'</a>');
 				array_push($data_t, $v );
 			}
 		}
@@ -92,7 +97,8 @@ class Edittable extends Admin_Controller {
 		$this->view ( 'viewtable', array (
 				'require_js' => true,
 				'table_data' => $table_data,
-				'pagelink' => $pageslink 
+				'pagelink' => $pageslink,
+		        'add_action' => $table_actionc
 		) );
 	}
 	
@@ -104,9 +110,13 @@ class Edittable extends Admin_Controller {
             exit("Can not find the table. Check your database!");
         
         $table_name = $table_row->row_array()['table_name'];
-        $table_actiona = $table_row->row_array()['actionaurl'];
-        $table_actionb = $table_row->row_array()['actionburl'];
-        
+		$table_actiona = ($table_row->row_array()['actionmodifyurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actionmodifyurl'].'/');
+		$table_texta = $table_row->row_array()['actionmodifytext'];
+		$table_actionb = ($table_row->row_array()['actiondeleteurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actiondeleteurl'].'/');
+		$table_textb = $table_row->row_array()['actiondeletetext'];
+		$table_actionc = ($table_row->row_array()['actionaddurl'] == '#')?'#':base_url($this->page_data['folder_name'].'/'.$table_row->row_array()['actionaddurl'].'/');
+		$table_textc = $table_row->row_array()['actionaddtext'];
+            
         if ($table_name == "tb_alarm_loc")
             $data = $this->Tablelist_model->gettablestatus($table_name, "alarm_type != 0");
         else
@@ -125,15 +135,16 @@ class Edittable extends Admin_Controller {
         $fields = $data->list_fields();
         if (! isset($fields))
             exit("Can not get the table data from: " . $table_name . ". Check your database!");
-        array_push($fields, 'Action', 'Action');
+        array_push($fields, '修改', '删除');
         $this->table->set_heading($fields);
         
         $data_t = array();
         if ($data->result_array()) {
             foreach ($data->result_array() as $k => $v) {
-				array_push($v, '<a class="btn btn-info btn-sm" href="'.base_url().$table_actiona.'/'.$v[reset($fields)].'" role="button">修改</a>');
-				array_push($v, '<a class="btn btn-info btn-sm" href="'.base_url().$table_actionb.'/'.$v[reset($fields)].'" role="button">删除</a>');
-                array_push($data_t, $v);
+				array_push($v, '<a class="btn btn-info btn-sm" href="'.$table_actiona.'/'.$v[reset($fields)].'" role="button">'.$table_texta.'</a>');
+				$href_delete = sprintf("href=\"javascript:if(confirm('确定要删除吗')) window.location.href='%s';\"", $table_actionb.'/'.$v[reset($fields)]);
+ 				array_push($v, '<a class="btn btn-info btn-sm" '.$href_delete.' role="button">'.$table_textb.'</a>');
+				array_push($data_t, $v);
             }
         } else {
             array_push($data_t, array(
@@ -157,7 +168,8 @@ class Edittable extends Admin_Controller {
         $this->view('viewtable', array(
             'require_js' => true,
             'table_data' => $table_data,
-            'pagelink' => $pageslink
+            'pagelink' => $pageslink,
+            'add_action' => $table_actionc
         ));
     }
 }
