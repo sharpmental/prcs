@@ -5,7 +5,7 @@
 <div class='panel panel-default'>
 	<div class='panel-heading'>
 		<i class='glyphicon glyphicon-edit'></i>
-		新增人员资料
+		修改人员资料
 		<div class='panel-tools'>
 			<div class='btn-group'>
 				<?php aci_ui_a($folder_name,'edittable','index','',' class="btn  btn-sm pull-right"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
@@ -18,7 +18,7 @@
 				<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 				<div class="input-group col-sm-9">
 					<span class="input-group-addon" id="sizing-addon3">*</span>
-					<input type="text" name="person_id"  id="person_id"  value=''  class="form-control validate[required]"  placeholder="请输入人员ID" >
+					<input type="text" name="person_id"  id="person_id"  value=''  class="form-control validate[required]"  placeholder="<?php echo $data_info["people_id"]; ?>" >
 				</div>
 			</div>
 			<div class="form-group">
