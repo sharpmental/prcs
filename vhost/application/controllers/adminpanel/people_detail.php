@@ -9,16 +9,17 @@ class People_detail extends Admin_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model("People_detail_model");
     }
 
     public function add()
     {
         if ($this->input->is_ajax_request()) {
-            $arr['person_id'] = "";
+            $arr['people_id'] = "";
             if (isset($_POST['person_id']))
-                $arr['person_id'] = $_POST['person_id'];
+                $arr['people_id'] = $_POST['person_id'];
             
-            if ($arr['person_id'] == '')
+            if ($arr['people_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
                     'tips' => 's'
@@ -68,15 +69,15 @@ class People_detail extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['person_id'] = "";
-            if (isset($_POST['person_id']))
-                $arr['person_id'] = $_POST['person_id'];
+//             $arr['people_id'] = "";
+//             if (isset($_POST['person_id']))
+//                 $arr['people_id'] = $_POST['person_id'];
             
-            if ($arr['person_id'] == '')
-                exit(json_encode(array(
-                    'status' => false,
-                    'tips' => 's'
-                )));
+//             if ($arr['people_id'] == '')
+//                 exit(json_encode(array(
+//                     'status' => false,
+//                     'tips' => 's'
+//                 )));
             
             $arr['no'] = $_POST['person_no'];
             $arr['name'] = $_POST['person_name'];
@@ -99,7 +100,7 @@ class People_detail extends Admin_Controller
             $arr['nationality'] = $_POST['national'];
             $arr['status'] = $_POST['status'];
             
-            $new_id = $this->People_detail_model->update($arr);
+            $new_id = $this->People_detail_model->update($arr, 'people_id = '.$id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -114,7 +115,7 @@ class People_detail extends Admin_Controller
                 )));
             }
         } else {
-            $data = $this->People_detail_model->getone(array('people_id' => intval($id)));
+            $data = $this->People_detail_model->get_one(array('people_id' => intval($id)));
             if(isset($data)){
                 
                 $this->view("modify", array("require_js" => true, "data_info" => $data));
@@ -126,7 +127,24 @@ class People_detail extends Admin_Controller
     }
 
     public function delete($id)
-    {}
+    {
+        $data_info = $this->People_detail_model->get_one(array(
+            'people_id' => $id
+        ));
+        
+        if (! $data_info)
+            $this->showmessage('信息不存在');
+        
+        $status = $this->People_detail_model->delete(array(
+            'people_id' => $id
+        ));
+        
+        if ($status) {
+            $this->showmessage('删除成功');
+        } else
+            $this->showmessage('删除失败');
+        $this->showmessage('删除失败');
+    }
 }
 
 ?>

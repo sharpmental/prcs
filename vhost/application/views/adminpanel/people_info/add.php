@@ -19,31 +19,31 @@
 			<div class="form-group">
 				<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 				<div class="col-sm-9">
-					<input type="text" name="role_name"  id="role_name"  value=''  class="form-control validate[required]"  placeholder="请输入人员ID" >
+					<input type="text" name="role_name"  id="people_id"  value=''  class="form-control validate[required]"  placeholder="请输入人员ID" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">人员名称</label>
 				<div class="col-sm-9">
-					<input type="text" name="role_name"  id="role_name"  value=''  class="form-control validate[required]"  placeholder="请输入" >
+					<input type="text" name="role_name"  id="people_name"  value=''  class="form-control validate[required]"  placeholder="请输入" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">人员所属部门</label>
 				<div class="col-sm-9">
-					<input type="text" name="role_name"  id="role_name"  value=''  class="form-control validate[required]"  placeholder="请输入" >
+					<input type="text" name="role_name"  id="people_deparment"  value=''  class="form-control validate[required]"  placeholder="请输入" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">人员配带腕带标识</label>
 				<div class="col-sm-9">
-					<input type="text" name="role_name"  id="role_name"  value=''  class="form-control validate[required]"  placeholder="请输入" >
+					<input type="text" name="role_name"  id="watch_id"  value=''  class="form-control validate[required]"  placeholder="请输入" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">人员的初始位置</label>
 				<div class="col-sm-9">
-					<input type="text" name="role_name"  id="role_name"  value=''  class="form-control validate[required]"  placeholder="请输入" >
+					<input type="text" name="role_name"  id="initloc"  value=''  class="form-control validate[required]"  placeholder="请输入" >
 				</div>
 			</div>
 		</fieldset>
