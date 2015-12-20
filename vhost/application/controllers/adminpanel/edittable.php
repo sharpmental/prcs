@@ -119,6 +119,8 @@ class Edittable extends Admin_Controller {
             
         if ($table_name == "tb_alarm_loc")
             $data = $this->Tablelist_model->gettablestatus($table_name, "alarm_type != 0");
+        else if ($table_name == "tb_alarm_general")
+            $data = $this->Tablelist_model->gettablestatus($table_name, "alarm_state != 0 or watch_working_state != 0");
         else
             $data = $this->Tablelist_model->gettablestatus($table_name, "alarm_state != 0");
         

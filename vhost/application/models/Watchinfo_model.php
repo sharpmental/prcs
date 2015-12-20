@@ -9,4 +9,13 @@ class Watchinfo_model extends Base_model{
 		$data = $this->query("select * from tb_watch_info");
 		return $data;
 	}
+	
+	public function getlist(){
+	    $data = $this->query("select watch_id from ".$this->table_name);
+	    
+	    if($data)
+	        return $data->result_array();
+	    else
+	        return null;
+	}
 }

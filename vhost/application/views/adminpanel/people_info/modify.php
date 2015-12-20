@@ -19,14 +19,16 @@
 				<div class="form-group">
 					<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 					<div class="col-sm-9">
-						<input type="text" name="people_id" id="people_id" value=''
+						<input type="text" name="people_id" id="people_id"
+							value='<?php echo $data_info['people_id'];?>'
 							class="form-control validate[required]" placeholder="请输入人员ID">
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员名称</label>
 					<div class="col-sm-9">
-						<input type="text" name="people_name" id="people_name" value=''
+						<input type="text" name="people_name" id="people_name"
+							value='<?php echo $data_info['people_name'];?>'
 							class="form-control validate[required]" placeholder="请输入">
 					</div>
 				</div>
@@ -37,7 +39,10 @@
 							<option value="">==请选择==</option>
 						<?php
     foreach ($dep_list as $k => $v) {
-        echo '<option value="' . $v['dep_id'] . '">' . $v['dep_name'] . '</option>';
+        if ($v['dep_id'] == $data_info['dep_id'])
+            echo '<option value="' . $v['dep_id'] . '" selected="selected">' . $v['dep_name'] . '</option>';
+        else
+            echo '<option value="' . $v['dep_id'] . '">' . $v['dep_name'] . '</option>';
     }
     ?>
 					</select>
@@ -50,8 +55,12 @@
 							<option value="">==请选择==</option>
 						<?php
     foreach ($watch_list as $k => $v) {
-        echo '<option value="' . $v['watch_id'] . '">' . $v['watch_id'] . '</option>';
+        if ($v['watch_id'] == $data_info['watch_id'])
+            echo '<option value="' . $v['watch_id'] . '" selected="selected">' . $v['watch_id'] . '</option>';
+        else
+            echo '<option value="' . $v['watch_id'] . '" >' . $v['watch_id'] . '</option>';
     }
+    
     ?>
 					</select>
 					</div>
@@ -59,7 +68,8 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员的初始位置</label>
 					<div class="col-sm-9">
-						<input type="text" name="initloc" id="initloc" value=''
+						<input type="text" name="initloc" id="initloc"
+							value='<?php echo $data_info['init_locarea_id'];?>'
 							class="form-control validate[required]" placeholder="请输入">
 					</div>
 				</div>

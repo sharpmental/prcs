@@ -1,5 +1,4 @@
 <?php
-
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -45,31 +44,40 @@ class People_info extends Admin_Controller
                 )));
             }
         } else {
+            $this->load->model('Department_info_model');
+            $dep_list = $this->Department_info_model->getlist();
             
-            $this->view("add");
+            $this->load->model('Watchinfo_model');
+            $watch_list = $this->Watchinfo_model->getlist();
+            
+            $this->view("add", array(
+                "require_js" => true,
+                "dep_list" => $dep_list,
+                "watch_list" => $watch_list
+            ));
         }
     }
 
     public function modify($id)
     {
         if ($this->input->is_ajax_request()) {
-                
-                // $arr['people_id'] = "";
-                // if (isset($_POST['people_id']))
-                // $arr['people_id'] = $_POST['people_id'];
-                
+            
+            // $arr['people_id'] = "";
+            // if (isset($_POST['people_id']))
+            // $arr['people_id'] = $_POST['people_id'];
+            
             // if ($arr['people_id'] == '')
-                // exit(json_encode(array(
-                // 'status' => false,
-                // 'tips' => 's'
-                // )));
-                
+            // exit(json_encode(array(
+            // 'status' => false,
+            // 'tips' => 's'
+            // )));
+            
             $arr['people_name'] = $_POST['people_name'];
             $arr['dep_id'] = $_POST['people_deparment'];
             $arr['watch_id'] = $_POST['watch_id'];
             $arr['init_locarea_id'] = $_POST['initloc'];
-                
-            $new_id = $this->People_info_model->update($arr, 'people_id = '.$id);
+            
+            $new_id = $this->People_info_model->update($arr, 'people_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -84,12 +92,23 @@ class People_info extends Admin_Controller
                 )));
             }
         } else {
-            $data = $this->People_info_model->get_one(array('people_id' => intval($id)));
-            if(isset($data)){
+            $data = $this->People_info_model->get_one(array(
+                'people_id' => intval($id)
+            ));
+            if (isset($data)) {
+                $this->load->model('Department_info_model');
+                $dep_list = $this->Department_info_model->getlist();
                 
-                $this->view("modify", array("require_js" => true, "data_info" => $data));
-            }
-            else{
+                $this->load->model('Watchinfo_model');
+                $watch_list = $this->Watchinfo_model->getlist();
+                
+                $this->view("modify", array(
+                    "require_js" => true,
+                    "data_info" => $data,
+                    "dep_list" => $dep_list,
+                    "watch_list" => $watch_list
+                ));
+            } else {
                 $this->showmessage('找不到对应的数据！');
             }
         }
