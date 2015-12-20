@@ -5,7 +5,7 @@
 
 	<div class='panel panel-default'>
 		<div class='panel-heading'>
-			<i class='glyphicon glyphicon-edit'></i> 新增用户资料
+			<i class='glyphicon glyphicon-edit'></i> 修改人员信息
 			<div class='panel-tools'>
 
 				<div class='btn-group'>
@@ -76,7 +76,7 @@
 			</fieldset>
 
 			<div class='form-actions'>
-		<?php aci_ui_button($folder_name,'role','edit','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
+		<?php aci_ui_button($folder_name,'people_info','modify','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
 	</div>
 		</div>
 	</div>

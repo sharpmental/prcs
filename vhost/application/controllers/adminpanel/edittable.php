@@ -98,7 +98,8 @@ class Edittable extends Admin_Controller {
 				'require_js' => true,
 				'table_data' => $table_data,
 				'pagelink' => $pageslink,
-		        'add_action' => $table_actionc
+		        'add_action' => $table_actionc,
+		        'table_name' => $table_name
 		) );
 	}
 	
@@ -171,7 +172,8 @@ class Edittable extends Admin_Controller {
             'require_js' => true,
             'table_data' => $table_data,
             'pagelink' => $pageslink,
-            'add_action' => $table_actionc
+            'add_action' => $table_actionc,
+            'table_name' => $table_name
         ));
     }
 }

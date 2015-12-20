@@ -2,7 +2,7 @@
 
 <div class="panel panel-default grid">
 	<div class='panel-heading'>
-		<i class='glyphicon glyphicon-th-list'></i>数据表信息
+		<i class='glyphicon glyphicon-th-list'></i><?php echo ' '.$table_name ?> 数据表信息
 		<div class='panel-tools'>
 			<div class='btn-group'>
             <?php aci_ui_a($folder_name,'edittable','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>

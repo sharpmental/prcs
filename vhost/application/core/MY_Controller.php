@@ -581,8 +581,8 @@ class Admin_Controller extends Member_Controller{
 		$menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
 		$menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
 
-		$menu1 = $this->Monarea_model->getall()->result_array();
-		$menu2 = $this->Locarea_model->getall()->result_array();
+		$menu1 = $this->Monarea_info_model->getall()->result_array();
+		$menu2 = $this->Locarea_info_model->getall()->result_array();
 		
 		if (isset ($menu1)){
 			foreach ($menu1 as $k=>$v){
