@@ -31,6 +31,22 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">坐标编号</label>
+					<div class="col-sm-9">
+						<select class="form-control validate[required] " name="dep_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($loccoor_list as $k => $v) {
+        if ($v['coor_id'] == $data_info['coor_id'])
+            echo '<option value="' . $v['coor_id'] . '" selected="selected">' . $v['coor_id'] . '</option>';
+        else
+            echo '<option value="' . $v['coor_id'] . '">' . $v['coor_id'] . '</option>';
+    }
+    ?>
+					</select>
+					</div>
+				</div>
+				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">X坐标</label>
 					<div class="col-sm-9">
 						<input type="text" name="cent_x" id="cent_x" value='<?php echo $data_info['cent_x']; ?>'

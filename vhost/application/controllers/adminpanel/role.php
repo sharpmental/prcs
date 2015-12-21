@@ -1,17 +1,5 @@
 <?php 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/**
- * AutoCodeIgniter.com
- *
- * 基于CodeIgniter核心模块自动生成程序
- *
- * 源项目		AutoCodeIgniter
- * 作者：		AutoCodeIgniter.com Dev Team EMAIL:hubinjie@outlook.com QQ:5516448
- * 版权：		Copyright (c) 2015 , AutoCodeIgniter com.
- * 项目名称：用户组管理 
- * 版本号：1 
- * 最后生成时间：2015-01-21 10:08:51 
- */
 class Role extends Admin_Controller {
 	
     var $method_config;

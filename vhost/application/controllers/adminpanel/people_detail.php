@@ -45,6 +45,7 @@ class People_detail extends Admin_Controller
             $arr['cause'] = $_POST['cause'];
             $arr['nationality'] = $_POST['national'];
             $arr['status'] = $_POST['status'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_detail_model->insert($arr);
             if ($new_id) {
@@ -99,6 +100,7 @@ class People_detail extends Admin_Controller
             $arr['cause'] = $_POST['cause'];
             $arr['nationality'] = $_POST['national'];
             $arr['status'] = $_POST['status'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_detail_model->update($arr, 'people_id = '.$id);
             if ($new_id) {

@@ -30,6 +30,7 @@ class Locarea_info extends Admin_Controller
             $arr['cent_y'] = $_POST['locarea_name'];
             $arr['size_x'] = $_POST['locarea_name'];
             $arr['size_y'] = $_POST['locarea_name'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->insert($arr);
             if ($new_id) {
@@ -46,9 +47,12 @@ class Locarea_info extends Admin_Controller
                 )));
             }
         } else {
+            $this->load->model("Loccoor_info_model");
+            $loccoor_list = $this->Loccoor_info_model->getlist();
             
             $this->view("add", array(
                 "require_js" => true,
+                "loccoor_list" => $loccoor_list
             ));
         }
     }
@@ -73,7 +77,8 @@ class Locarea_info extends Admin_Controller
             $arr['cent_y'] = $_POST['locarea_name'];
             $arr['size_x'] = $_POST['locarea_name'];
             $arr['size_y'] = $_POST['locarea_name'];
-                        
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
+            
             $new_id = $this->Locarea_info_model->update($arr, 'locarea_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
@@ -93,10 +98,13 @@ class Locarea_info extends Admin_Controller
                 'locarea_id' => intval($id)
             ));
             if (isset($data)) {
-                               
+                $this->load->model("Loccoor_info_model");
+                $loccoor_list = $this->Loccoor_info_model->getlist();
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
+                    "loccoor_list" => $loccoor_list
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

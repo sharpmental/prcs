@@ -170,8 +170,8 @@ VALUES
 	(7,'修改密码',5,7,1,'profile','adminpanel','change_pwd','0',1,0,1,1,'','0,1,5','7',0,1),
 	(8,'注销',5,8,1,'manage','adminpanel','logout','0',1,0,1,1,'','0,1,5','8',0,1),
 	(9,'管理用户和用户组',2,9,1,'manage','adminpanel','go_9','0',1,0,1,1,'','0,2','9,31,32,33,34,35,36,37',1,1),
-	(10,'系统管理',0,10,1,'manage','adminpanel','go_10','0',1,0,1,1,'server','0','104',1,1),
-	(11,'管理栏目和模块',3,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'','0,3','11,16,17,18,19,20',1,1),
+	(10,'系统管理',0,10,1,'manage','adminpanel','go_10','0',1,0,1,1,'server','0','10,51,49,50',1,1),
+	(11,'管理栏目和模块',3,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'','0,3','11,14,16,17,18,19,20',1,1),
 	(13,'已安装模块列表',12,13,1,'moduleManage','adminpanel','index','0',1,0,1,1,'','0,3,12','13',0,1),
 	(14,'安装新模块',11,14,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,3,12','14,21,22,23,24,25,39',1,1),
 	(15,'模块列表',4,15,1,'manage','adminpanel','go_15','0',1,0,1,1,'','0,4','15,38',1,1),
@@ -207,7 +207,10 @@ VALUES
 	(45,'添加People_info', 38, 45, 0, 'people_info', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,15,38', '45', 0, 1),
 	(46,'修改People_info', 38, 46, 0, 'people_info', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '46', 0, 1),
 	(47,'添加People_detail', 38, 47, 0, 'people_detail', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,15,38', '47', 0, 1),
-	(48,'修改People_detail', 38, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '48', 0, 1)
+	(48,'修改People_detail', 38, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '48', 0, 1),
+	(50,'服务器设置', 49, 50, 0, 'server_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '50', 1, 1),
+	(51,'日志', 49, 51, 0, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1),
+	(49,'服务器相关设置', 10, 49, 0, 'manage', 'adminpanel', 'go_49', '0', 1, 0, 1, 1, '', '0,10', '50 ,51', 1, 1)
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;
@@ -251,7 +254,8 @@ insert into `tb_table_edit_list` values
 	(16, 'tb_dep_ru_door', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元门禁信息'),
 	(17, 'tb_dep_ru_monitor', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元监控信息'),
 	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息'),
-	(19, 'tb_watch_area_info', 0, '#', '增加', '#', '修改', '#',  '删除', '重点区域信息');
+	(19, 'tb_watch_area_info', 0, '#', '增加', '#', '修改', '#',  '删除', '重点区域信息'),
+	(20, 'tb_people_inout_detail', 0, '#', '增加', '#', '修改', '#',  '删除', '人员出入信息');
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------
@@ -690,7 +694,7 @@ create table `tb_locarea_info` (
   `locarea_id` int(11) not null,
   `locarea_name` varchar(64) not null,
   `coor_id` int(11) not null,
-  #含义未知
+  #坐标编号
   `cent_x` int(11) not null,
    #含义未知
   `cent_y` int(11) not null,
@@ -900,14 +904,23 @@ drop table if exists `tb_server_info`;
 
 create table `tb_server_info` (
   `server_id` int(11) not null,
+  #服务器ID
   `server_type` tinyint(4) not null,
+  #服务器类型
   `server_name` varchar(64) not null,
+  #服务器名称
   `server_ip` varchar(64) not null,
+  #IP地址
   `powerlow_times` int(11) not null default '2',
+  #低电压次数
   `location_decision_interval` int(11) not null default '5',
+  #定位间隔
   `location_lost_ms` int(11) not null default '5000',
+  #失位时间
   `monitor_lost_ms` int(11) not null default '5000',
+  #失联时间
   `prohibit_lost` int(11) not null default '1',
+  #监控丢失时间
   `update_timestamp` datetime not null default current_timestamp on update current_timestamp
 ) engine=myisam default charset=utf8;
 

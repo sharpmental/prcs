@@ -25,6 +25,7 @@ class Watch_info extends Admin_Controller
                 )));
             
             $arr['watch_status'] = $_POST['watch_status'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->insert($arr);
             if ($new_id) {
@@ -63,6 +64,7 @@ class Watch_info extends Admin_Controller
             // )));
             
             $arr['watch_status'] = $_POST['watch_status'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->update($arr, 'watch_id = ' . $id);
             if ($new_id) {

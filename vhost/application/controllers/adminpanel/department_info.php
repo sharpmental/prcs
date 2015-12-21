@@ -25,6 +25,7 @@ class Department_info extends Admin_Controller
                 )));
             
             $arr['dep_name'] = $_POST['dep_name'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s'); 
             
             $new_id = $this->Department_info_model->insert($arr);
             if ($new_id) {
@@ -63,6 +64,7 @@ class Department_info extends Admin_Controller
             // )));
             
             $arr['dep_name'] = $_POST['dep_name'];
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Department_info_model->update($arr, 'dep_id = ' . $id);
             if ($new_id) {

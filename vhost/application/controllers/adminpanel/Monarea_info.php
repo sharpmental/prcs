@@ -2,35 +2,32 @@
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class People_info extends Admin_Controller
+class Monarea_info extends Admin_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("People_info_model");
+        $this->load->model("Monarea_info_model");
     }
 
     public function add()
     {
         if ($this->input->is_ajax_request()) {
-            $arr['people_id'] = "";
-            if (isset($_POST['people_id']))
-                $arr['people_id'] = $_POST['people_id'];
+            $arr['monarea_id'] = "";
+            if (isset($_POST['monarea_id']))
+                $arr['monarea_id'] = $_POST['monarea_id'];
             
-            if ($arr['person_id'] == '')
+            if ($arr['monarea_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
                     'tips' => 's'
                 )));
             
-            $arr['people_name'] = $_POST['people_name'];
-            $arr['dep_id'] = $_POST['people_deparment'];
-            $arr['watch_id'] = $_POST['watch_id'];
-            $arr['init_locarea_id'] = $_POST['initloc'];
+            $arr['monarea_name'] = $_POST['monarea_name'];
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->People_info_model->insert($arr);
+            $new_id = $this->Monarea_info_model->insert($arr);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -45,16 +42,8 @@ class People_info extends Admin_Controller
                 )));
             }
         } else {
-            $this->load->model('Department_info_model');
-            $dep_list = $this->Department_info_model->getlist();
-            
-            $this->load->model('Watchinfo_model');
-            $watch_list = $this->Watchinfo_model->getlist();
-            
             $this->view("add", array(
-                "require_js" => true,
-                "dep_list" => $dep_list,
-                "watch_list" => $watch_list
+                "require_js" => true
             ));
         }
     }
@@ -73,13 +62,10 @@ class People_info extends Admin_Controller
             // 'tips' => 's'
             // )));
             
-            $arr['people_name'] = $_POST['people_name'];
-            $arr['dep_id'] = $_POST['people_deparment'];
-            $arr['watch_id'] = $_POST['watch_id'];
-            $arr['init_locarea_id'] = $_POST['initloc'];
+            $arr['monarea_name'] = $_POST['monarea_name'];
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->People_info_model->update($arr, 'people_id = ' . $id);
+            $new_id = $this->Monarea_info_model->update($arr, 'monarea_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -94,21 +80,14 @@ class People_info extends Admin_Controller
                 )));
             }
         } else {
-            $data = $this->People_info_model->get_one(array(
-                'people_id' => intval($id)
+            $data = $this->Monarea_info_model->get_one(array(
+                'monarea_id' => intval($id)
             ));
             if (isset($data)) {
-                $this->load->model('Department_info_model');
-                $dep_list = $this->Department_info_model->getlist();
-                
-                $this->load->model('Watchinfo_model');
-                $watch_list = $this->Watchinfo_model->getlist();
                 
                 $this->view("modify", array(
                     "require_js" => true,
-                    "data_info" => $data,
-                    "dep_list" => $dep_list,
-                    "watch_list" => $watch_list
+                    "data_info" => $data
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');
@@ -118,15 +97,15 @@ class People_info extends Admin_Controller
 
     public function delete($id)
     {
-        $data_info = $this->People_info_model->get_one(array(
-            'people_id' => $id
+        $data_info = $this->monarea_info_model->get_one(array(
+            'moncarea_id' => $id
         ));
         
         if (! $data_info)
             $this->showmessage('信息不存在');
         
-        $status = $this->People_info_model->delete(array(
-            'people_id' => $id
+        $status = $this->Monarea_info_model->delete(array(
+            'monarea_id' => $id
         ));
         
         if ($status) {
