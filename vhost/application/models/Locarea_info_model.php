@@ -12,6 +12,16 @@ class Locarea_info_model extends Base_Model
         $data = $this->query("select * from tb_locarea_info");
         return $data;
     }
+    
+    public function getlist(){
+        $data = $this->db->query("select locarea_id, locarea_name from ".$this->table_name);
+    
+        if($data)
+            return $data->result_array();
+            else
+                return null;
+    }
+    
 }
 
 ?>

@@ -1,726 +1,795 @@
-<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+if (! defined('BASEPATH'))
+    exit('No direct script access allowed');
+
 class MY_Controller extends CI_Controller
 {
-	private  $is_load_captcha;
-	public $aci_config;
-	public $aci_status;
-	public $all_module_menu;
-	protected $page_data = array(
-		'module_name' => '',
-		'controller_name' => '',
-		'method_name' => '',
-	);
 
+    private $is_load_captcha;
 
-	function __construct(){
-		parent::__construct();
-		$this->load->driver('cache',array('adapter'=>'file'));
-		$this->load->helper(array('global','url','string','text','language','auto_codeIgniter_helper','member'));
+    public $aci_config;
 
-		$this->page_data['folder_name']=strtolower(substr($this->router->directory, 0, -1)) ;
-		$this->page_data['controller_name']= strtolower($this->router->class);
-		$this->page_data['method_name']= strtolower($this->router->method);
-		$this->page_data['controller_info']= $this->config->item($this->page_data['controller_name'],'module');
+    public $aci_status;
 
-		$this->config->load('aci');
-		$this->aci_config = $this->config->item('aci_module');
-		$this->aci_status = $this->config->item('aci_status');
+    public $all_module_menu;
 
-		$_pageseo = $this->config->item($this->router->class,'seo');
-		$_default_pageseo = $this->config->item('default','seo');
-		$this->page_data['title'] = isset($_pageseo['title'])?$_pageseo['title'] : $_default_pageseo['title'];
-		$this->page_data['keywords'] = isset($_pageseo['keywords'])?$_pageseo['keywords'] : $_default_pageseo['keywords'];
-		$this->page_data['decriptions'] = isset($_pageseo['decriptions'])?$_pageseo['decriptions'] : $_default_pageseo['decriptions'];
-		unset($_pageseo);
-		unset($_default_pageseo);
-		
-		//如果未安装，执行安装
-		if(!$this->aci_status['installED']&&$this->page_data['folder_name']!="setup") 
-			die("未安装");
+    protected $page_data = array(
+        'module_name' => '',
+        'controller_name' => '',
+        'method_name' => ''
+    );
 
-		$this->all_module_menu = getcache("cache_module_menu_all");
-		$this->load->vars($this->page_data);
-		//$this->_check_module(); // Don't need check module, wsm
-
-	}
-
-	//检查模块
-	function _check_module()
-	{
-		if(!$this->aci_status['installED']&&$this->page_data['folder_name']=="setup")  return true;
-		$_aci_config = NULL;
-
-		foreach($this->aci_config as $k=>$v)
-		{
-			if(strtolower(trim($v['modulePath']))==strtolower(trim($this->page_data['folder_name']) ))
-			{
-				if($v['moduleDetails'])
-					foreach($v['moduleDetails'] as $moduleDetail)
-					{
-						if(strtolower(trim($moduleDetail['controller']))==strtolower(trim($this->page_data['controller_name'])))
-						{
-							if (preg_match("/^".strtolower(trim($moduleDetail['method']))."/i", strtolower(trim($this->page_data['method_name'])))) {
-
-								$_aci_config = $v;
-								break;
-							}
-
-						}
-					}
-			}
-			if($_aci_config!=NULL)break;
-		}
-
-
-		if($_aci_config==NULL)
-			exit('Module does not exists');
-		if(!isset($_aci_config['works']))
-			$this->showmessage('模块不存在，或未正确安装',base_url($this->page_data['folder_name'].'/moduleManage/index'));
-		if(!$_aci_config['works'])
-			$this->showmessage('模块已经被卸载，请重新加载',base_url($this->page_data['folder_name'].'/moduleManage/index'));
-	}
-
-	/**
-	 * 模板
-	 *  ...
-	 * @param unknown_type $module
-	 * @param unknown_type $template
-	 * @param unknown_type $style
-	 */
-	protected function template($module = 'home', $template = 'index', $style = 'expatree')
-	{
-		return template($module , $template , $style ,false);
-	}
-
-	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
-
-		if($url_forward=='')
-			$url_forward=isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:site_url();
-		$datainfo = array("msg"=>$msg,"url_forward"=>$url_forward,"ms"=>$ms,"returnjs"=>$returnjs,"dialog"=>$dialog);
-		exit($msg);
-	}
-
-	protected function view($view_file,$sub_page_data=NULL,$autoload_header_footer_view= true)
-	{
-		$view_file= $this->page_data['folder_name'].DIRECTORY_SEPARATOR.$this->page_data['controller_name'].DIRECTORY_SEPARATOR.$view_file;
-
-		$this->load->view(reduce_double_slashes($view_file),$sub_page_data);
-	}
-
-}
-
-class Front_Controller extends MY_Controller{
-	function __construct(){
-		parent::__construct();
-	}
-
-	/**
-	 * 自动模板调用
-	 *
-	 * @param $module
-	 * @param $template
-	 * @param $istag
-	 * @return unknown_type
-	 */
-// 	protected function view($view_file,$page_data=false,$cache=false)
-// 	{
-
-// 		$view_file=$this->template($this->page_data['folder_name']."/".$this->page_data['controller_name'],$view_file);
-
-// 		if(isset($this->current_member_info))
-// 		{
-// 			$page_data['current_member_info']=$this->current_member_info;
-// 			$page_data['current_member_id']=$this->current_member_id;//当前用户id
-// 		}
-
-// 		$this->load->view(reduce_double_slashes($view_file),$page_data);
-// 	}
-
-	/**
-	 * 自动模板调用
-	 *
-	 * @param $module
-	 * @param $template
-	 * @param $istag
-	 * @return unknown_type
-	 */
-	protected function tpl($module_path,$view_file,$page_data=false,$cache=false)
-	{
-
-		$view_file=$this->template($module_path,$view_file);
-
-		$this->load->view($view_file,$page_data);
-	}
-
-	//重新加载所有缓存至文件
-	final public function reload_all_cache(){
-
-		$menus = array();
-		$datas = $this->Module_menu_model->select('','*',10000,'list_order ASC,menu_id asc');
-		$array = array();
-		foreach ($datas as $r) {
-			$r['url'] =base_url($r['folder'].'/'.$r['controller'].'/'.$r['method']) ;
-			$menus[$r['menu_id']] = $r;
-		}
-		setcache('cache_module_menu_all', $menus);
-
-
-		$priv_arr = $this->Member_role_priv_model->select("");
-		$new_priv_arr = array();
-		if($priv_arr) {
-			foreach($priv_arr as $k=>$v){
-				$new_priv_arr[$v['role_id']][$v['menu_id']]=$v;
-			}
-
-			setcache('cache_member_role_priv', $new_priv_arr);
-
-			$infos = $this->Member_role_model->select('',  '*', '', 'role_id ASC');
-			
-			$groups = array();
-
-			foreach ($infos as $info){
-				$role[$info['role_id']] = $info['role_name'];
-				$groups[$info['role_id']]=$info;
-			}
-
-			setcache('cache_member_group', $groups);
-		}
-
-	}
-
-}
-
-
-class Member_Controller extends Front_Controller{
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->driver('cache', array(
+            'adapter' => 'file'
+        ));
+        $this->load->helper(array(
+            'global',
+            'url',
+            'string',
+            'text',
+            'language',
+            'auto_codeIgniter_helper',
+            'member'
+        ));
+        
+        $this->page_data['folder_name'] = strtolower(substr($this->router->directory, 0, - 1));
+        $this->page_data['controller_name'] = strtolower($this->router->class);
+        $this->page_data['method_name'] = strtolower($this->router->method);
+        $this->page_data['controller_info'] = $this->config->item($this->page_data['controller_name'], 'module');
+        
+        $this->config->load('aci');
+        $this->aci_config = $this->config->item('aci_module');
+        $this->aci_status = $this->config->item('aci_status');
+        
+        $_pageseo = $this->config->item($this->router->class, 'seo');
+        $_default_pageseo = $this->config->item('default', 'seo');
+        $this->page_data['title'] = isset($_pageseo['title']) ? $_pageseo['title'] : $_default_pageseo['title'];
+        $this->page_data['keywords'] = isset($_pageseo['keywords']) ? $_pageseo['keywords'] : $_default_pageseo['keywords'];
+        $this->page_data['decriptions'] = isset($_pageseo['decriptions']) ? $_pageseo['decriptions'] : $_default_pageseo['decriptions'];
+        unset($_pageseo);
+        unset($_default_pageseo);
+        
+        // 如果未安装，执行安装
+        if (! $this->aci_status['installED'] && $this->page_data['folder_name'] != "setup")
+            die("未安装");
+        
+        $this->all_module_menu = getcache("cache_module_menu_all");
+        $this->load->vars($this->page_data);
+        // $this->_check_module(); // Don't need check module, wsm
+    }
     
-	public $module_info,$user_id,$group_id,$current_member_info,$menu_side_list;
-	public $cache_module_menu_arr,$current_role_priv_arr;
-	
-	function __construct(){
-		parent::__construct();
-		
-		define("IN_MEMBER", TRUE);
-		$this->module_info = $this->config->item('module');
-		$this->cache_module_menu_arr =  getcache('cache_module_menu_all');
-		$this->user_id = intval($this->session->userdata('user_id'));
-		$this->user_name = $this->security->xss_clean($this->session->userdata('user_name'));
-		$this->group_id = intval($this->session->userdata('group_id'));
-		$_cache_member_role_priv_arr = getcache('cache_member_role_priv');
+    // 检查模块
+    function _check_module()
+    {
+        if (! $this->aci_status['installED'] && $this->page_data['folder_name'] == "setup")
+            return true;
+        $_aci_config = NULL;
+        
+        foreach ($this->aci_config as $k => $v) {
+            if (strtolower(trim($v['modulePath'])) == strtolower(trim($this->page_data['folder_name']))) {
+                if ($v['moduleDetails'])
+                    foreach ($v['moduleDetails'] as $moduleDetail) {
+                        if (strtolower(trim($moduleDetail['controller'])) == strtolower(trim($this->page_data['controller_name']))) {
+                            if (preg_match("/^" . strtolower(trim($moduleDetail['method'])) . "/i", strtolower(trim($this->page_data['method_name'])))) {
+                                
+                                $_aci_config = $v;
+                                break;
+                            }
+                        }
+                    }
+            }
+            if ($_aci_config != NULL)
+                break;
+        }
+        
+        if ($_aci_config == NULL)
+            exit('Module does not exists');
+        if (! isset($_aci_config['works']))
+            $this->showmessage('模块不存在，或未正确安装', base_url($this->page_data['folder_name'] . '/moduleManage/index'));
+        if (! $_aci_config['works'])
+            $this->showmessage('模块已经被卸载，请重新加载', base_url($this->page_data['folder_name'] . '/moduleManage/index'));
+    }
 
-		$this->current_role_priv_arr = $this->group_id==SUPERADMIN_GROUP_ID?$this->cache_module_menu_arr:(isset($_cache_member_role_priv_arr[$this->group_id])?$_cache_member_role_priv_arr[$this->group_id]:NULL);
+    /**
+     * 模板
+     * ...
+     * 
+     * @param unknown_type $module            
+     * @param unknown_type $template            
+     * @param unknown_type $style            
+     */
+    protected function template($module = 'home', $template = 'index', $style = 'expatree')
+    {
+        return template($module, $template, $style, false);
+    }
 
-		$this->check_member();
-// 		$this->check_priv();
-	}
+    protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '')
+    {
+        if ($url_forward == '')
+            $url_forward = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url();
+        $datainfo = array(
+            "msg" => $msg,
+            "url_forward" => $url_forward,
+            "ms" => $ms,
+            "returnjs" => $returnjs,
+            "dialog" => $dialog
+        );
+        exit($msg);
+    }
 
-	/**
-	 * 判断用户是否已经登陆
-	 */
-	protected function check_member() {
-
-		$_datainfo = $this->Member_model->get_one(array('operator_id'=>$this->user_id,'operator_name'=>$this->user_name));
-		if(!($this->page_data['folder_name']=='member'&&$this->router->class=='manage'&&$this->router->method=='login')&&!$_datainfo)
-		{
-			$this->showmessage('请您重新登录',base_url($this->module_info['php_path'].'/manage/login'));
-			exit(0);
-		}
-
-		$this->current_member_info = $_datainfo;
-	}
-
-	protected function check_priv()
-	{
-// 		$cache_member_role_priv = getcache('cache_member_role_priv');
-		if($this->page_data['folder_name'] =='member' 
-		    && $this->page_data['controller_name'] =='manage' 
-		    && in_array($this->page_data['method_name'], array('login', 'logout', 'manage'))) 
-		    return true;
-		    
-		if($this->group_id == SUPERADMIN_GROUP_ID) 
-		    return true;
-		
-		if(preg_match('/^public_/',$this->page_data['method_name'])) 
-		    return true;
-
-		// 如果有缓存，缓存优先
-		if($this->current_role_priv_arr)
-		{
-			$found=false;
-			foreach($this->current_role_priv_arr as $k=>$v){
-				if($v['method']==$this->page_data['method_name']&&$v['controller']==$this->page_data['controller_name']&&$v['folder']==$this->page_data['folder_name']){
-					$found=true;
-					break;
-				}
-			}
-			if(!$found) $this->showmessage('您没有权限操作该项','blank');
-		}else{
-
-			$r =$this->Member_role_priv_model->get_one(array('method'=>$this->page_data['method_name'],'controller'=>$this->page_data['controller_name'] ,'folder'=>$this->page_data['folder_name'],'role_id'=>$this->group_id ));
-			if(!$r) $this->showmessage('您没有权限操作该项','blank');
-		}
-
-	}
-
-	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
-
-		if($url_forward=='')
-			$url_forward=isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:site_url();
-
-		$datainfo = array("msg"=>$msg,"url_forward"=>$url_forward,"ms"=>$ms,"returnjs"=>$returnjs,"dialog"=>$dialog);
-		echo $this->load->view('member/header',NULL,true);
-		echo $this->load->view('member/message',$datainfo,true);
-		echo $this->load->view('member/footer',NULL,true);
-		exit;
-	}
-
-	/**
-	 * 自动模板调用
-	 *
-	 * @param $module
-	 * @param $template
-	 * @param $istag
-	 * @return unknown_type
-	 */
-	protected function view($view_file,$sub_page_data=NULL,$cache=false)
-	{
-		$view_file= $this->page_data['folder_name'].DIRECTORY_SEPARATOR.$this->page_data['controller_name'].DIRECTORY_SEPARATOR.$view_file;
-
-		if(isset($this->current_member_info))
-		{
-			$page_data['current_member_info']=$this->current_member_info;
-		}
-		$page_data['current_member_id']=$this->user_id;//当前用户id
-		$page_data['current_member_groupid']=$this->group_id;
-
-		//加截菜单
-
-		$menu_data =$this->nav_menu(0,0,0);
-		$page_data['sub_menu_data']= NULL;
-		$page_data['current_pos']= "";
-
-		$find_menu=false;
-		$menu_id = 0;
-
-		foreach($this->all_module_menu as $k=>$_value)
-		{
-			if($_value['folder']==trim($this->page_data['folder_name'])&&
-				$_value['controller']==trim($this->page_data['controller_name'])&&
-				$_value['method']==trim($this->page_data['method_name']))
-			{
-
-				$menu_id = $_value['menu_id'];
-				if(!$find_menu){
-					$arr_parentid = explode(",",$_value['arr_parentid']);
-					if(count($arr_parentid)>=2) {
-						$parent_id =$arr_parentid[1];
-					}else{
-						$parent_id =$_value['menu_id'];
-					}
-
-					$page_data['sub_menu_data']=$this->nav_menu($parent_id);
-
-					foreach($page_data['sub_menu_data'] as $kk=>$vv){
-						$page_data['sub_menu_data'][$kk]['sub_array'] = $this->nav_menu($vv['menu_id']);
-					}
-
-					$find_menu = true;
-				}
-			}
-		}
-		
-		$page_data['menu_data']= $menu_data;
-		$page_data['current_pos']=$this->current_pos($menu_id);
-		$page_data['sub_page']=$this->load->view(reduce_double_slashes($view_file),$sub_page_data,true);
-		
-		$this->load->view('member/header',$page_data);
-		$this->load->view('member/index',$page_data);
-		$this->load->view('member/footer',$page_data);
-	}
-
-
-
-	/**
-	 * 按父ID查找菜单子项
-	 * @param integer $parentid   父菜单ID
-	 * @param integer $with_self  是否包括他自己
-	 */
-	protected function nav_menu($parent_id, $with_self = 0, $show_where = 0) {
-		$parent_id = intval($parent_id);
-
-		$result = array();
-		if($this->all_module_menu)
-		foreach($this->all_module_menu as $k=>$v){
-			if($show_where==1&&$v['folder']!="adminpanel")
-				continue;
-			if($show_where==0&&$v['folder']=="adminpanel")
-				continue;
-			if($v['parent_id']==$parent_id&&$v['is_display']==1&&$v['is_side_menu']==1){
-				$result[] = $v;
-			}
-		}
-
-		if($with_self) {
-			if(isset($this->all_module_menu[$parent_id])){
-				$result = array_merge($this->all_module_menu[$parent_id],$result);
-			}
-		}
-
-		if($this->group_id == SUPERADMIN_GROUP_ID) 
-			return $result;
-		
-		//check_priv
-		$array = array();
-		foreach($result as $v) {
-			$action = base_url($v['folder'].'/'.$v['controller'].'/'.$v['method']);
-			$v['url'] = $action;
-			if(preg_match('/^public_/',$v['method'])) {
-				$array[] = $v;
-			} else {
-				$r = $this->Member_role_priv_model->get_one(array('folder'=> $v['folder'],'controller'=> $v['controller'] ,'method'=> $v['method'],'role_id'=>$this->group_id));
-				if($r) 
-					$array[] = $v;
-			}
-		}
-		
-		return $array;
-	}
-
-	final  public function current_pos($id)
-	{
-		$str = '';
-		if (isset($this->all_module_menu[$id])) {
-
-			if ($this->all_module_menu[$id]['is_side_menu']) {
-				$str = $this->current_pos($this->all_module_menu[$id]['parent_id']);
-
-				if ($this->all_module_menu[$id]['is_parent'])
-					$str = $str . '<li><a href="' . $this->all_module_menu[$id]['url'] . '">' . $this->all_module_menu[$id]['menu_name'] . '</a></li>';
-
-				else
-					$str = $str . '<li> ' . $this->all_module_menu[$id]['menu_name'] . ' </li>';
-
-				return $str;
-			}
-		}
-	}
-
-
-
+    protected function view($view_file, $sub_page_data = NULL, $autoload_header_footer_view = true)
+    {
+        $view_file = $this->page_data['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
+        
+        $this->load->view(reduce_double_slashes($view_file), $sub_page_data);
+    }
 }
 
+class Front_Controller extends MY_Controller
+{
 
-class Admin_Controller extends Member_Controller{
+    function __construct()
+    {
+        parent::__construct();
+    }
 
-	function __construct(){
-		define("IN_ADMIN", TRUE);
-		parent::__construct();
-	}
-
-	protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '') {
-
-		if($url_forward=='')
-			$url_forward=isset($_SERVER['HTTP_REFERER'])?$_SERVER['HTTP_REFERER']:site_url();
-
-		$datainfo = array("msg"=>$msg,"url_forward"=>$url_forward,"ms"=>$ms,"returnjs"=>$returnjs,"dialog"=>$dialog);
-		echo $this->load->view('adminpanel/header',NULL,true);
-		echo $this->load->view('adminpanel/message',$datainfo,true);
-		echo $this->load->view('adminpanel/footer',NULL,true);
-
-		exit;
-	}
-
-
-
-	/**
-	 * 判断用户是否已经登陆
-	 */
-	protected function check_member() {
-
-		if(!$this->user_id&&!($this->router->directory=='adminpanel/'&&$this->router->class=='manage'&&$this->router->method=='login'))
-		{
-			$this->showmessage('请您重新登录',site_url('adminpanel/manage/login'));
-			exit(0);
-		}
-
-	}
-
-	protected function check_priv()
-	{
-		if($this->page_data['folder_name'] =='adminpanel' 
-		    && $this->page_data['controller_name'] =='manage' 
-		    && in_array($this->page_data['method_name'], array('login', 'logout','manage'))) 
-		    return true;
-		
-		if($this->group_id == SUPERADMIN_GROUP_ID) 
-		    return true;
-		
-		if(preg_match('/^public_/',$this->page_data['method_name'])||($this->page_data['method_name']=="go"&&$this->page_data['controller_name']=="manage")) 
-		    return true;
-
-		// 如果有缓存，缓存优先
-		if($this->current_role_priv_arr)
-		{
-			$found=false;
-			foreach($this->current_role_priv_arr as $k=>$v){
-				if($v['method']==$this->page_data['method_name']
-				    && $v['controller']==$this->page_data['controller_name']
-				    && $v['folder']==$this->page_data['folder_name']){
-					$found=true;
-					break;
-				}
-			}
-			if(!$found) 
-			    $this->showmessage('您没有权限操作该项','blank');
-		}else{
-
-			$r =$this->Member_role_priv_model->get_one(array('method'=>$this->page_data['method_name'],'controller'=>$this->page_data['controller_name'] ,'folder'=>$this->page_data['folder_name'],'role_id'=>$this->group_id ));
-			if(!$r) $this->showmessage('您没有权限操作该项','blank');
-		}
-	}
-
-	/**
-	 * 自动模板调用
-	 *
-	 * @param $module
-	 * @param $template
-	 * @param $istag
-	 * @return unknown_type
-	 */
-	protected function admin_tpl($view_file,$page_data=false,$cache=false)
-	{
-		$view_file= $this->page_data['folder_name'].DIRECTORY_SEPARATOR.$this->page_data['controller_name'].DIRECTORY_SEPARATOR.$view_file;
-
-
-		$this->load->view('adminpanel/header',$page_data);
-		$this->load->view(reduce_double_slashes($view_file),$page_data);
-		$this->load->view('adminpanel/footer',$page_data);
-	}
-
-
-	/**
-	 * 自动模板调用
-	 *
-	 * @param $module
-	 * @param $template
-	 * @param $istag
-	 * @return unknown_type
-	 */
-	protected function view($view_file,$sub_page_data=NULL,$cache=false)
-	{
-		$view_file= $this->page_data['folder_name'].DIRECTORY_SEPARATOR.$this->page_data['controller_name'].DIRECTORY_SEPARATOR.$view_file;
-
-		if(isset($this->current_member_info))
-		{
-			$page_data['current_member_info']=$this->current_member_info;
-		}
-		$page_data['current_member_id']=$this->user_id;//当前用户id
-		$page_data['current_member_groupid']=$this->group_id;
-
-		//加截菜单ADMIN
-
-		$menu_data =$this->nav_menu(0,0,1);
-
-		$page_data['sub_menu_data']= NULL;
-		$page_data['current_pos']= "";
-
-		$find_menu=false;
-		$menu_id = 0;
-
-		if($this->current_role_priv_arr)
-		foreach($this->cache_module_menu_arr as $k=>$_value)
-		{
-			if(strtolower($_value['folder'])==strtolower(trim($this->page_data['folder_name']))&&
-				strtolower($_value['controller'])==strtolower(trim($this->page_data['controller_name']))&&
-				strtolower($_value['method'])==strtolower(trim($this->page_data['method_name'])))
-			{
-				$menu_id = $_value['menu_id'];
-				if(!$find_menu&&isset($_value['arr_parentid'])){
-					$arr_parentid = explode(",",$_value['arr_parentid']);
-					if(count($arr_parentid)>=2) {
-						$parent_id =$arr_parentid[1];
-					}else{
-						$parent_id =$_value['menu_id'];
-					}
-
-					$page_data['sub_menu_data']=$this->nav_menu($parent_id,0,1);
-
-					foreach($page_data['sub_menu_data'] as $kk=>$vv){
-						$page_data['sub_menu_data'][$kk]['sub_array'] = $this->nav_menu($vv['menu_id'],0,1);
-					}
-
-					$find_menu = true;
-				}
-			}
-		}
-
-		$page_data['menu_data'] = $sub_page_data['menu_data']= $menu_data;
-		$page_data['current_pos']=$this->current_pos($menu_id);
-		$page_data['sub_page']=$this->load->view(reduce_double_slashes($view_file),$sub_page_data,true);
-		
-		//Setup notification data menu, wsm
-		$menu_notify = $this->config->item('menu_notify');
-		
-		$people_count = $this->Peoplecountview_model->getall();
-		if (isset($people_count)){
-			$row = $people_count->row_array();
-			$prison_totalnumber = $row['people_reg_count'];
-			$prison_outer =  $row['people_out'];
-			$prison_watch_error= $row['watch_alarm'];
-		}
-		else {
-			$prison_totalnumber = 0;
-			$prison_outer = 0;
-			$prison_watch_error= 0;
-		}
-			
-		$prison_lostconnection = $prison_watch_error + $prison_outer;
-		$prison_avaliable = $prison_totalnumber-$prison_lostconnection;
-		
-		$menu_notify['person_count']['submenu']['prison_totalnumber'] = $prison_totalnumber;
-		$menu_notify['person_count']['submenu']['prison_lostconnection'] = $prison_lostconnection;
-		$menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
-		$menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
-
-		$menu1 = $this->Monarea_info_model->getall()->result_array();
-		$menu2 = $this->Locarea_info_model->getall()->result_array();
-		
-		if (isset ($menu1)){
-			foreach ($menu1 as $k=>$v){
-				array_push($menu_notify['person_count']['submenu'], '#');
-				array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
-				$number = $this->Watcharea_model->count('monarea_id = '.$v['monarea_id']);
-				array_push($menu_notify['person_count']['submenu'], $number);
-			}
-		}
-		
-		if (isset ($menu2)){
-			foreach ($menu2 as $k=>$v){
-				array_push($menu_notify['person_count']['submenu'], '#');
-				array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
-				$number = $number = $this->Watcharea_model->count('locarea_id = '.$v['locarea_id']);
-				array_push($menu_notify['person_count']['submenu'], $number);
-			}
-		}
-		
-		//Setup the 2nd menu
-		
-		$menu_notify['device_count']['submenu']['prison_watch_error'] = $prison_watch_error;
-		
-		$alarm_count = $this->Alarmcountview_model->getall();
-		
-		if(isset($alarm_count)){
-			$row=$alarm_count->row_array();
-			$menu_notify['device_count']['submenu']['loc_alarm'] = $row['loc_count'];
-			$menu_notify['device_count']['submenu']['prohibit_alarm'] = $row['prohibit_count'];
-			$menu_notify['device_count']['submenu']['enter_alarm'] = $row['enter_count'];
-			$menu_notify['device_count']['submenu']['mon_alarm'] = $row['mon_count'];
-		}
-		else{
-			$menu_notify['device_count']['submenu']['loc_alarm'] = 0;
-			$menu_notify['device_count']['submenu']['prohibit_alarm'] = 0;
-			$menu_notify['device_count']['submenu']['enter_alarm'] = 0;
-			$menu_notify['device_count']['submenu']['mon_alarm'] = 0;
-		}
-		
-		$page_data['notification'] = $menu_notify;
-		
-		$this->load->view('adminpanel/header',$page_data);
-		$this->load->view('adminpanel/index',$page_data);
-		$this->load->view('adminpanel/footer',$page_data);
-	}
+    /**
+     * 自动模板调用
+     *
+     * @param
+     *            $module
+     * @param
+     *            $template
+     * @param
+     *            $istag
+     * @return unknown_type
+     */
+    // protected function view($view_file,$page_data=false,$cache=false)
+    // {
+    
+    // $view_file=$this->template($this->page_data['folder_name']."/".$this->page_data['controller_name'],$view_file);
+    
+    // if(isset($this->current_member_info))
+    // {
+    // $page_data['current_member_info']=$this->current_member_info;
+    // $page_data['current_member_id']=$this->current_member_id;//当前用户id
+    // }
+    
+    // $this->load->view(reduce_double_slashes($view_file),$page_data);
+    // }
+    
+    /**
+     * 自动模板调用
+     *
+     * @param
+     *            $module
+     * @param
+     *            $template
+     * @param
+     *            $istag
+     * @return unknown_type
+     */
+    protected function tpl($module_path, $view_file, $page_data = false, $cache = false)
+    {
+        $view_file = $this->template($module_path, $view_file);
+        
+        $this->load->view($view_file, $page_data);
+    }
+    
+    // 重新加载所有缓存至文件
+    final public function reload_all_cache()
+    {
+        $menus = array();
+        $datas = $this->Module_menu_model->select('', '*', 10000, 'list_order ASC,menu_id asc');
+        $array = array();
+        foreach ($datas as $r) {
+            $r['url'] = base_url($r['folder'] . '/' . $r['controller'] . '/' . $r['method']);
+            $menus[$r['menu_id']] = $r;
+        }
+        setcache('cache_module_menu_all', $menus);
+        
+        $priv_arr = $this->Member_role_priv_model->select("");
+        $new_priv_arr = array();
+        if ($priv_arr) {
+            foreach ($priv_arr as $k => $v) {
+                $new_priv_arr[$v['role_id']][$v['menu_id']] = $v;
+            }
+            
+            setcache('cache_member_role_priv', $new_priv_arr);
+            
+            $infos = $this->Member_role_model->select('', '*', '', 'role_id ASC');
+            
+            $groups = array();
+            
+            foreach ($infos as $info) {
+                $role[$info['role_id']] = $info['role_name'];
+                $groups[$info['role_id']] = $info;
+            }
+            
+            setcache('cache_member_group', $groups);
+        }
+    }
 }
 
-class API_Controller extends Front_Controller{
+class Member_Controller extends Front_Controller
+{
 
-	public $POST,$GET;
-	public $current_member_info;
+    public $module_info, $user_id, $group_id, $current_member_info, $menu_side_list;
 
-	function __construct(){
+    public $cache_module_menu_arr, $current_role_priv_arr;
 
+    function __construct()
+    {
+        parent::__construct();
+        
+        define("IN_MEMBER", TRUE);
+        $this->module_info = $this->config->item('module');
+        $this->cache_module_menu_arr = getcache('cache_module_menu_all');
+        $this->user_id = intval($this->session->userdata('user_id'));
+        $this->user_name = $this->security->xss_clean($this->session->userdata('user_name'));
+        $this->group_id = intval($this->session->userdata('group_id'));
+        $_cache_member_role_priv_arr = getcache('cache_member_role_priv');
+        
+        $this->current_role_priv_arr = $this->group_id == SUPERADMIN_GROUP_ID ? $this->cache_module_menu_arr : (isset($_cache_member_role_priv_arr[$this->group_id]) ? $_cache_member_role_priv_arr[$this->group_id] : NULL);
+        
+        $this->check_member();
+        // $this->check_priv();
+    }
 
-		header('Access-Control-Allow-Origin: *');
-		header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
-		if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-			if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && (
+    /**
+     * 判断用户是否已经登陆
+     */
+    protected function check_member()
+    {
+        $_datainfo = $this->Member_model->get_one(array(
+            'operator_id' => $this->user_id,
+            'operator_name' => $this->user_name
+        ));
+        if (! ($this->page_data['folder_name'] == 'member' && $this->router->class == 'manage' && $this->router->method == 'login') && ! $_datainfo) {
+            $this->showmessage('请您重新登录', base_url($this->module_info['php_path'] . '/manage/login'));
+            exit(0);
+        }
+        
+        $this->current_member_info = $_datainfo;
+    }
 
-					$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'POST' ||
-					$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'DELETE' ||
-					$_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'PUT' )) {
-				header('Access-Control-Allow-Origin: *');
-				header("Access-Control-Allow-Credentials: true");
-				header('Access-Control-Allow-Headers: X-Requested-With');
-				header('Access-Control-Allow-Headers: access_token');
-				header('Access-Control-Allow-Headers: Content-Type');
-				header('Access-Control-Allow-Headers: Authorization');
+    protected function check_priv()
+    {
+        // $cache_member_role_priv = getcache('cache_member_role_priv');
+        if ($this->page_data['folder_name'] == 'member' && $this->page_data['controller_name'] == 'manage' && in_array($this->page_data['method_name'], array(
+            'login',
+            'logout',
+            'manage'
+        )))
+            return true;
+        
+        if ($this->group_id == SUPERADMIN_GROUP_ID)
+            return true;
+        
+        if (preg_match('/^public_/', $this->page_data['method_name']))
+            return true;
+            
+            // 如果有缓存，缓存优先
+        if ($this->current_role_priv_arr) {
+            $found = false;
+            foreach ($this->current_role_priv_arr as $k => $v) {
+                if ($v['method'] == $this->page_data['method_name'] && $v['controller'] == $this->page_data['controller_name'] && $v['folder'] == $this->page_data['folder_name']) {
+                    $found = true;
+                    break;
+                }
+            }
+            if (! $found)
+                $this->showmessage('您没有权限操作该项', 'blank');
+        } else {
+            
+            $r = $this->Member_role_priv_model->get_one(array(
+                'method' => $this->page_data['method_name'],
+                'controller' => $this->page_data['controller_name'],
+                'folder' => $this->page_data['folder_name'],
+                'role_id' => $this->group_id
+            ));
+            if (! $r)
+                $this->showmessage('您没有权限操作该项', 'blank');
+        }
+    }
 
-				header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE'); 
-				header('Access-Control-Max-Age: 86400');
-			}
-			exit;
-		}
+    protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '')
+    {
+        if ($url_forward == '')
+            $url_forward = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url();
+        
+        $datainfo = array(
+            "msg" => $msg,
+            "url_forward" => $url_forward,
+            "ms" => $ms,
+            "returnjs" => $returnjs,
+            "dialog" => $dialog
+        );
+        echo $this->load->view('member/header', NULL, true);
+        echo $this->load->view('member/message', $datainfo, true);
+        echo $this->load->view('member/footer', NULL, true);
+        exit();
+    }
 
+    /**
+     * 自动模板调用
+     *
+     * @param
+     *            $module
+     * @param
+     *            $template
+     * @param
+     *            $istag
+     * @return unknown_type
+     */
+    protected function view($view_file, $sub_page_data = NULL, $cache = false)
+    {
+        $view_file = $this->page_data['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
+        
+        if (isset($this->current_member_info)) {
+            $page_data['current_member_info'] = $this->current_member_info;
+        }
+        $page_data['current_member_id'] = $this->user_id; // 当前用户id
+        $page_data['current_member_groupid'] = $this->group_id;
+        
+        // 加截菜单
+        
+        $menu_data = $this->nav_menu(0, 0, 0);
+        $page_data['sub_menu_data'] = NULL;
+        $page_data['current_pos'] = "";
+        
+        $find_menu = false;
+        $menu_id = 0;
+        
+        foreach ($this->all_module_menu as $k => $_value) {
+            if ($_value['folder'] == trim($this->page_data['folder_name']) && $_value['controller'] == trim($this->page_data['controller_name']) && $_value['method'] == trim($this->page_data['method_name'])) {
+                
+                $menu_id = $_value['menu_id'];
+                if (! $find_menu) {
+                    $arr_parentid = explode(",", $_value['arr_parentid']);
+                    if (count($arr_parentid) >= 2) {
+                        $parent_id = $arr_parentid[1];
+                    } else {
+                        $parent_id = $_value['menu_id'];
+                    }
+                    
+                    $page_data['sub_menu_data'] = $this->nav_menu($parent_id);
+                    
+                    foreach ($page_data['sub_menu_data'] as $kk => $vv) {
+                        $page_data['sub_menu_data'][$kk]['sub_array'] = $this->nav_menu($vv['menu_id']);
+                    }
+                    
+                    $find_menu = true;
+                }
+            }
+        }
+        
+        $page_data['menu_data'] = $menu_data;
+        $page_data['current_pos'] = $this->current_pos($menu_id);
+        $page_data['sub_page'] = $this->load->view(reduce_double_slashes($view_file), $sub_page_data, true);
+        
+        $this->load->view('member/header', $page_data);
+        $this->load->view('member/index', $page_data);
+        $this->load->view('member/footer', $page_data);
+    }
 
-		$headers = apache_request_headers();
-		
-		parent::__construct();
-		$this->load->library(array('encrypt'));
-		define("IN_API", TRUE);
+    /**
+     * 按父ID查找菜单子项
+     * 
+     * @param integer $parentid
+     *            父菜单ID
+     * @param integer $with_self
+     *            是否包括他自己
+     */
+    protected function nav_menu($parent_id, $with_self = 0, $show_where = 0)
+    {
+        $parent_id = intval($parent_id);
+        
+        $result = array();
+        if ($this->all_module_menu)
+            foreach ($this->all_module_menu as $k => $v) {
+                if ($show_where == 1 && $v['folder'] != "adminpanel")
+                    continue;
+                if ($show_where == 0 && $v['folder'] == "adminpanel")
+                    continue;
+                if ($v['parent_id'] == $parent_id && $v['is_display'] == 1 && $v['is_side_menu'] == 1) {
+                    $result[] = $v;
+                }
+            }
+        
+        if ($with_self) {
+            if (isset($this->all_module_menu[$parent_id])) {
+                $result = array_merge($this->all_module_menu[$parent_id], $result);
+            }
+        }
+        
+        if ($this->group_id == SUPERADMIN_GROUP_ID)
+            return $result;
+            
+            // check_priv
+        $array = array();
+        foreach ($result as $v) {
+            $action = base_url($v['folder'] . '/' . $v['controller'] . '/' . $v['method']);
+            $v['url'] = $action;
+            if (preg_match('/^public_/', $v['method'])) {
+                $array[] = $v;
+            } else {
+                $r = $this->Member_role_priv_model->get_one(array(
+                    'folder' => $v['folder'],
+                    'controller' => $v['controller'],
+                    'method' => $v['method'],
+                    'role_id' => $this->group_id
+                ));
+//                 if ($r)
+                    $array[] = $v;
+            }
+        }
+        
+        return $array;
+    }
 
-		$this->_check_token();
-	}
+    final public function current_pos($id)
+    {
+        $str = '';
+        if (isset($this->all_module_menu[$id])) {
+            
+            if ($this->all_module_menu[$id]['is_side_menu']) {
+                $str = $this->current_pos($this->all_module_menu[$id]['parent_id']);
+                
+                if ($this->all_module_menu[$id]['is_parent'])
+                    $str = $str . '<li><a href="' . $this->all_module_menu[$id]['url'] . '">' . $this->all_module_menu[$id]['menu_name'] . '</a></li>';
+                
+                else
+                    $str = $str . '<li> ' . $this->all_module_menu[$id]['menu_name'] . ' </li>';
+                
+                return $str;
+            }
+        }
+    }
+}
 
-	function _check_token(){
+class Admin_Controller extends Member_Controller
+{
 
-		$headers = apache_request_headers();
-		$rawpostdata = file_get_contents("php://input");
-		if(isset($headers['access_token'])){
+    function __construct()
+    {
+        define("IN_ADMIN", TRUE);
+        parent::__construct();
+    }
 
-			if($rawpostdata)
-				$_POST['token']=$headers['access_token'];
-			else
-				$_GET['token']=$headers['access_token'];
-		}
-		if(isset($_GET['token']))
-		{
+    protected function showmessage($msg, $url_forward = '', $ms = 500, $dialog = '', $returnjs = '')
+    {
+        if ($url_forward == '')
+            $url_forward = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : site_url();
+        
+        $datainfo = array(
+            "msg" => $msg,
+            "url_forward" => $url_forward,
+            "ms" => $ms,
+            "returnjs" => $returnjs,
+            "dialog" => $dialog
+        );
+        echo $this->load->view('adminpanel/header', NULL, true);
+        echo $this->load->view('adminpanel/message', $datainfo, true);
+        echo $this->load->view('adminpanel/footer', NULL, true);
+        
+        exit();
+    }
 
-			$this->GET = $this->POST = $_GET;
+    /**
+     * 判断用户是否已经登陆
+     */
+    protected function check_member()
+    {
+        if (! $this->user_id && ! ($this->router->directory == 'adminpanel/' && $this->router->class == 'manage' && $this->router->method == 'login')) {
+            $this->showmessage('请您重新登录', site_url('adminpanel/manage/login'));
+            exit(0);
+        }
+    }
 
-			if($this->GET['token']==""){
-				exit(json_encode(array('status_id'=>-99991,'tips'=>' 登录失败，缺少token')));
-			}
-		}else{
-			if(!$rawpostdata)
-				exit(json_encode(array('status_id'=>-99992,'tips'=>' 登录失败，缺少token')));
+    protected function check_priv()
+    {
+        if ($this->page_data['folder_name'] == 'adminpanel' && $this->page_data['controller_name'] == 'manage' && in_array($this->page_data['method_name'], array(
+            'login',
+            'logout',
+            'manage'
+        )))
+            return true;
+        
+        if ($this->group_id == SUPERADMIN_GROUP_ID)
+            return true;
+        
+        if (preg_match('/^public_/', $this->page_data['method_name']) || ($this->page_data['method_name'] == "go" && $this->page_data['controller_name'] == "manage"))
+            return true;
+            
+            // 如果有缓存，缓存优先
+        if ($this->current_role_priv_arr) {
+            $found = false;
+            foreach ($this->current_role_priv_arr as $k => $v) {
+                if ($v['method'] == $this->page_data['method_name'] && $v['controller'] == $this->page_data['controller_name'] && $v['folder'] == $this->page_data['folder_name']) {
+                    $found = true;
+                    break;
+                }
+            }
+            if (! $found)
+                $this->showmessage('您没有权限操作该项', 'blank');
+        } else {
+            
+            $r = $this->Member_role_priv_model->get_one(array(
+                'method' => $this->page_data['method_name'],
+                'controller' => $this->page_data['controller_name'],
+                'folder' => $this->page_data['folder_name'],
+                'role_id' => $this->group_id
+            ));
+            if (! $r)
+                $this->showmessage('您没有权限操作该项', 'blank');
+        }
+    }
 
-			$post = json_decode($rawpostdata, true);
-			$this->POST  = $post['params'];
+    /**
+     * 自动模板调用
+     *
+     * @param
+     *            $module
+     * @param
+     *            $template
+     * @param
+     *            $istag
+     * @return unknown_type
+     */
+    protected function admin_tpl($view_file, $page_data = false, $cache = false)
+    {
+        $view_file = $this->page_data['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
+        
+        $this->load->view('adminpanel/header', $page_data);
+        $this->load->view(reduce_double_slashes($view_file), $page_data);
+        $this->load->view('adminpanel/footer', $page_data);
+    }
 
-			if(!isset($_POST['token'])&&!isset($this->POST['token'])){
-				exit(json_encode(array('status_id'=>-9999,'tips'=>' 登录失败，缺少token')));
-			}
+    /**
+     * 自动模板调用
+     *
+     * @param
+     *            $module
+     * @param
+     *            $template
+     * @param
+     *            $istag
+     * @return unknown_type
+     */
+    protected function view($view_file, $sub_page_data = NULL, $cache = false)
+    {
+        $view_file = $this->page_data['folder_name'] . DIRECTORY_SEPARATOR . $this->page_data['controller_name'] . DIRECTORY_SEPARATOR . $view_file;
+        
+        if (isset($this->current_member_info)) {
+            $page_data['current_member_info'] = $this->current_member_info;
+        }
+        $page_data['current_member_id'] = $this->user_id; // 当前用户id
+        $page_data['current_member_groupid'] = $this->group_id;
+        
+        // 加截菜单ADMIN
+        
+        $menu_data = $this->nav_menu(0, 0, 1);
+        
+        $page_data['sub_menu_data'] = NULL;
+        $page_data['current_pos'] = "";
+        
+        $find_menu = false;
+        $menu_id = 0;
+        
+        if ($this->current_role_priv_arr)
+            foreach ($this->cache_module_menu_arr as $k => $_value) {
+                if (strtolower($_value['folder']) == strtolower(trim($this->page_data['folder_name'])) && strtolower($_value['controller']) == strtolower(trim($this->page_data['controller_name'])) && strtolower($_value['method']) == strtolower(trim($this->page_data['method_name']))) {
+                    $menu_id = $_value['menu_id'];
+                    if (! $find_menu && isset($_value['arr_parentid'])) {
+                        $arr_parentid = explode(",", $_value['arr_parentid']);
+                        if (count($arr_parentid) >= 2) {
+                            $parent_id = $arr_parentid[1];
+                        } else {
+                            $parent_id = $_value['menu_id'];
+                        }
+                        
+                        $page_data['sub_menu_data'] = $this->nav_menu($parent_id, 0, 1);
+                        
+                        foreach ($page_data['sub_menu_data'] as $kk => $vv) {
+                            $page_data['sub_menu_data'][$kk]['sub_array'] = $this->nav_menu($vv['menu_id'], 0, 1);
+                        }
+                        
+                        $find_menu = true;
+                    }
+                }
+            }
+        
+        $page_data['menu_data'] = $sub_page_data['menu_data'] = $menu_data;
+        $page_data['current_pos'] = $this->current_pos($menu_id);
+        $page_data['sub_page'] = $this->load->view(reduce_double_slashes($view_file), $sub_page_data, true);
+        
+        // Setup notification data menu, wsm
+        $menu_notify = $this->config->item('menu_notify');
+        
+        $people_count = $this->Peoplecountview_model->getall();
+        if (isset($people_count)) {
+            $row = $people_count->row_array();
+            $prison_totalnumber = $row['people_reg_count'];
+            $prison_outer = $row['people_out'];
+            $prison_watch_error = $row['watch_alarm'];
+        } else {
+            $prison_totalnumber = 0;
+            $prison_outer = 0;
+            $prison_watch_error = 0;
+        }
+        
+        $prison_lostconnection = $prison_watch_error + $prison_outer;
+        $prison_avaliable = $prison_totalnumber - $prison_lostconnection;
+        
+        $menu_notify['person_count']['submenu']['prison_totalnumber'] = $prison_totalnumber;
+        $menu_notify['person_count']['submenu']['prison_lostconnection'] = $prison_lostconnection;
+        $menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
+        $menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
+        
+        $menu1 = $this->Monarea_info_model->getall()->result_array();
+        $menu2 = $this->Locarea_info_model->getall()->result_array();
+        
+        if (isset($menu1)) {
+            foreach ($menu1 as $k => $v) {
+                array_push($menu_notify['person_count']['submenu'], '#');
+                array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
+                $number = $this->Watcharea_model->count('monarea_id = ' . $v['monarea_id']);
+                array_push($menu_notify['person_count']['submenu'], $number);
+            }
+        }
+        
+        if (isset($menu2)) {
+            foreach ($menu2 as $k => $v) {
+                array_push($menu_notify['person_count']['submenu'], '#');
+                array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
+                $number = $number = $this->Watcharea_model->count('locarea_id = ' . $v['locarea_id']);
+                array_push($menu_notify['person_count']['submenu'], $number);
+            }
+        }
+        
+        // Setup the 2nd menu
+        
+        $menu_notify['device_count']['submenu']['prison_watch_error'] = $prison_watch_error;
+        
+        $alarm_count = $this->Alarmcountview_model->getall();
+        
+        if (isset($alarm_count)) {
+            $row = $alarm_count->row_array();
+            $menu_notify['device_count']['submenu']['loc_alarm'] = $row['loc_count'];
+            $menu_notify['device_count']['submenu']['prohibit_alarm'] = $row['prohibit_count'];
+            $menu_notify['device_count']['submenu']['enter_alarm'] = $row['enter_count'];
+            $menu_notify['device_count']['submenu']['mon_alarm'] = $row['mon_count'];
+        } else {
+            $menu_notify['device_count']['submenu']['loc_alarm'] = 0;
+            $menu_notify['device_count']['submenu']['prohibit_alarm'] = 0;
+            $menu_notify['device_count']['submenu']['enter_alarm'] = 0;
+            $menu_notify['device_count']['submenu']['mon_alarm'] = 0;
+        }
+        
+        $page_data['notification'] = $menu_notify;
+        
+        $this->load->view('adminpanel/header', $page_data);
+        $this->load->view('adminpanel/index', $page_data);
+        $this->load->view('adminpanel/footer', $page_data);
+    }
+}
 
-			if(isset($_POST['token'])){
-				$this->POST['token'] = $_POST['token'];
-			}
-		}
-		$token = $this->POST['token'];
+class API_Controller extends Front_Controller
+{
 
-		$token =  str_replace("^^","+",$token);
-		$token =  str_replace("~~","#",$token);
+    public $POST, $GET;
 
-		$decode_token = $this->encrypt->decode($token);
+    public $current_member_info;
 
-		if($decode_token=="")
-			exit(json_encode(array('status_id'=>-9998,'tips'=>' token 无效')));
-		$decode_token_arr = explode("_",$decode_token);
-		if(count($decode_token_arr)!=4)
-			exit(json_encode(array('status_id'=>-9997,'tips'=>' token 无效')));
-		$user_id =  $decode_token_arr[0];
-		$user_name =  $decode_token_arr[2];
-		$user_password =  $decode_token_arr[1];
-		$user_login_time =  $decode_token_arr[3];
-		$this->current_member_info = $this->Member_model->get_one(array('operator_name'=>$user_name,'operator_pwd'=>$user_password));
-		if(!$this->current_member_info)
-			exit(json_encode(array('status_id'=>-1000,'tips'=>' token 无效')));
-	}
+    function __construct()
+    {
+        header('Access-Control-Allow-Origin: *');
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+            if (isset($_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD']) && (
+
+            $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'POST' || $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'DELETE' || $_SERVER['HTTP_ACCESS_CONTROL_REQUEST_METHOD'] == 'PUT')) {
+                header('Access-Control-Allow-Origin: *');
+                header("Access-Control-Allow-Credentials: true");
+                header('Access-Control-Allow-Headers: X-Requested-With');
+                header('Access-Control-Allow-Headers: access_token');
+                header('Access-Control-Allow-Headers: Content-Type');
+                header('Access-Control-Allow-Headers: Authorization');
+                
+                header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE');
+                header('Access-Control-Max-Age: 86400');
+            }
+            exit();
+        }
+        
+        $headers = apache_request_headers();
+        
+        parent::__construct();
+        $this->load->library(array(
+            'encrypt'
+        ));
+        define("IN_API", TRUE);
+        
+        $this->_check_token();
+    }
+
+    function _check_token()
+    {
+        $headers = apache_request_headers();
+        $rawpostdata = file_get_contents("php://input");
+        if (isset($headers['access_token'])) {
+            
+            if ($rawpostdata)
+                $_POST['token'] = $headers['access_token'];
+            else
+                $_GET['token'] = $headers['access_token'];
+        }
+        if (isset($_GET['token'])) {
+            
+            $this->GET = $this->POST = $_GET;
+            
+            if ($this->GET['token'] == "") {
+                exit(json_encode(array(
+                    'status_id' => - 99991,
+                    'tips' => ' 登录失败，缺少token'
+                )));
+            }
+        } else {
+            if (! $rawpostdata)
+                exit(json_encode(array(
+                    'status_id' => - 99992,
+                    'tips' => ' 登录失败，缺少token'
+                )));
+            
+            $post = json_decode($rawpostdata, true);
+            $this->POST = $post['params'];
+            
+            if (! isset($_POST['token']) && ! isset($this->POST['token'])) {
+                exit(json_encode(array(
+                    'status_id' => - 9999,
+                    'tips' => ' 登录失败，缺少token'
+                )));
+            }
+            
+            if (isset($_POST['token'])) {
+                $this->POST['token'] = $_POST['token'];
+            }
+        }
+        $token = $this->POST['token'];
+        
+        $token = str_replace("^^", "+", $token);
+        $token = str_replace("~~", "#", $token);
+        
+        $decode_token = $this->encrypt->decode($token);
+        
+        if ($decode_token == "")
+            exit(json_encode(array(
+                'status_id' => - 9998,
+                'tips' => ' token 无效'
+            )));
+        $decode_token_arr = explode("_", $decode_token);
+        if (count($decode_token_arr) != 4)
+            exit(json_encode(array(
+                'status_id' => - 9997,
+                'tips' => ' token 无效'
+            )));
+        $user_id = $decode_token_arr[0];
+        $user_name = $decode_token_arr[2];
+        $user_password = $decode_token_arr[1];
+        $user_login_time = $decode_token_arr[3];
+        $this->current_member_info = $this->Member_model->get_one(array(
+            'operator_name' => $user_name,
+            'operator_pwd' => $user_password
+        ));
+        if (! $this->current_member_info)
+            exit(json_encode(array(
+                'status_id' => - 1000,
+                'tips' => ' token 无效'
+            )));
+    }
 }

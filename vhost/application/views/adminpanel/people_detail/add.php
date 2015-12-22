@@ -16,7 +16,6 @@
 			<div class="form-group">
 				<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 				<div class="input-group col-sm-9">
-					<span class="input-group-addon" id="sizing-addon3">*</span>
 					<input type="text" name="person_id"  id="person_id"  value=''  class="form-control validate[required]"  placeholder="请输入人员ID" >
 				</div>
 			</div>
@@ -41,7 +40,12 @@
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">性别</label>
 				<div class="col-sm-9">
-					<input type="text" name="gender"  id="gender"  value=''  class="form-control validate[required]"  placeholder="请输入" >
+					<select class="form-control validate[required] " name="gender">
+					<option value="">==请选择==</option>
+					<option value="男">男</option>
+					<option value="女">女</option>
+					<option value="不详">不详</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">

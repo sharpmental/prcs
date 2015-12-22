@@ -1,12 +1,12 @@
 <?php
 
-class Server_info_model extends \Base_Model
+class Logging_info_model extends \Base_Model
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->table_name = "tb_server_info";
+        $this->table_name = "tb_logging";
     }
 
     public function getfromview($offset = '0', $limit = '20')
@@ -18,7 +18,7 @@ class Server_info_model extends \Base_Model
     public function getfromkeyword($keyword)
     {
         if ($keyword)
-            $data = $this->query("select * from " . $this->table_name . " where server_name like '%" . $keyword . "%' or server_id like '%" . $keyword . "%'");
+            $data = $this->query("select * from " . $this->table_name . " where operator_id like '%" . $keyword . "%' or name like '%" . $keyword . "%'");
         else
             $data = $this->query("select * from " . $this->table_name);
         

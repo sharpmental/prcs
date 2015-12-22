@@ -50,11 +50,15 @@ class People_info extends Admin_Controller
             
             $this->load->model('Watchinfo_model');
             $watch_list = $this->Watchinfo_model->getlist();
+
+            $this->load->model('Locarea_info_model');
+            $locarea_list = $this->Locarea_info_model->getlist();
             
             $this->view("add", array(
                 "require_js" => true,
                 "dep_list" => $dep_list,
-                "watch_list" => $watch_list
+                "watch_list" => $watch_list,
+                "locarea_list" => $locarea_list,
             ));
         }
     }
@@ -104,11 +108,15 @@ class People_info extends Admin_Controller
                 $this->load->model('Watchinfo_model');
                 $watch_list = $this->Watchinfo_model->getlist();
                 
+                $this->load->model('Locarea_info_model');
+                $locarea_list = $this->Locarea_info_model->getlist();
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "dep_list" => $dep_list,
-                    "watch_list" => $watch_list
+                    "watch_list" => $watch_list,
+                    "locarea_list" => $locarea_list
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

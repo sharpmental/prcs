@@ -68,9 +68,18 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员的初始位置</label>
 					<div class="col-sm-9">
-						<input type="text" name="initloc" id="initloc"
-							value='<?php echo $data_info['init_locarea_id'];?>'
-							class="form-control validate[required]" placeholder="请输入">
+						<select class="form-control validate[required] " name="watch_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($locarea_list as $k => $v) {
+        if ($v['locarea_id'] == $data_info['init_locarea_id'])
+            echo '<option value="' . $v['locarea_id'] . '" selected="selected">' . $v['locarea_name'] . '</option>';
+        else
+            echo '<option value="' . $v['locarea_id'] . '" >' . $v['locarea_name'] . '</option>';
+    }
+    
+    ?>
+					</select>
 					</div>
 				</div>
 			</fieldset>
