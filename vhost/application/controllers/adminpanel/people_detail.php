@@ -62,7 +62,9 @@ class People_detail extends Admin_Controller
                 )));
             }
         } else {
-            $this->view("add");
+            $this->view("add", array(
+                "require_js" => true,
+            ));
         }
     }
 

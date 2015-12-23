@@ -9,51 +9,169 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			person_id : {
+			people_id : {
 				validators : {
 					notEmpty : {
 						message : '人员ID不能为空'
 					},
 					numeric : {
-						message : '必须是数字'
+						message : '必须为数字'
 					}
 				}
 			},
-			person_no : {
+			people_no : {
 				validators : {
 					notEmpty : {
-						message : '人员NO不能为空'
+						message : '用户号码不能为空'
 					},
 					numeric : {
-						message : '必须是数字'
+						message : '必须为数字'
 					}
 				}
 			},
-			person_name : {
+			people_name : {
 				validators : {
 					notEmpty : {
-						message : '名称不能为空'
+						message : '不能为空'
 					}
 				}
 			},
 			birthday : {
 				validators : {
 					notEmpty : {
-						message : '出生日期不能为空'
+						message : '不能为空'
 					},
-					data : {
-						format : 'YYYY/DD/MM h:m:s',
-						message : '必须为YYYY/DD/MM h:m:s'
+					date : {
+						format : 'YYYY/MM/DD',
+						message : '时间必须为YYYY/MM/DD'
 					}
 				}
 			},
 			gender : {
 				validators : {
 					notEmpty : {
-						message : '性别不能为空'
+						message : '不能为空'
 					}
 				}
 			},
+			education : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			job : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			homeland : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			liveland : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			national : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			zipcode : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					numeric : {
+						message : '必须为数字'
+					}
+				}
+			},
+			sentence: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					numeric : {
+						message : '必须为数字'
+					}
+				}
+			},
+			start: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					date : {
+						message : '必须为数字',
+						format : 'YYYY/MM/DD',
+						message : '时间必须为YYYY/MM/DD'
+					}
+				}
+			},
+			end: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					date : {
+						message : '必须为数字',
+						format : 'YYYY/MM/DD',
+						message : '时间必须为YYYY/MM/DD'
+					}
+				}
+			},
+			entertime: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					date : {
+						message : '必须为数字',
+						format : 'YYYY/MM/DD',
+						message : '时间必须为YYYY/MM/DD'
+					}
+				}
+			},
+			level: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					numeric : {
+						message : '必须为数字'
+					}
+				}
+			},
+			status: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+					numeric : {
+						message : '必须为数字'
+					}
+				}
+			},
+			crime: {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			}
 		}
 	};
 

@@ -7,10 +7,8 @@
 		<div class='panel-heading'>
 			<i class='glyphicon glyphicon-edit'></i> 新增人员信息
 			<div class='panel-tools'>
-
 				<div class='btn-group'>
 				<?php aci_ui_a($folder_name,'edittable','index','',' class="btn  btn-sm pull-right"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-
 			</div>
 			</div>
 		</div>

@@ -9,7 +9,22 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			
+			people_id :{
+				message : '用户ID不能为空',
+				validators : {
+					notEmpty : {
+						message : '用户ID不能为空'
+					}
+				}
+			},
+			people_name :{
+				message : '用户名称不能为空',
+				validators : {
+					notEmpty : {
+						message : '用户名称不能为空'
+					}
+				}
+			}
 		}
 	};
 
