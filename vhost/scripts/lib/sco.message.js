@@ -53,7 +53,7 @@
 			,okClass: 'page_mess_ok'
 			,errClass: 'page_mess_error'
 			,animate: true
-			,delay: 4000
+			,delay: 8000
 			,appendTo: 'body'	// where should the modal be appended to (default to document.body). Added for unit tests, not really needed in real life.
 		},
 

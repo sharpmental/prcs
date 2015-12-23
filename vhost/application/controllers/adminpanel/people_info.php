@@ -18,16 +18,16 @@ class People_info extends Admin_Controller
             if (isset($_POST['people_id']))
                 $arr['people_id'] = $_POST['people_id'];
             
-            if ($arr['person_id'] == '')
+            if ($arr['people_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, No ID find.'
                 )));
             
-            $arr['people_name'] = $_POST['people_name'];
-            $arr['dep_id'] = $_POST['people_deparment'];
-            $arr['watch_id'] = $_POST['watch_id'];
-            $arr['init_locarea_id'] = $_POST['initloc'];
+            $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+            $arr['dep_id'] = isset($_POST['dep_id'])?$_POST['dep_id']:0;
+            $arr['watch_id'] = isset($_POST['watch_id'])?$_POST['watch_id']:0;
+            $arr['init_locarea_id'] = isset($_POST['initloc'])?$_POST['initloc']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_info_model->insert($arr);
@@ -40,8 +40,8 @@ class People_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
-                    'new_id' => 0
+                    'tips' => '信息新增失败, DB failure.',
+                    'new_id' => $new_id
                 )));
             }
         } else {
@@ -67,20 +67,10 @@ class People_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            // $arr['people_id'] = "";
-            // if (isset($_POST['people_id']))
-            // $arr['people_id'] = $_POST['people_id'];
-            
-            // if ($arr['people_id'] == '')
-            // exit(json_encode(array(
-            // 'status' => false,
-            // 'tips' => 's'
-            // )));
-            
-            $arr['people_name'] = $_POST['people_name'];
-            $arr['dep_id'] = $_POST['people_deparment'];
-            $arr['watch_id'] = $_POST['watch_id'];
-            $arr['init_locarea_id'] = $_POST['initloc'];
+            $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+            $arr['dep_id'] = isset($_POST['people_deparment'])?$_POST['people_deparment']:0;
+            $arr['watch_id'] = isset($_POST['watch_id'])?$_POST['watch_id']:0;
+            $arr['init_locarea_id'] = isset($_POST['initloc'])?$_POST['initloc']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_info_model->update($arr, 'people_id = ' . $id);

@@ -16,19 +16,19 @@
 			<div class="form-group">
 				<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 				<div class="col-sm-9">
-					<input type="text" name="person_id"  id="person_id"  value='<?php echo $data_info["people_id"]; ?>'  class="form-control validate[required]"  placeholder="" >
+					<input type="text" name="people_id"  id="people_id"  value='<?php echo $data_info["people_id"]; ?>'  class="form-control validate[required]"  placeholder="" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">编号</label>
 				<div class="col-sm-9">
-					<input type="text" name="person_no"  id="person_no"  value='<?php echo $data_info["no"]; ?>'  class="form-control validate[required]"  placeholder="" >
+					<input type="text" name="people_no"  id="people_no"  value='<?php echo $data_info["no"]; ?>'  class="form-control validate[required]"  placeholder="" >
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="description" class="col-sm-2 control-label">姓名</label>
 				<div class="col-sm-9">
-					<input type="text" name="person_name"  id="person_name"  value='<?php echo $data_info["name"] ?>'  class="form-control validate[required]"  placeholder="" >
+					<input type="text" name="people_name"  id="people_name"  value='<?php echo $data_info["name"] ?>'  class="form-control validate[required]"  placeholder="" >
 				</div>
 			</div>
 			<div class="form-group">

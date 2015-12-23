@@ -21,15 +21,15 @@ class Locarea_info extends Admin_Controller
             if ($arr['locarea_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, no ID'
                 )));
             
-            $arr['locarea_name'] = $_POST['locarea_name'];
-            $arr['coor_id'] = $_POST['locarea_name'];
-            $arr['cent_x'] = $_POST['locarea_name'];
-            $arr['cent_y'] = $_POST['locarea_name'];
-            $arr['size_x'] = $_POST['locarea_name'];
-            $arr['size_y'] = $_POST['locarea_name'];
+            $arr['locarea_name'] = isset($_POST['locarea_name'])?$_POST['locarea_name']:'';
+            $arr['coor_id'] = isset($_POST['coor_id'])?$_POST['coor_id']:0;
+            $arr['cent_x'] = isset($_POST['cent_x'])?$_POST['cent_x']:0;
+            $arr['cent_y'] = isset($_POST['cent_y'])?$_POST['cent_y']:0;
+            $arr['size_x'] = isset($_POST['size_x'])?$_POST['size_x']:0;
+            $arr['size_y'] = isset($_POST['size_y'])?$_POST['size_y']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->insert($arr);
@@ -42,7 +42,7 @@ class Locarea_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }
@@ -61,22 +61,12 @@ class Locarea_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            // $arr['people_id'] = "";
-            // if (isset($_POST['people_id']))
-            // $arr['people_id'] = $_POST['people_id'];
-            
-            // if ($arr['people_id'] == '')
-            // exit(json_encode(array(
-            // 'status' => false,
-            // 'tips' => 's'
-            // )));
-            
-            $arr['locarea_name'] = $_POST['locarea_name'];
-            $arr['coor_id'] = $_POST['locarea_name'];
-            $arr['cent_x'] = $_POST['locarea_name'];
-            $arr['cent_y'] = $_POST['locarea_name'];
-            $arr['size_x'] = $_POST['locarea_name'];
-            $arr['size_y'] = $_POST['locarea_name'];
+            $arr['locarea_name'] = isset($_POST['locarea_name'])?$_POST['locarea_name']:'';
+            $arr['coor_id'] = isset($_POST['coor_id'])?$_POST['coor_id']:0;
+            $arr['cent_x'] = isset($_POST['cent_x'])?$_POST['cent_x']:0;
+            $arr['cent_y'] = isset($_POST['cent_y'])?$_POST['cent_y']:0;
+            $arr['size_x'] = isset($_POST['size_x'])?$_POST['size_x']:0;
+            $arr['size_y'] = isset($_POST['size_y'])?$_POST['size_y']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->update($arr, 'locarea_id = ' . $id);

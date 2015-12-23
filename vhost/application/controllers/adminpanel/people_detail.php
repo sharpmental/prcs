@@ -16,35 +16,35 @@ class People_detail extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             $arr['people_id'] = "";
-            if (isset($_POST['person_id']))
-                $arr['people_id'] = $_POST['person_id'];
+            if (isset($_POST['people_id']))
+                $arr['people_id'] = $_POST['people_id'];
             
             if ($arr['people_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, No people ID'
                 )));
             
-            $arr['no'] = $_POST['person_no'];
-            $arr['name'] = $_POST['person_name'];
-            $arr['birthday'] = $_POST['birthday'];
-            $arr['gender'] = $_POST['gender'];
-            $arr['education'] = $_POST['education'];
-            $arr['jobcareer'] = $_POST['job'];
-            $arr['area_code'] = $_POST['zipcode'];
-            $arr['regaddress'] = $_POST['homeland'];
-            $arr['address'] = $_POST['liveland'];
-            $arr['charge'] = $_POST['crime'];
-            $arr['term_begin'] = $_POST['start'];
-            $arr['term'] = $_POST['sentence'];
-            $arr['term_end'] = $_POST['end'];
-            $arr['arrival_day'] = $_POST['entertime'];
-            $arr['level'] = $_POST['level'];
-            $arr['multicrime'] = $_POST['multiple'];
-            $arr['samecharge'] = $_POST['simcrime'];
-            $arr['cause'] = $_POST['cause'];
-            $arr['nationality'] = $_POST['national'];
-            $arr['status'] = $_POST['status'];
+            $arr['no'] = isset($_POST['people_no'])?$_POST['people_no']:0;
+            $arr['name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+            $arr['birthday'] = isset($_POST['birthday'])?$_POST['birthday']:"";
+            $arr['gender'] = isset($_POST['gender'])?$_POST['gender']:"";
+            $arr['education'] = isset($_POST['education'])?$_POST['education']:"";
+            $arr['jobcareer'] = isset($_POST['job'])?$_POST['job']:"";
+            $arr['area_code'] = isset($_POST['zipcode'])?$_POST['zipcode']:"";
+            $arr['regaddress'] = isset($_POST['homeland'])?$_POST['homeland']:"";
+            $arr['address'] = isset($_POST['liveland'])?$_POST['liveland']:"";
+            $arr['charge'] = isset($_POST['crime'])?$_POST['crime']:"";
+            $arr['term_begin'] = isset($_POST['start'])?$_POST['start']:"";
+            $arr['term'] = isset($_POST['sentence'])?$_POST['sentence']:"";
+            $arr['term_end'] = isset($_POST['end'])?$_POST['end']:"";
+            $arr['arrival_day'] = isset($_POST['entertime'])?$_POST['entertime']:"";
+            $arr['level'] = isset($_POST['level'])?$_POST['level']:0;
+            $arr['multicrime'] = isset($_POST['multiple'])?$_POST['multiple']:"";
+            $arr['samecharge'] = isset($_POST['simcrime'])?$_POST['simcrime']:"";
+            $arr['cause'] = isset($_POST['cause'])?$_POST['cause']:"";
+            $arr['nationality'] = isset($_POST['national'])?$_POST['national']:"";
+            $arr['status'] = isset($_POST['status'])?$_POST['status']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_detail_model->insert($arr);
@@ -57,7 +57,7 @@ class People_detail extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }
@@ -70,36 +70,26 @@ class People_detail extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-//             $arr['people_id'] = "";
-//             if (isset($_POST['person_id']))
-//                 $arr['people_id'] = $_POST['person_id'];
-            
-//             if ($arr['people_id'] == '')
-//                 exit(json_encode(array(
-//                     'status' => false,
-//                     'tips' => 's'
-//                 )));
-            
-            $arr['no'] = $_POST['person_no'];
-            $arr['name'] = $_POST['person_name'];
-            $arr['birthday'] = $_POST['birthday'];
-            $arr['gender'] = $_POST['gender'];
-            $arr['education'] = $_POST['education'];
-            $arr['jobcareer'] = $_POST['job'];
-            $arr['area_code'] = $_POST['zipcode'];
-            $arr['regaddress'] = $_POST['homeland'];
-            $arr['address'] = $_POST['liveland'];
-            $arr['charge'] = $_POST['crime'];
-            $arr['term_begin'] = $_POST['start'];
-            $arr['term'] = $_POST['sentence'];
-            $arr['term_end'] = $_POST['end'];
-            $arr['arrival_day'] = $_POST['entertime'];
-            $arr['level'] = $_POST['level'];
-            $arr['multicrime'] = $_POST['multiple'];
-            $arr['samecharge'] = $_POST['simcrime'];
-            $arr['cause'] = $_POST['cause'];
-            $arr['nationality'] = $_POST['national'];
-            $arr['status'] = $_POST['status'];
+            $arr['no'] = isset($_POST['people_no'])?$_POST['people_no']:0;
+            $arr['name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+            $arr['birthday'] = isset($_POST['birthday'])?$_POST['birthday']:"";
+            $arr['gender'] = isset($_POST['gender'])?$_POST['gender']:"";
+            $arr['education'] = isset($_POST['education'])?$_POST['education']:"";
+            $arr['jobcareer'] = isset($_POST['job'])?$_POST['job']:"";
+            $arr['area_code'] = isset($_POST['zipcode'])?$_POST['zipcode']:"";
+            $arr['regaddress'] = isset($_POST['homeland'])?$_POST['homeland']:"";
+            $arr['address'] = isset($_POST['liveland'])?$_POST['liveland']:"";
+            $arr['charge'] = isset($_POST['crime'])?$_POST['crime']:"";
+            $arr['term_begin'] = isset($_POST['start'])?$_POST['start']:"";
+            $arr['term'] = isset($_POST['sentence'])?$_POST['sentence']:"";
+            $arr['term_end'] = isset($_POST['end'])?$_POST['end']:"";
+            $arr['arrival_day'] = isset($_POST['entertime'])?$_POST['entertime']:"";
+            $arr['level'] = isset($_POST['level'])?$_POST['level']:0;
+            $arr['multicrime'] = isset($_POST['multiple'])?$_POST['multiple']:"";
+            $arr['samecharge'] = isset($_POST['simcrime'])?$_POST['simcrime']:"";
+            $arr['cause'] = isset($_POST['cause'])?$_POST['cause']:"";
+            $arr['nationality'] = isset($_POST['national'])?$_POST['national']:"";
+            $arr['status'] = isset($_POST['status'])?$_POST['status']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_detail_model->update($arr, 'people_id = '.$id);
@@ -112,7 +102,7 @@ class People_detail extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }

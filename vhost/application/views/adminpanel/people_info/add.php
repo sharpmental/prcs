@@ -59,7 +59,7 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员的初始位置</label>
 					<div class="col-sm-9">
-						<select class="form-control validate[required] " name="watch_id">
+						<select class="form-control validate[required] " name="initloc">
 							<option value="">==请选择==</option>
 						<?php
     foreach ($locarea_list as $k => $v) {

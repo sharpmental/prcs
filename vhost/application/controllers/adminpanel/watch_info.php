@@ -21,10 +21,10 @@ class Watch_info extends Admin_Controller
             if ($arr['watch_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, no watch ID'
                 )));
             
-            $arr['watch_status'] = $_POST['watch_status'];
+            $arr['watch_status'] = isset($_POST['watch_status'])?$_POST['watch_status']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->insert($arr);
@@ -37,7 +37,7 @@ class Watch_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }
@@ -53,17 +53,7 @@ class Watch_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            // $arr['people_id'] = "";
-            // if (isset($_POST['people_id']))
-            // $arr['people_id'] = $_POST['people_id'];
-            
-            // if ($arr['people_id'] == '')
-            // exit(json_encode(array(
-            // 'status' => false,
-            // 'tips' => 's'
-            // )));
-            
-            $arr['watch_status'] = $_POST['watch_status'];
+            $arr['watch_status'] = isset($_POST['watch_status'])?$_POST['watch_status']:0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->update($arr, 'watch_id = ' . $id);
@@ -76,7 +66,7 @@ class Watch_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }

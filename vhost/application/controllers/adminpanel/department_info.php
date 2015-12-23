@@ -21,10 +21,10 @@ class Department_info extends Admin_Controller
             if ($arr['dep_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, no ID'
                 )));
             
-            $arr['dep_name'] = $_POST['dep_name'];
+            $arr['dep_name'] = isset($_POST['dep_name'])?$_POST['dep_name']:"";
             $arr['update_timestamp'] = date('Y-m-d H:i:s'); 
             
             $new_id = $this->Department_info_model->insert($arr);
@@ -37,7 +37,7 @@ class Department_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }
@@ -53,17 +53,7 @@ class Department_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            // $arr['people_id'] = "";
-            // if (isset($_POST['people_id']))
-            // $arr['people_id'] = $_POST['people_id'];
-            
-            // if ($arr['people_id'] == '')
-            // exit(json_encode(array(
-            // 'status' => false,
-            // 'tips' => 's'
-            // )));
-            
-            $arr['dep_name'] = $_POST['dep_name'];
+            $arr['dep_name'] = isset($_POST['dep_name'])?$_POST['dep_name']:"";
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Department_info_model->update($arr, 'dep_id = ' . $id);

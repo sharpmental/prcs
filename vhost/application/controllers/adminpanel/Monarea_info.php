@@ -21,10 +21,10 @@ class Monarea_info extends Admin_Controller
             if ($arr['monarea_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => 's'
+                    'tips' => '信息新增失败, no ID'
                 )));
             
-            $arr['monarea_name'] = $_POST['monarea_name'];
+            $arr['monarea_name'] = isset($_POST['monarea_name'])?$_POST['monarea_name']:"";
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Monarea_info_model->insert($arr);
@@ -37,7 +37,7 @@ class Monarea_info extends Admin_Controller
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败',
+                    'tips' => '信息新增失败, DB failure',
                     'new_id' => 0
                 )));
             }
@@ -52,17 +52,7 @@ class Monarea_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            // $arr['people_id'] = "";
-            // if (isset($_POST['people_id']))
-            // $arr['people_id'] = $_POST['people_id'];
-            
-            // if ($arr['people_id'] == '')
-            // exit(json_encode(array(
-            // 'status' => false,
-            // 'tips' => 's'
-            // )));
-            
-            $arr['monarea_name'] = $_POST['monarea_name'];
+            $arr['monarea_name'] = isset($_POST['monarea_name'])?$_POST['monarea_name']:"";
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Monarea_info_model->update($arr, 'monarea_id = ' . $id);
