@@ -7,6 +7,16 @@ class People_detail_model extends Base_Model
         parent::__construct();
         $this->table_name = "tb_people_detail";
     }
+    
+    public function getlist(){
+        $data = $this->query("select people_id, name from ".$this->table_name);
+         
+        if($data)
+            return $data->result_array();
+            else
+                return null;
+    }
+    
 }
 
 ?>

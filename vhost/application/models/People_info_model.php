@@ -7,6 +7,7 @@ class People_info_model extends Base_Model
         parent::__construct();
         $this->table_name = "tb_people_info";
     }
+    
 }
 
 ?>

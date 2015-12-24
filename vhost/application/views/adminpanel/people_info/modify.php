@@ -19,17 +19,26 @@
 				<div class="form-group">
 					<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 					<div class="col-sm-9">
-						<input type="text" name="people_id" id="people_id"
-							value='<?php echo $data_info['people_id'];?>'
-							class="form-control validate[required]" placeholder="请输入人员ID">
+						<select class="form-control validate[required] " name="people_id"
+							id="people_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($people_list as $k => $v) {
+        if ($v['people_id'] == $data_info['people_id'])
+            echo '<option value="' . $v['people_id'] . '" selected="selected ">' . $v['people_id'] . '</option>';
+        else
+            echo '<option value="' . $v['people_id'] . '">' . $v['people_id'] . '</option>';
+    }
+    ?>
+					</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员名称</label>
 					<div class="col-sm-9">
 						<input type="text" name="people_name" id="people_name"
-							value='<?php echo $data_info['people_name'];?>'
-							class="form-control validate[required]" placeholder="请输入">
+							value='<?php echo $people_list[$data_info['people_id']]['name']?>'
+							class="form-control" disabled="disabled" placeholder="请输入">
 					</div>
 				</div>
 				<div class="form-group">
@@ -40,7 +49,7 @@
 						<?php
     foreach ($dep_list as $k => $v) {
         if ($v['dep_id'] == $data_info['dep_id'])
-            echo '<option value="' . $v['dep_id'] . '" selected="selected">' . $v['dep_name'] . '</option>';
+            echo '<option value="' . $v['dep_id'] . '" selected="selected ">' . $v['dep_name'] . '</option>';
         else
             echo '<option value="' . $v['dep_id'] . '">' . $v['dep_name'] . '</option>';
     }
@@ -94,4 +103,9 @@
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
     var id = "<?php echo $data_info['people_id']?>";
+    var people_list = Array();
+    <?php foreach($people_list as $k => $v){ ?>
+        people_list['<?php echo $v["people_id"]?>'] = '<?php echo $v["name"]?>';
+    <?php }?>
+    
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/modify.js']); </script>

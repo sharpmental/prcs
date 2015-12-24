@@ -17,15 +17,21 @@
 				<div class="form-group">
 					<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 					<div class="col-sm-9">
-						<input type="text" name="people_id" id="people_id" value=''
-							class="form-control validate[required]" placeholder="请输入人员ID">
+						<select class="form-control validate[required] " name="people_id" id="people_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($people_list as $k => $v) {
+        echo '<option value="' . $v['people_id'] . '">' . $v['people_id'] . '</option>';
+    }
+    ?>
+					</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员名称</label>
 					<div class="col-sm-9">
 						<input type="text" name="people_name" id="people_name" value=''
-							class="form-control validate[required]" placeholder="请输入">
+							class="form-control" disabled="disabled" placeholder="请输入">
 					</div>
 				</div>
 				<div class="form-group">
@@ -78,4 +84,8 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+    var people_list = Array();
+    <?php foreach($people_list as $k => $v){ ?>
+        people_list['<?php echo $v["people_id"]?>'] = '<?php echo $v["name"]?>';
+    <?php }?>
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add.js']); </script>

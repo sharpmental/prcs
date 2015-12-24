@@ -27,7 +27,13 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			}
 		}
 	};
-
+	
+	$('#people_id').change(
+			function(){
+				var xtext = people_list[$('#people_id').val()];
+				$('#people_name').val(xtext);
+			});
+	
 	$('#validateform').bootstrapValidator(validator_config).on(
 			'success.form.bv',
 			function(e) {

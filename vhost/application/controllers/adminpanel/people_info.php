@@ -24,7 +24,7 @@ class People_info extends Admin_Controller
                     'tips' => '信息新增失败, No ID find.'
                 )));
             
-            $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+//             $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
             $arr['dep_id'] = isset($_POST['dep_id'])?$_POST['dep_id']:0;
             $arr['watch_id'] = isset($_POST['watch_id'])?$_POST['watch_id']:0;
             $arr['init_locarea_id'] = isset($_POST['initloc'])?$_POST['initloc']:0;
@@ -54,11 +54,15 @@ class People_info extends Admin_Controller
             $this->load->model('Locarea_info_model');
             $locarea_list = $this->Locarea_info_model->getlist();
             
+            $this->load->model('People_detail_model');
+            $people_list = $this->People_detail_model->getlist();
+            
             $this->view("add", array(
                 "require_js" => true,
                 "dep_list" => $dep_list,
                 "watch_list" => $watch_list,
                 "locarea_list" => $locarea_list,
+                "people_list" => $people_list 
             ));
         }
     }
@@ -67,7 +71,7 @@ class People_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
+//             $arr['people_name'] = isset($_POST['people_name'])?$_POST['people_name']:"";
             $arr['dep_id'] = isset($_POST['people_deparment'])?$_POST['people_deparment']:0;
             $arr['watch_id'] = isset($_POST['watch_id'])?$_POST['watch_id']:0;
             $arr['init_locarea_id'] = isset($_POST['initloc'])?$_POST['initloc']:0;
@@ -101,12 +105,16 @@ class People_info extends Admin_Controller
                 $this->load->model('Locarea_info_model');
                 $locarea_list = $this->Locarea_info_model->getlist();
                 
+                $this->load->model('People_detail_model');
+                $people_list = $this->People_detail_model->getlist();
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "dep_list" => $dep_list,
                     "watch_list" => $watch_list,
-                    "locarea_list" => $locarea_list
+                    "locarea_list" => $locarea_list,
+                    "people_list" => $people_list
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');
