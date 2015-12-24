@@ -39,4 +39,5 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+    var id = "<?php echo $data_info['watch_id']?>";
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/modify.js']); </script>

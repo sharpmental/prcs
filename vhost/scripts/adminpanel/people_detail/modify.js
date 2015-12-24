@@ -185,7 +185,7 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 				$.scojs_message('请稍候...', $.scojs_message.TYPE_WAIT);
 				$.ajax({
 					type : "POST",
-					url : SITE_URL + folder_name + "/people_detail/modify/",
+					url : SITE_URL + folder_name + "/people_detail/modify/" + id,
 					data : $("#validateform").serialize(),
 					success : function(response) {
 						var dataObj = jQuery.parseJSON(response);
