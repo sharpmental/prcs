@@ -3,7 +3,7 @@ require.config({
 	baseUrl: '/scripts',
     paths: {
         "jquery": "lib/jquery", 
-        "jquery-ui": "lib/jquery-ui-1.10.0.custom.min", 
+        "jquery-ui": "lib/jquery-ui", 
 		"jquery-ui-dialog-extend": "lib/jquery-ui-dialog-extend", 
         "underscore": "lib/underscore",
         "bootstrap": "lib/bootstrap", 

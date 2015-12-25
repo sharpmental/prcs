@@ -246,15 +246,15 @@ insert into `tb_table_edit_list` values
 	(8, 'tb_alarm_mon', 0, '#', '增加', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表'),
 	(9, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表'),
 	(10, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表'),
-	(11, 'tb_recvunit_info', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元信息表'),
-	(12, 'tb_loccoor_info', 0, '#', '增加', '#', '修改', '#',  '删除', '定位坐标信息表'),
-	(13, 'tb_dep_ru_location', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元定位信息'),
-	(14, 'tb_dep_ru_prohibit', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元警戒信息'),
-	(15, 'tb_dep_ru_enter', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元进入信息'),
-	(16, 'tb_dep_ru_door', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元门禁信息'),
-	(17, 'tb_dep_ru_monitor', 0, '#', '增加', '#', '修改', '#',  '删除', '接收单元监控信息'),
+	(11, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表'),
+	(12, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表'),
+	(13, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息'),
+	(14, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息'),
+	(15, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息'),
+	(16, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息'),
+	(17, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息'),
 	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息'),
-	(19, 'tb_watch_area_info', 0, '#', '增加', '#', '修改', '#',  '删除', '重点区域信息'),
+	(19, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息'),
 	(20, 'tb_people_inout_detail', 0, '#', '增加', '#', '修改', '#',  '删除', '人员出入信息');
 
 # Dump of table tb_sessions

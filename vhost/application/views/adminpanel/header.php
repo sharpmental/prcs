@@ -14,13 +14,13 @@
 <!--[if IE 7]>
 <link rel="stylesheet" href="<?php echo base_url('css/font-awesome-ie7.min.css')?>">
 <![endif]-->
-<link type="text/css" href="<?php echo base_url('css/jquery-ui-1.10.0.custom.css')?>" rel="stylesheet" />
+<link type="text/css" href="<?php echo base_url('css/jquery-ui.css')?>" rel="stylesheet" />
 <link rel="stylesheet" href="<?php echo base_url(ADMIN_CSS_PATH.'style.css')?>">
 <?php if(isset($require_js)):?>
 <script src="<?php echo base_url('/scripts/require.js')?>" data-main="/scripts/common"></script>
 <?php else:?>
 <script src="<?php echo base_url('/scripts/lib/jquery.js')?>" ></script>
-<script src="<?php echo base_url('/scripts/lib/jquery-ui-1.10.0.custom.min.js')?>"></script>
+<script src="<?php echo base_url('/scripts/lib/jquery-ui.js')?>"></script>
 <script src="<?php echo base_url('/scripts/lib/jquery.datetimepicker.js')?>"></script>
 <script src="<?php echo base_url('/scripts/lib/jquery.validationEngine-zh_CN.js')?>" ></script>
 <script src="<?php echo base_url('/scripts/lib/jquery.validationEngine.js')?>" ></script>
