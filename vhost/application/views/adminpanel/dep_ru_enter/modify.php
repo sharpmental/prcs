@@ -5,7 +5,7 @@
 
 	<div class='panel panel-default'>
 		<div class='panel-heading'>
-			<i class='glyphicon glyphicon-edit'></i> 新增定位坐标系
+			<i class='glyphicon glyphicon-edit'></i>修改进入天线 
 			<div class='panel-tools'>
 				<div class='btn-group'>
 				<?php aci_ui_a($folder_name,'edittable','index','',' class="btn  btn-sm pull-right"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
@@ -49,26 +49,27 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="description" class="col-sm-2 control-label">定位信号系数值</label>
+					<label for="description" class="col-sm-2 control-label">监控区域标识</label>
 					<div class="col-sm-9">
-						<input type="text" name="weight" id="weight"
-							value='<?php echo $data_info['weight']?>' class="form-control"
-							placeholder="请输入">
+						<select class="form-control validate[required] " name="monarea_id"
+							id="monarea_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($monarea_list as $k => $v) {
+        if ($data_info['monarea_id'] == $v['monarea_id'])
+            echo '<option value="' . $v['monarea_id'] . '" selected = "selected ">' . $v['monarea_id'] . '</option>';
+       
+            else 
+                echo '<option value="' . $v['monarea_id'] . '">' . $v['monarea_id'] . '</option>';
+    }
+    ?>
+					</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="description" class="col-sm-2 control-label">定位信号 rssi 强度系数值</label>
-					<div class="col-sm-9">
-						<input type="text" name="rssi_weight" id="rssi_weight"
-							value='<?php echo $data_info['rssi_weight']?>' class="form-control"
-							placeholder="请输入">
-					</div>
-				</div>
-				
 			</fieldset>
 
 			<div class='form-actions'>
-		<?php aci_ui_button($folder_name,'dep_ru_location','modify','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
+		<?php aci_ui_button($folder_name,'dep_ru_enter','modify','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
 	</div>
 		</div>
 	</div>

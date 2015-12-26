@@ -43,26 +43,23 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="description" class="col-sm-2 control-label">定位信号系数值</label>
+					<label for="description" class="col-sm-2 control-label">监控区域标识</label>
 					<div class="col-sm-9">
-						<input type="text" name="weight" id="weight"
-							value='' class="form-control"
-							placeholder="请输入">
+						<select class="form-control validate[required] " name="monarea_id"
+							id="monarea_id">
+							<option value="">==请选择==</option>
+						<?php
+    foreach ($monarea_list as $k => $v) {
+        echo '<option value="' . $v['monarea_id'] . '">' . $v['monarea_id'] . '</option>';
+    }
+    ?>
+					</select>
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="description" class="col-sm-2 control-label">定位信号 rssi 强度系数值</label>
-					<div class="col-sm-9">
-						<input type="text" name="rssi_weight" id="rssi_weight"
-							value='' class="form-control"
-							placeholder="请输入">
-					</div>
-				</div>
-
 			</fieldset>
 
 			<div class='form-actions'>
-		<?php aci_ui_button($folder_name,'dep_ru_location','add','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
+		<?php aci_ui_button($folder_name,'dep_ru_prohibit','add','type="submit" id="dosubmit" class="btn btn-primary "','保存')?>
 	</div>
 		</div>
 	</div>

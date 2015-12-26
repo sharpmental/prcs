@@ -10,4 +10,12 @@ class Monarea_info_model extends Base_model{
 		return $data;
 	}
 	
+	public function getlist(){
+	    $data = $this->db->query("select monarea_id, monarea_name from ".$this->table_name);
+	
+	    if($data)
+	        return $data->result_array();
+	        else
+	            return null;
+	}
 }

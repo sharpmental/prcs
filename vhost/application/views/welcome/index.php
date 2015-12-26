@@ -46,7 +46,7 @@
 				<div class="masthead clearfix">
 					<div class="inner">
 						<h3 class="masthead-brand">Prison Resource Control
-							System(www.prcs.com)</h3>
+							System</h3>
 						<nav>
 							<ul class="nav masthead-nav">
 								<li class="active"><a href="<?php echo site_url()?>">首页</a></li>

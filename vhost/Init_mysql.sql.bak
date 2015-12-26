@@ -254,7 +254,7 @@ insert into `tb_table_edit_list` values
 	(16, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息'),
 	(17, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息'),
 	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息'),
-	(19, 'tb_watch_area_info', 0, '#', '增加', '#', '修改', '#',  '删除', '重点区域信息'),
+	(19, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息'),
 	(20, 'tb_people_inout_detail', 0, '#', '增加', '#', '修改', '#',  '删除', '人员出入信息');
 
 # Dump of table tb_sessions
