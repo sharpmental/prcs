@@ -2,33 +2,34 @@
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
-class Dep_ru_door extends Admin_Controller
+class Watch_area_info extends Admin_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
-        $this->load->model("Dep_ru_door_model");
+        $this->load->model("Watch_area_info_model");
     }
 
     public function add()
     {
         if ($this->input->is_ajax_request()) {
-            $arr['ru_id'] = "";
-            if (isset($_POST['ru_id']))
-                $arr['ru_id'] = $_POST['ru_id'];
+            $arr['watch_id'] = "";
+            if (isset($_POST['watch_id']))
+                $arr['watch_id'] = $_POST['watch_id'];
             
-            if ($arr['ru_id'] == '')
+            if ($arr['watch_id'] == '')
                 exit(json_encode(array(
                     'status' => false,
                     'tips' => '信息新增失败, No ID find.'
                 )));
             
-            $arr['dep_id'] = isset($_POST['dep_id']) ? $_POST['dep_id'] : 0;
+            $arr['alarm_type'] = isset($_POST['alarm_type']) ? $_POST['alarm_type'] : 0;
+            $arr['locarea_id'] = isset($_POST['locarea_id']) ? $_POST['locarea_id'] : 0;
             $arr['monarea_id'] = isset($_POST['monarea_id']) ? $_POST['monarea_id'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->Dep_ru_door_model->insert($arr);
+            $new_id = $this->Watch_area_info_model->insert($arr);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -43,19 +44,19 @@ class Dep_ru_door extends Admin_Controller
                 )));
             }
         } else {
-            $this->load->model('Department_info_model');
-            $dep_list = $this->Department_info_model->getlist();
-
-            $this->load->model('Recvunit_info_model');
-            $recvunit_list = $this->Recvunit_info_model->getlist();
+            $this->load->model('Watchinfo_model');
+            $watch_list = $this->Watchinfo_model->getlist();
+            
+            $this->load->model('Locarea_info_model');
+            $locarea_list = $this->Locarea_info_model->getlist();
             
             $this->load->model('Monarea_info_model');
             $monarea_list = $this->Monarea_info_model->getlist();
             
             $this->view("add", array(
                 "require_js" => true,
-                "dep_list" => $dep_list,
-                "recvunit_list" => $recvunit_list,
+                "watch_list" => $watch_list,
+                "locarea_list" => $locarea_list,
                 "monarea_list" =>$monarea_list
             ));
         }
@@ -65,11 +66,12 @@ class Dep_ru_door extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['dep_id'] = isset($_POST['dep_id']) ? $_POST['dep_id'] : 0;
+            $arr['alarm_type'] = isset($_POST['alarm_type']) ? $_POST['alarm_type'] : 0;
+            $arr['locarea_id'] = isset($_POST['locarea_id']) ? $_POST['locarea_id'] : 0;
             $arr['monarea_id'] = isset($_POST['monarea_id']) ? $_POST['monarea_id'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->Dep_ru_door_model->update($arr, ' ru_id = '.$id);
+            $new_id = $this->Watch_area_info_model->update($arr, ' watch_id = '.$id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -84,16 +86,16 @@ class Dep_ru_door extends Admin_Controller
                 )));
             }
         } else {
-            $data = $this->Dep_ru_door_model->get_one(array(
-                'ru_id' => intval($id)
+            $data = $this->Watch_area_info_model->get_one(array(
+                'watch_id' => intval($id)
             ));
             if (isset($data)) {
                 
-                $this->load->model('Department_info_model');
-                $dep_list = $this->Department_info_model->getlist();
+                $this->load->model('Watchinfo_model');
+                $watch_list = $this->Watchinfo_model->getlist();
                 
-                $this->load->model('Recvunit_info_model');
-                $recvunit_list = $this->Recvunit_info_model->getlist();
+                $this->load->model('Locarea_info_model');
+                $locarea_list = $this->Locarea_info_model->getlist();
                 
                 $this->load->model('Monarea_info_model');
                 $monarea_list = $this->Monarea_info_model->getlist();
@@ -101,8 +103,8 @@ class Dep_ru_door extends Admin_Controller
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
-                    "dep_list" => $dep_list,
-                    "recvunit_list" => $recvunit_list,
+                    "watch_list" => $watch_list,
+                    "locarea_list" => $locarea_list,
                     "monarea_list" => $monarea_list
                 ));
             } else {
@@ -113,15 +115,15 @@ class Dep_ru_door extends Admin_Controller
 
     public function delete($id)
     {
-        $data_info = $this->Dep_ru_door_model->get_one(array(
-            'ru_id' => $id
+        $data_info = $this->Watch_area_info_model->get_one(array(
+            'watch_id' => $id
         ));
         
         if (! $data_info)
             $this->showmessage('信息不存在');
         
-        $status = $this->Dep_ru_door_model->delete(array(
-            'ru_id' => $id
+        $status = $this->Watch_area_info_model->delete(array(
+            'watch_id' => $id
         ));
         
         if ($status) {

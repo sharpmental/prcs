@@ -638,7 +638,7 @@ class Admin_Controller extends Member_Controller
             foreach ($menu1 as $k => $v) {
                 array_push($menu_notify['person_count']['submenu'], '#');
                 array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
-                $number = $this->Watcharea_model->count('monarea_id = ' . $v['monarea_id']);
+                $number = $this->Watch_area_info_model->count('monarea_id = ' . $v['monarea_id']);
                 array_push($menu_notify['person_count']['submenu'], $number);
             }
         }
@@ -647,7 +647,7 @@ class Admin_Controller extends Member_Controller
             foreach ($menu2 as $k => $v) {
                 array_push($menu_notify['person_count']['submenu'], '#');
                 array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
-                $number = $number = $this->Watcharea_model->count('locarea_id = ' . $v['locarea_id']);
+                $number = $number = $this->Watch_area_info_model->count('locarea_id = ' . $v['locarea_id']);
                 array_push($menu_notify['person_count']['submenu'], $number);
             }
         }
