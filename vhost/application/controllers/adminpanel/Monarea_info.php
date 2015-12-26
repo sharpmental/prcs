@@ -87,8 +87,8 @@ class Monarea_info extends Admin_Controller
 
     public function delete($id)
     {
-        $data_info = $this->monarea_info_model->get_one(array(
-            'moncarea_id' => $id
+        $data_info = $this->Monarea_info_model->get_one(array(
+            'monarea_id' => $id
         ));
         
         if (! $data_info)

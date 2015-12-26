@@ -44,7 +44,7 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员所属部门</label>
 					<div class="col-sm-9">
-						<select class="form-control validate[required] " name="dep_id">
+						<select class="form-control validate[required] " name="dep_id" id="dep_id">
 							<option value="">==请选择==</option>
 						<?php
     foreach ($dep_list as $k => $v) {
@@ -60,7 +60,7 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员配带腕带标识</label>
 					<div class="col-sm-9">
-						<select class="form-control validate[required] " name="watch_id">
+						<select class="form-control validate[required] " name="watch_id" id="watch_id">
 							<option value="">==请选择==</option>
 						<?php
     foreach ($watch_list as $k => $v) {
@@ -77,7 +77,7 @@
 				<div class="form-group">
 					<label for="description" class="col-sm-2 control-label">人员的初始位置</label>
 					<div class="col-sm-9">
-						<select class="form-control validate[required] " name="watch_id">
+						<select class="form-control validate[required] " name="init_locarea_id" id="init_locarea_id">
 							<option value="">==请选择==</option>
 						<?php
     foreach ($locarea_list as $k => $v) {

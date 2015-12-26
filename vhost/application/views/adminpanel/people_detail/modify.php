@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="description" class="col-sm-2 control-label">入园时间</label>
+				<label for="description" class="col-sm-2 control-label">入狱时间</label>
 				<div class="col-sm-9">
 					<input type="text" name="entertime"  id="entertime"  value='<?php echo $data_info["arrival_day"]; ?>'  class="form-control validate[required]"  placeholder="请输入" >
 				</div>

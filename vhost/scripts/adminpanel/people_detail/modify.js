@@ -36,17 +36,17 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 					}
 				}
 			},
-			birthday : {
-				validators : {
-					notEmpty : {
-						message : '不能为空'
-					},
-					date : {
-						format : 'YYYY-MM-DD',
-						message : '时间必须为YYYY-MM-DD'
-					}
-				}
-			},
+//			birthday : {
+//				validators : {
+//					notEmpty : {
+//						message : '不能为空'
+//					},
+//					date : {
+//						format : 'YYYY-MM-DD',
+//						message : '时间必须为YYYY-MM-DD'
+//					}
+//				}
+//			},
 			gender : {
 				validators : {
 					notEmpty : {
@@ -109,50 +109,50 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 					}
 				}
 			},
-			start : {
-				validators : {
-					notEmpty : {
-						message : '不能为空'
-					},
-					date : {
-						message : '必须为数字',
-						format : 'YYYY-MM-DD',
-						message : '时间必须为YYYY-MM-DD'
-					}
-				}
-			},
-			end : {
-				validators : {
-					notEmpty : {
-						message : '不能为空'
-					},
-					date : {
-						message : '必须为数字',
-						format : 'YYYY-MM-DD',
-						message : '时间必须为YYYY-MM-DD'
-					}
-				}
-			},
-			entertime : {
-				validators : {
-					notEmpty : {
-						message : '不能为空'
-					},
-					date : {
-						message : '必须为数字',
-						format : 'YYYY-MM-DD',
-						message : '时间必须为YYYY-MM-DD'
-					}
-				}
-			},
+//			start : {
+//				validators : {
+//					notEmpty : {
+//						message : '不能为空'
+//					},
+//					date : {
+//						message : '必须为数字',
+//						format : 'YYYY-MM-DD',
+//						message : '时间必须为YYYY-MM-DD'
+//					}
+//				}
+//			},
+//			end : {
+//				validators : {
+//					notEmpty : {
+//						message : '不能为空'
+//					},
+//					date : {
+//						message : '必须为数字',
+//						format : 'YYYY-MM-DD',
+//						message : '时间必须为YYYY-MM-DD'
+//					}
+//				}
+//			},
+//			entertime : {
+//				validators : {
+//					notEmpty : {
+//						message : '不能为空'
+//					},
+//					date : {
+//						message : '必须为数字',
+//						format : 'YYYY-MM-DD',
+//						message : '时间必须为YYYY-MM-DD'
+//					}
+//				}
+//			},
 			level : {
 				validators : {
 					notEmpty : {
 						message : '不能为空'
 					},
-					numeric : {
-						message : '必须为数字'
-					}
+//					numeric : {
+//						message : '必须为数字'
+//					}
 				}
 			},
 			status : {
@@ -175,6 +175,19 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 		}
 	};
 
+	$('#birthday').datepicker({
+		  dateFormat: "yy-mm-dd"
+	});
+	$('#start').datepicker({
+		  dateFormat: "yy-mm-dd"
+	});
+	$('#end').datepicker({
+		  dateFormat: "yy-mm-dd"
+	});
+	$('#entertime').datepicker({
+		  dateFormat: "yy-mm-dd"
+	});
+	
 	$('#validateform').bootstrapValidator(validator_config).on(
 			'success.form.bv',
 			function(e) {

@@ -239,11 +239,11 @@ insert into `tb_table_edit_list` values
 	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表'),
 	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息’'),
 	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息'),
-	(4, 'tb_alarm_general', 0,  '#', '增加', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态'),
-	(5, 'tb_alarm_loc', 0, '#', '增加', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表'),
-	(6, 'tb_alarm_prohibit', 0, '#', '增加', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表'),
-	(7, 'tb_alarm_enter', 0, '#', '增加', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表'),
-	(8, 'tb_alarm_mon', 0, '#', '增加', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表'),
+	(4, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态'),
+	(5, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表'),
+	(6, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表'),
+	(7, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表'),
+	(8, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表'),
 	(9, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表'),
 	(10, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表'),
 	(11, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表'),
@@ -255,7 +255,7 @@ insert into `tb_table_edit_list` values
 	(17, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息'),
 	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息'),
 	(19, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息'),
-	(20, 'tb_people_inout_detail', 0, '#', '增加', '#', '修改', '#',  '删除', '人员出入信息');
+	(20, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息');
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------
@@ -465,6 +465,8 @@ create table `tb_people_inout_detail` (
   primary key  (`inout_id`)
 ) engine=myisam default charset=utf8 comment='人员出入历史记录表';
 
+
+insert into tb_people_inout_detail values (1, 1, 1, 1, '2011-01-01', '', 'memeo',1, "2011-01-10");
 
 -- --------------------------------------------------------
 

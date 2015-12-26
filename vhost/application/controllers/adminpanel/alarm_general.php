@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Alarm_gneral extends Admin_Controller
+class Alarm_general extends Admin_Controller
 {
     public function __construct(){
         parent::__construct();
