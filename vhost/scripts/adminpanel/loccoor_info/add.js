@@ -17,6 +17,48 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 					}
 				}
 			},
+			coor_name :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			ori_x :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			ori_y :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			ori_z :{
+				validators : {
+					notEmpty : {
+						message : 'ID不能为空'
+					}
+				}
+			},
+			angle_h :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			},
+			angle_v :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			}
 		}
 	};
 	

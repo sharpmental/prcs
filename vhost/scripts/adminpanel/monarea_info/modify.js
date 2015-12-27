@@ -9,7 +9,21 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			
+			monarea_id :{
+				message : 'ID不能为空',
+				validators : {
+					notEmpty : {
+						message : 'ID不能为空'
+					}
+				}
+			},
+			monarea_name :{
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					}
+				}
+			}
 		}
 	};
 

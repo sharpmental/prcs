@@ -9,7 +9,13 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			
+			watch_id :{
+				validators : {
+					notEmpty : {
+						message : 'ID不能为空'
+					}
+				}
+			},
 		}
 	};
 

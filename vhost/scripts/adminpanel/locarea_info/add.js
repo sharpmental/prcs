@@ -9,7 +9,55 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			
+			locarea_id : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+				}
+			},
+			locarea_name :{
+				validators :{
+					notEmpty :{
+						message : '不能为空'
+					}
+				}
+			},
+			coor_id : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+				}
+			},
+			cent_x :{
+				validators :{
+					notEmpty :{
+						message : '不能为空'
+					}
+				}
+			},
+			cent_y : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+				}
+			},
+			size_x :{
+				validators :{
+					notEmpty :{
+						message : '不能为空'
+					}
+				}
+			},
+			size_y : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+				}
+			}
 		}
 	};
 

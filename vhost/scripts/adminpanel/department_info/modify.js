@@ -9,7 +9,20 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 			validating : 'glyphicon glyphicon-refresh'
 		},
 		fields : {
-			
+			dep_id : {
+				validators : {
+					notEmpty : {
+						message : '不能为空'
+					},
+				}
+			},
+			dep_name :{
+				validators :{
+					notEmpty :{
+						message : '不能为空'
+					}
+				}
+			}
 		}
 	};
 
