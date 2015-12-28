@@ -74,6 +74,7 @@ class Edittable extends Admin_Controller
         $this->table->set_heading($fields);
         
         $data_t = array();
+        //assume the 1st column data is the index of the table!!!
         if ($data->result_array()) {
             foreach ($data->result_array() as $k => $v) {
                 array_push($v, '<a class="btn btn-info btn-sm" href="' . $table_actiona . '/' . $v[reset($fields)] . '" role="button">' . $table_texta . '</a>');

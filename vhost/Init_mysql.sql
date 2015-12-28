@@ -232,30 +232,33 @@ create table `tb_table_edit_list` (
 	`actiondeleteurl` varchar(128) default '#',
 	`actiondeletetext` varchar(64) default 'Delete',
 	`comments` varchar(128),
+	`icon` varchar(40),
+	`color` varchar(40),
     PRIMARY KEY (`id`)
 )engine=myisam default charset=utf8;
 
 insert into `tb_table_edit_list` values
-	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表'),
-	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息’'),
-	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息'),
-	(4, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态'),
-	(5, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表'),
-	(6, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表'),
-	(7, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表'),
-	(8, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表'),
-	(9, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表'),
-	(10, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表'),
-	(11, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表'),
-	(12, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表'),
-	(13, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息'),
-	(14, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息'),
-	(15, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息'),
-	(16, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息'),
-	(17, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息'),
-	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息'),
-	(19, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息'),
-	(20, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息');
+	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表', 'fa-database', '#0AC0FC'),
+	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息', 'fa-database', '#0AC0FC'),
+	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息', 'fa-database', '#0AC0FC'),
+	(4, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态', 'fa-database', '#0AC0FC'),
+	(5, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表', 'fa-database', '#0AC0FC'),
+	(6, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表', 'fa-database', '#0AC0FC'),
+	(7, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表', 'fa-database', '#0AC0FC'),
+	(8, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表', 'fa-database', '#0AC0FC'),
+	(9, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表', 'fa-database', '#0AC0FC'),
+	(10, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表', 'fa-database', '#0AC0FC'),
+	(11, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表', 'fa-database', '#0AC0FC'),
+	(12, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表', 'fa-database', '#0AC0FC'),
+	(13, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息', 'fa-database', '#0AC0FC'),
+	(14, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息', 'fa-database', '#0AC0FC'),
+	(15, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息', 'fa-database', '#0AC0FC'),
+	(16, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息', 'fa-database', '#0AC0FC'),
+	(17, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息', 'fa-database', '#0AC0FC'),
+	(18, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息', 'fa-database', '#0AC0FC'),
+	(19, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息', 'fa-database', '#0AC0FC'),
+	(20, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息', 'fa-database', '#0AC0FC'),
+	(21, 'tb_dep_locarea_param', 0, 'dep_locarea_param/add', '增加', 'dep_locarea_param/modify', '修改', 'dep_locarea_param/delete',  '删除', '部门定位参数表', 'fa-database', '#00FFFF');
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------
@@ -789,8 +792,8 @@ value
 drop table if exists `tb_dep_ru_location`;
 
 create table `tb_dep_ru_location` (
-`dep_id` int not null comment '部门标识',
 `ru_id` int not null comment '接收天线标识，全局唯一',
+`dep_id` int not null comment '部门标识',
 `weight` int not null default 100 comment '定位信号系数值',
 `rssi_weight` int not null default 100 comment '定位信号 rssi 强度系数值',
 `update_timestamp` datetime not null default '2011-01-01' on update current_timestamp comment '记录更新时间'
@@ -809,8 +812,8 @@ value
 drop table if exists `tb_dep_ru_prohibit`;
 
 create table `tb_dep_ru_prohibit` (
-`dep_id` int(11) not null comment '部门标识',
 `ru_id` int(11) not null comment '接收天线标识，全局唯一',
+`dep_id` int(11) not null comment '部门标识',
 `monarea_id` int(11) not null comment '警戒天线对应的监控区域标识',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间'
 )
@@ -820,8 +823,8 @@ comment='部门警戒天线表';
 drop table if exists `tb_dep_ru_enter`;
 
 create table `tb_dep_ru_enter` (
-`dep_id` int(11) not null comment '部门标识',
 `ru_id` int(11) not null comment '接收天线标识，全局唯一',
+`dep_id` int(11) not null comment '部门标识',
 `monarea_id` int(11) not null comment '进入天线对应的监控区域标识',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间'
 )
@@ -831,8 +834,8 @@ comment='部门进入天线表';
 drop table if exists `tb_dep_ru_door`;
 
 create table `tb_dep_ru_door` (
-`dep_id` int(11) not null comment '部门标识',
 `ru_id` int(11) not null comment '接收天线标识，全局唯一',
+`dep_id` int(11) not null comment '部门标识',
 `monarea_id` int(11) not null comment '门禁天线报警解除对应的监控区域标识',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间'
 )
@@ -842,8 +845,8 @@ comment='部门门禁天线表';
 drop table if exists `tb_dep_ru_monitor`;
 
 create table `tb_dep_ru_monitor` (
-`dep_id` int(11) not null comment '部门标识',
 `ru_id` int(11) not null comment '接收天线标识，全局唯一',
+`dep_id` int(11) not null comment '部门标识',
 `monarea_id` int(11) not null comment '监控天线对应的监控区域标识',
 `update_timestamp` datetime not null default current_timestamp on update current_timestamp comment '记录更新时间'
 )
@@ -909,11 +912,13 @@ insert into `tb_watch_area_info` values (2, 0, 2, 1112, '2015-10-22 14:45:43');
 drop table if exists `tb_dep_locarea_param` ;
 
 create table `tb_dep_locarea_param` (
+  `param_id` int(11) Not Null auto_increment,
   `dep_id` Int(11) Not Null,
   `locarea_id` Int(11) Not Null,
   `delay_ratio` Int(11) Not Null Default '100',
   `night_delay_ratio` Int(11) Not Null Default '100',
-  `update_timestamp` Datetime Not Null Default Current_timestamp On Update Current_timestamp
+  `update_timestamp` Datetime Not Null Default Current_timestamp On Update Current_timestamp,
+ primary key  (`param_id`)
 ) engine=Myisam Default Charset=utf8 Comment='部门定位参数表';
 
 -- --------------------------------------------------------

@@ -230,15 +230,15 @@ body {
 }
 
 .circle {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   margin: 0 auto;
   -webkit-border-radius: 60px;
   -moz-border-radius: 60px;
   -o-border-radius: 60px;
   border-radius: 60px;
-  background-color: #1ABC9C;
-  line-height: 72px;
+  background-color: #0AC0FC;
+  line-height: 50px;
   padding: 12px;
   text-align: center;
   color: white;
