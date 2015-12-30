@@ -5,7 +5,7 @@
 
 	<div class='panel panel-default'>
 		<div class='panel-heading'>
-			<i class='glyphicon glyphicon-edit'></i> 修改区域信息
+			<i class='glyphicon glyphicon-edit'></i> 新增区域信息
 			<div class='panel-tools'>
 
 				<div class='btn-group'>
