@@ -149,7 +149,7 @@ class Manage extends Admin_Controller {
 			$this->load->model('Times_model');
 			//密码错误剩余重试次数
 			$rtime = $this->Times_model->get_one(array('username'=>$username,'is_admin'=>1));
-			$maxloginfailedtimes = 500000;
+			$maxloginfailedtimes = 5;
 			if($rtime)
 			{
 				if($rtime['failure_times'] > $maxloginfailedtimes) {

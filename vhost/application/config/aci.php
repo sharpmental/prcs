@@ -410,19 +410,19 @@ $config['menu_notify'] = array(
 		'device_count' => array (
 				'title' => '设备统计',
 				'submenu' => array(
-						'url1' => base_url().'adminpanel/edittable/viewalarm/4',
+						'url1' => base_url().'adminpanel/edittable/viewalarm/12',
 						'腕带异常',
 						'prison_watch_error'=> '0',
-						'url2' => base_url().'adminpanel/edittable/viewalarm/5',
+						'url2' => base_url().'adminpanel/edittable/viewalarm/13',
 						'定位模块报警',
 						'loc_alarm' => '0',
-						'url3' => base_url().'adminpanel/edittable/viewalarm/6',
+						'url3' => base_url().'adminpanel/edittable/viewalarm/14',
 						'警戒模块报警',
 						'prohibit_alarm' => '0',
-						'url4' => base_url().'adminpanel/edittable/viewalarm/7',
+						'url4' => base_url().'adminpanel/edittable/viewalarm/15',
 						'进入模块报警',
 						'enter_alarm' => '0',
-						'url5' => base_url().'adminpanel/edittable/viewalarm/8',
+						'url5' => base_url().'adminpanel/edittable/viewalarm/16',
 						'监控模块报警',
 						'mon_alarm' => '0'
 				)
@@ -463,7 +463,7 @@ $config['watch_status'] = array(
 );
 
 $config['prcs_system'] = array(
-		"reloadtime" => 300000
+		"reloadtime" => 300
 );
 
 $config['prisonerdetail_status'] = array(
