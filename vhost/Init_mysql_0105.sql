@@ -174,11 +174,12 @@ VALUES
 	(11,'人员信息',0,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'user-times','0','11',1,1),
 	(12,'区域信息',0,12,1,'manage','adminpanel','go_12','0',1,0,1,1,'map-marker','0','12',1,1),
 	(13,'其他功能',0,13,1,'manage','adminpanel','go_13','0',1,0,1,1,'gears','0','13',1,1),
+	(15,'模块列表',4,15,1,'manage','adminpanel','go_15','0',1,0,1,1,'','0,4','15,38',1,1),
 	(16,'栏目列表',9,16,1,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,2,9','16,17,18,19,20',1,1),
-	(17,'数据表',3,17,1,'edittable','adminpanel','index_0','0',1,0,1,1,'','0,3','',1,1),
-	(18,'数据表',4,18,1,'edittable','adminpanel','index_1','0',1,0,1,1,'','0,4','',1,1),
-	(19,'数据表',11,19,1,'edittable','adminpanel','index_3','0',1,0,1,1,'','0,11','',1,1),
-	(20,'数据表',12,20,1,'edittable','adminpanel','index_4','0',1,0,1,1,'','0,12','',1,1),
+	(17,'空白页面',3,17,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,3','',1,1),
+	(18,'空白页面',11,18,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,11','',1,1),
+	(19,'空白页面',12,19,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,12','',1,1),
+	(20,'空白页面',13,20,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,13','',1,1),
 	(26,'用户组列表',9,26,1,'role','adminpanel','index','0',1,0,1,1,'','0,2,9','26,27,28,29,30',1,1),
 	(27,'新增',26,27,1,'role','adminpanel','add','0',1,0,1,1,'','0,2,9,26','27',0,1),
 	(28,'编辑',26,28,1,'role','adminpanel','edit','0',1,0,1,1,'','0,2,9,26','28',0,1),
@@ -191,7 +192,7 @@ VALUES
 	(35,'删除',31,35,1,'user','adminpanel','delete','0',1,0,1,1,'','0,2,9,31','35',0,1),
 	(36,'锁定/解锁',31,36,1,'user','adminpanel','lock','0',1,0,1,1,'','0,2,9,31','36',0,1),
 	(37,'上传头像',31,37,1,'user','adminpanel','upload','0',1,0,1,1,'','0,2,9,31','37',0,1),
-	(38,'数据表',13,38,1,'edittable','adminpanel','index_5','0',1,0,1,1,'','0,13','38',0,1),
+	(38,'数据表',15,38,1,'edittable','adminpanel','index','0',1,0,1,1,'','0,4,15','38',0,1),
 	(40,'全局缓存',5,40,1,'manage','adminpanel','cache','0',1,0,1,1,'','0,1,5','40',0,1),
 	(41,'详细信息', 4, 41, 0, 'manage', 'adminpanel', 'detailinfo', '0', 1, 0, 1, 1, '', '0,4,41', '41', 0, 1),
 	(42,'外出', 4, 42, 0, 'manage', 'adminpanel', 'leave', '0', 1, 0, 1, 1, '', '0,4,42', '42', 0, 1),
@@ -745,19 +746,17 @@ create table `tb_recvunit_info` (
 `pos_x` int not null comment '天线安装位置坐标 x 值',
 `pos_y` int not null comment '天线安装位置坐标 y 值',
 `weight` int not null default '100' comment '天线定位权重，可以区分天线信号的强弱',
-`rssi_diff` int(11) default 0,
-`ru_type` int(11) default 0,
 `update_timestamp` datetime not null default '2011-01-01' on update current_timestamp comment '记录更新时间',
 primary key (`ru_id`)
 )
 comment='接收单元信息表 接收单元是一对唯一的 接收机 ip 地址和接收天线 index';
 
-insert into `tb_recvunit_info` (`ru_id`, `receiver_ip`,`receiver_index`, `locarea_id`, `coor_id`, `pos_x`, `pos_y`, `weight`, `rssi_diff`, `ru_type`, `update_timestamp`)
+insert into `tb_recvunit_info` (`ru_id`, `receiver_ip`,`receiver_index`, `locarea_id`, `coor_id`, `pos_x`, `pos_y`, `weight`, `update_timestamp`)
 value 
-	(1, '192.168.0.1', 1, 1, 100, 1, 1, 100, 0, 0, '2011-01-01'),
-        (2, '192.168.0.2', 2,.1, 100, 1, 1, 100, 0, 0,  '2011-01-01'),
-        (3, '192.168.0.3', 3, 1, 100, 1, 1, 100, 0, 0,  '2011-01-01'),
-	(4, '192.168.0.4', 4, 1, 100, 1, 1, 100, 0, 0,  '2011-01-01');
+	(1, '192.168.0.1', 1, 1, 100, 1, 1, 100, '2011-01-01'),
+        (2, '192.168.0.2', 2,.1, 100, 1, 1, 100, '2011-01-01'),
+        (3, '192.168.0.3', 3, 1, 100, 1, 1, 100, '2011-01-01'),
+	(4, '192.168.0.4', 4, 1, 100, 1, 1, 100, '2011-01-01');
 
 # dump of table location_coordinate_info 定位坐标系表
 # ------------------------------------------------------------
@@ -1001,14 +1000,3 @@ select
 	(select count(watch_id) from tb_alarm_prohibit where alarm_state <> 0 ) as prohibit_count,
 	(select count(watch_id) from tb_alarm_enter where alarm_state <> 0 ) as enter_count,
 	(select count(watch_id) from tb_alarm_mon where alarm_state <> 0 ) as mon_count;
-
-drop view if exists `watch_view`;
-
-create view `watch_view` as
-select 
-	a.watch_id,
-	a.watch_status,
-	b.dep_id
-from tb_watch_info a
-left join tb_people_info b
-on a.watch_id = b.watch_id;

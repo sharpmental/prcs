@@ -12,9 +12,9 @@ class Edittable extends Admin_Controller
         $this->load->model('Tablelist_model');
     }
 
-    public function index()
+    public function index($type=0)
     {
-        $data = $this->Tablelist_model->getall();
+        $data = $this->Tablelist_model->getbytype($type);
         // create pageination
         $this->load->library('pagination');
         
@@ -40,7 +40,7 @@ class Edittable extends Admin_Controller
             ));
         }
     }
-
+    
     public function viewtable($id = '1', $start = '0')
     {
         $table_row = $this->Tablelist_model->getbyid($id);

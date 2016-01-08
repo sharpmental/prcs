@@ -6,7 +6,7 @@
 		<div class='panel-tools'>
 			<div class='btn-group'>
             <?php aci_ui_a($folder_name,'edittable','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            <div class="btn"><span class="glyphicon glyphicon-refresh">刷新</span></div>
+            <a class="btn" href=<?php echo $add_action ?>><span class="glyphicon glyphicon-plus">添加</span></a>
         </div>
 		</div>
 

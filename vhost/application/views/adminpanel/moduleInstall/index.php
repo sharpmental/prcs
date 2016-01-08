@@ -1,6 +1,6 @@
 <div class='panel panel-default grid'>
 <div class='panel-heading'>
-    <i class='fa fa-table'></i> 模块安装
+    <i class='fa fa-table'></i> BLANK PAGE
     <div class='panel-tools'>
         <div class='btn-group'>
             <?php aci_ui_a($folder_name,'manage','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>

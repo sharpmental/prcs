@@ -162,29 +162,23 @@ CREATE TABLE `tb_module_menu` (
 INSERT INTO `tb_module_menu` (`menu_id`, `menu_name`, `parent_id`, `list_order`, `is_display`, `controller`, `folder`, `method`, `flag_id`, `is_side_menu`, `is_system`, `is_works`, `user_id`, `css_icon`, `arr_parentid`, `arr_childid`, `is_parent`, `show_where`)
 VALUES
 	(1,'首页',0,1,1,'manage','adminpanel','index','0',1,0,1,1,'home','0','1,5,40,41,6,7,8',1,1),
-	(2,'操作员管理',0,2,1,'manage','adminpanel','go_2','0',1,0,1,1,'user','0','2,9,31,32,33,34,35,36,37,26,27,28,29,30',1,1),
-	(3,'栏目管理',0,3,1,'manage','adminpanel','go_3','0',1,0,1,1,'list-ol','0','3,11,16,17,18,19,20,12,13,14,21,22,23,24,25,39',1,1),
-	(4,'数据管理',0,4,1,'manage','adminpanel','go_4','0',1,0,1,1,'database','0','4,15,38',1,1),
+	(2,'用户设置',0,2,1,'manage','adminpanel','go_2','0',1,0,1,1,'user','0','2,9,16,31,32,33,34,35,36,37,26,27,28,29,30',1,1),
+	(3,'设备信息',0,3,1,'manage','adminpanel','go_3','0',1,0,1,1,'suitcase','0','3',1,1),
+	(4,'报警信息',0,4,1,'manage','adminpanel','go_4','0',1,0,1,1,'warning','0','4,15,38',1,1),
 	(5,'管理员',1,5,1,'manage','adminpanel','go_5','0',1,0,1,1,'','0,1','5,40,41,6,7,8',1,1),
 	(6,'控制面板',5,6,1,'manage','adminpanel','controlpanel','0',1,0,1,1,'','0,1,5','6',0,1),
 	(7,'修改密码',5,7,1,'profile','adminpanel','change_pwd','0',1,0,1,1,'','0,1,5','7',0,1),
 	(8,'注销',5,8,1,'manage','adminpanel','logout','0',1,0,1,1,'','0,1,5','8',0,1),
-	(9,'管理用户和用户组',2,9,1,'manage','adminpanel','go_9','0',1,0,1,1,'','0,2','9,26,31,32,33,34,35,36,37',1,1),
+	(9,'网页用户设置',2,9,1,'manage','adminpanel','go_9','0',1,0,1,1,'','0,2','9,26,31,32,33,34,35,36,37',1,1),
 	(10,'服务器管理',0,10,1,'manage','adminpanel','go_10','0',1,0,1,1,'server','0','10,51,49,50',1,1),
-	(11,'管理栏目和模块',3,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'','0,3','11,14,16,17,18,19,20',1,1),
-	(13,'已安装模块列表',12,13,1,'moduleManage','adminpanel','index','0',1,0,1,1,'','0,3,12','13',0,1),
-	(14,'安装新模块',11,14,1,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,3,12','14,21,22,23,24,25,39',1,1),
-	(15,'模块列表',4,15,1,'manage','adminpanel','go_15','0',1,0,1,1,'','0,4','15,38',1,1),
-	(16,'栏目列表',11,16,1,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,3,11','16,17,18,19,20',1,1),
-	(17,'新增',16,17,1,'moduleMenu','adminpanel','add','0',1,0,1,1,'','0,3,11,16','17',0,1),
-	(18,'修改',16,18,1,'moduleMenu','adminpanel','edit','0',1,0,1,1,'','0,3,11,16','18',0,1),
-	(19,'删除',16,19,1,'moduleMenu','adminpanel','delete','0',1,0,1,1,'','0,3,11,16','19',0,1),
-	(20,'设置左侧菜单',16,20,1,'moduleMenu','adminpanel','set_menu','0',1,0,1,1,'','0,3,11,16','20',0,1),
-	(21,'安装',14,21,1,'moduleInstall','adminpanel','setup','0',1,0,1,1,'','0,3,12,14','21',0,1),
-	(22,'检查',14,22,1,'moduleInstall','adminpanel','check','0',1,0,1,1,'','0,3,12,14','22',0,1),
-	(23,'重装',14,23,1,'moduleInstall','adminpanel','reinstall','0',1,0,1,1,'','0,3,12,14','23',0,1),
-	(24,'卸载',14,24,1,'moduleInstall','adminpanel','uninstall','0',1,0,1,1,'','0,3,12,14','24',0,1),
-	(25,'删除',14,25,1,'moduleInstall','adminpanel','delete','0',1,0,1,1,'','0,3,12,14','25',0,1),
+	(11,'人员信息',0,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'user-times','0','11',1,1),
+	(12,'区域信息',0,12,1,'manage','adminpanel','go_12','0',1,0,1,1,'map-marker','0','12',1,1),
+	(13,'其他功能',0,13,1,'manage','adminpanel','go_13','0',1,0,1,1,'gears','0','13',1,1),
+	(16,'栏目列表',9,16,1,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,2,9','16,17,18,19,20',1,1),
+	(17,'数据表',3,17,1,'edittable','adminpanel','index/0','0',1,0,1,1,'','0,3','',1,1),
+	(18,'数据表',4,18,1,'edittable','adminpanel','index/1','0',1,0,1,1,'','0,4','',1,1),
+	(19,'数据表',11,19,1,'edittable','adminpanel','index/3','0',1,0,1,1,'','0,11','',1,1),
+	(20,'数据表',12,20,1,'edittable','adminpanel','index/4','0',1,0,1,1,'','0,12','',1,1),
 	(26,'用户组列表',9,26,1,'role','adminpanel','index','0',1,0,1,1,'','0,2,9','26,27,28,29,30',1,1),
 	(27,'新增',26,27,1,'role','adminpanel','add','0',1,0,1,1,'','0,2,9,26','27',0,1),
 	(28,'编辑',26,28,1,'role','adminpanel','edit','0',1,0,1,1,'','0,2,9,26','28',0,1),
@@ -197,8 +191,7 @@ VALUES
 	(35,'删除',31,35,1,'user','adminpanel','delete','0',1,0,1,1,'','0,2,9,31','35',0,1),
 	(36,'锁定/解锁',31,36,1,'user','adminpanel','lock','0',1,0,1,1,'','0,2,9,31','36',0,1),
 	(37,'上传头像',31,37,1,'user','adminpanel','upload','0',1,0,1,1,'','0,2,9,31','37',0,1),
-	(38,'数据表',15,38,1,'edittable','adminpanel','index','0',1,0,1,1,'','0,4,15','38',0,1),
-	(39,'上传安装包',14,39,0,'moduleInstall','adminpanel','index','0',1,0,1,1,'','0,3,12,14','39',0,1),
+	(38,'数据表',13,38,1,'edittable','adminpanel','index/5','0',1,0,1,1,'','0,13','38',0,1),
 	(40,'全局缓存',5,40,1,'manage','adminpanel','cache','0',1,0,1,1,'','0,1,5','40',0,1),
 	(41,'详细信息', 4, 41, 0, 'manage', 'adminpanel', 'detailinfo', '0', 1, 0, 1, 1, '', '0,4,41', '41', 0, 1),
 	(42,'外出', 4, 42, 0, 'manage', 'adminpanel', 'leave', '0', 1, 0, 1, 1, '', '0,4,42', '42', 0, 1),
@@ -234,31 +227,32 @@ create table `tb_table_edit_list` (
 	`comments` varchar(128),
 	`icon` varchar(40),
 	`color` varchar(40),
+	`type` smallint, # 0=设备信息,1=报警信息,2=服务器信息,3=人员信息,4=区域信息,5=其他信息
     PRIMARY KEY (`id`)
 )engine=myisam default charset=utf8;
 
 insert into `tb_table_edit_list` values
-	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表', 'fa-user', '#0AC0FC'),
-	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息', 'fa-user-plus', '#0AC0FC'),
-	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息', 'fa-circle-o-notch', '#0AC0FC'),
-	(4, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表', 'fa-building', '#0AC0FC'),
-	(5, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表', 'fa-crosshairs', '#0AC0FC'),
-	(6, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表', 'fa-cubes', '#0AC0FC'),
-	(7, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表', 'fa-area-chart', '#0AC0FC'),
-	(8, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息', 'fa-crosshairs', '#0AC0FC'),
-	(9, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息', 'fa-crosshairs', '#0AC0FC'),
-	(10, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息', 'fa-user', '#0AC0FC'),
-	(11, 'tb_dep_locarea_param', 0, 'dep_locarea_param/add', '增加', 'dep_locarea_param/modify', '修改', 'dep_locarea_param/delete',  '删除', '部门定位参数表', 'fa-database', '#0AC0FC'),
-	(12, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态', 'fa-warning', '#DF0101'),
-	(13, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表', 'fa-warning', '#DF0101'),
-	(14, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表', 'fa-warning', '#DF0101'),
-	(15, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表', 'fa-warning', '#DF0101'),
-	(16, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表', 'fa-warning', '#DF0101'),
-	(17, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息', 'fa-wifi', '#0B610B'),
-	(18, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息', 'fa-wifi', '#0B610B'),
-	(19, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息', 'fa-wifi', '#0B610B'),
-	(20, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息', 'fa-wifi', '#0B610B'),
-	(21, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息', 'fa-wifi', '#0B610B');
+	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表', 'fa-user', '#0AC0FC',3),
+	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息', 'fa-user-plus', '#0AC0FC',3),
+	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息', 'fa-circle-o-notch', '#0AC0FC',0),
+	(4, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表', 'fa-building', '#0AC0FC',4),
+	(5, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表', 'fa-crosshairs', '#0AC0FC',4),
+	(6, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表', 'fa-cubes', '#0AC0FC',0),
+	(7, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表', 'fa-area-chart', '#0AC0FC',4),
+	(8, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息', 'fa-crosshairs', '#0AC0FC',4),
+	(9, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息', 'fa-crosshairs', '#0AC0FC',4),
+	(10, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息', 'fa-user', '#0AC0FC',3),
+	(11, 'tb_dep_locarea_param', 0, 'dep_locarea_param/add', '增加', 'dep_locarea_param/modify', '修改', 'dep_locarea_param/delete',  '删除', '部门定位参数表', 'fa-database', '#0AC0FC',4),
+	(12, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态', 'fa-warning', '#DF0101',1),
+	(13, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表', 'fa-warning', '#DF0101',1),
+	(14, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表', 'fa-warning', '#DF0101',1),
+	(15, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表', 'fa-warning', '#DF0101',1),
+	(16, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表', 'fa-warning', '#DF0101',1),
+	(17, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息', 'fa-wifi', '#0B610B',0),
+	(18, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息', 'fa-wifi', '#0B610B',0),
+	(19, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息', 'fa-wifi', '#0B610B',0),
+	(20, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息', 'fa-wifi', '#0B610B',0),
+	(21, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息', 'fa-wifi', '#0B610B',0);
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------
@@ -751,17 +745,19 @@ create table `tb_recvunit_info` (
 `pos_x` int not null comment '天线安装位置坐标 x 值',
 `pos_y` int not null comment '天线安装位置坐标 y 值',
 `weight` int not null default '100' comment '天线定位权重，可以区分天线信号的强弱',
+`rssi_diff` int(11) default 0,
+`ru_type` int(11) default 0,
 `update_timestamp` datetime not null default '2011-01-01' on update current_timestamp comment '记录更新时间',
 primary key (`ru_id`)
 )
 comment='接收单元信息表 接收单元是一对唯一的 接收机 ip 地址和接收天线 index';
 
-insert into `tb_recvunit_info` (`ru_id`, `receiver_ip`,`receiver_index`, `locarea_id`, `coor_id`, `pos_x`, `pos_y`, `weight`, `update_timestamp`)
+insert into `tb_recvunit_info` (`ru_id`, `receiver_ip`,`receiver_index`, `locarea_id`, `coor_id`, `pos_x`, `pos_y`, `weight`, `rssi_diff`, `ru_type`, `update_timestamp`)
 value 
-	(1, '192.168.0.1', 1, 1, 100, 1, 1, 100, '2011-01-01'),
-        (2, '192.168.0.2', 2,.1, 100, 1, 1, 100, '2011-01-01'),
-        (3, '192.168.0.3', 3, 1, 100, 1, 1, 100, '2011-01-01'),
-	(4, '192.168.0.4', 4, 1, 100, 1, 1, 100, '2011-01-01');
+	(1, '192.168.0.1', 1, 1, 100, 1, 1, 100, 0, 0, '2011-01-01'),
+        (2, '192.168.0.2', 2,.1, 100, 1, 1, 100, 0, 0,  '2011-01-01'),
+        (3, '192.168.0.3', 3, 1, 100, 1, 1, 100, 0, 0,  '2011-01-01'),
+	(4, '192.168.0.4', 4, 1, 100, 1, 1, 100, 0, 0,  '2011-01-01');
 
 # dump of table location_coordinate_info 定位坐标系表
 # ------------------------------------------------------------
@@ -1005,3 +1001,14 @@ select
 	(select count(watch_id) from tb_alarm_prohibit where alarm_state <> 0 ) as prohibit_count,
 	(select count(watch_id) from tb_alarm_enter where alarm_state <> 0 ) as enter_count,
 	(select count(watch_id) from tb_alarm_mon where alarm_state <> 0 ) as mon_count;
+
+drop view if exists `watch_view`;
+
+create view `watch_view` as
+select 
+	a.watch_id,
+	a.watch_status,
+	b.dep_id
+from tb_watch_info a
+left join tb_people_info b
+on a.watch_id = b.watch_id;

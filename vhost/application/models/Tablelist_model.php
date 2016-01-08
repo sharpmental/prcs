@@ -10,6 +10,11 @@ class Tablelist_model extends Base_model{
 		return $data;
 	}
 	
+	public function getbytype($type){
+	    $data = $this->query("select * from ".$this->table_name." where type = ".intval($type));
+	    return $data;
+	}
+	
 	public function gettable($table_name){
 		$data = $this->query("select * from ".$table_name);
 		return $data;
