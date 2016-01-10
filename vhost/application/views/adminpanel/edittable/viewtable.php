@@ -5,8 +5,11 @@
 		<i class='glyphicon glyphicon-th-list'></i><?php echo ' '.$table_name ?> 数据表信息
 		<div class='panel-tools'>
 			<div class='btn-group'>
-            <?php aci_ui_a($folder_name,'edittable','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            <a class="btn" href=<?php echo $add_action ?>><span class="glyphicon glyphicon-plus">添加</span></a>
+            <?php aci_ui_a($folder_name,'edittable','index/'.$type,'',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+            <?php
+            if($edit != 0)
+                echo '<a class="btn" href='.$add_action.'><span class="glyphicon glyphicon-plus">添加</span></a>'
+        	?>
         </div>
 		</div>
 
@@ -23,10 +26,14 @@
 				<button type="button" class="btn btn-default" id="refreshBtn">
 					<span class="glyphicon glyphicon-refresh">刷新</span>
                 </button>
-				<a type="button" class="btn btn-default" id="newBtn" href=<?php echo $add_action ?>>
-					<span class="glyphicon glyphicon-plus">添加</span>
-                </a>
-
+                <?php
+                if ($edit != 0)
+                    echo '<a type="button" class="btn btn-default" id="newBtn" href='.$add_action.'>
+					
+					    <span class="glyphicon glyphicon-plus">添加</span>
+					
+                </a>'
+				?>
 			</div>
 		</div>
 	</div>

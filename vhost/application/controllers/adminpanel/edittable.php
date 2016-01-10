@@ -30,13 +30,15 @@ class Edittable extends Admin_Controller
             $this->view('index', array(
                 'require_js' => true,
                 'table_data' => $data->result_array(),
-                'pagelink' => $pageslink
+                'pagelink' => $pageslink,
+                'type' => intval($type)
             ));
         } else {
             $this->view('index', array(
                 'require_js' => true,
                 'table_data' => null,
-                'pagelink' => null
+                'pagelink' => null,
+                'type' => intval($type)
             ));
         }
     }
@@ -55,6 +57,8 @@ class Edittable extends Admin_Controller
         $table_textb = $table_row->row_array()['actiondeletetext'];
         $table_actionc = ($table_row->row_array()['actionaddurl'] == '#') ? '#' : base_url($this->page_data['folder_name'] . '/' . $table_row->row_array()['actionaddurl'] . '/');
         $table_textc = $table_row->row_array()['actionaddtext'];
+        $table_type = $table_row->row_array()['type'];
+        $table_editable = $table_row->row_array()['editable'];
         
         $data = $this->Tablelist_model->gettablelimit($table_name, $start, 20);
         if (! isset($data)) {
@@ -109,7 +113,9 @@ class Edittable extends Admin_Controller
             'table_data' => $table_data,
             'pagelink' => $pageslink,
             'add_action' => $table_actionc,
-            'table_name' => $table_name
+            'table_name' => $table_name,
+            'type' => intval($table_type),
+            'edit' => intval($table_editable)
         ));
     }
 
@@ -127,6 +133,8 @@ class Edittable extends Admin_Controller
         $table_textb = $table_row->row_array()['actiondeletetext'];
         $table_actionc = ($table_row->row_array()['actionaddurl'] == '#') ? '#' : base_url($this->page_data['folder_name'] . '/' . $table_row->row_array()['actionaddurl'] . '/');
         $table_textc = $table_row->row_array()['actionaddtext'];
+        $table_type = $table_row->row_array()['type'];
+        $table_editable = $table_row->row_array()['editable'];
         
         if ($table_name == "tb_alarm_loc")
             $data = $this->Tablelist_model->gettablestatus($table_name, "alarm_type != 0");
@@ -184,7 +192,9 @@ class Edittable extends Admin_Controller
             'table_data' => $table_data,
             'pagelink' => $pageslink,
             'add_action' => $table_actionc,
-            'table_name' => $table_name
+            'table_name' => $table_name,
+            'type' => intval($table_type),
+            'edit' => intval($table_editable)
         ));
     }
 }
