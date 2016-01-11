@@ -430,27 +430,21 @@ $config['menu_notify'] = array(
 		'person_count' => array (
 				'title' => '人数统计',
 				'submenu' => array(
-						'#',
+						base_url().'adminpanel/manage/allregpeople/',
 						'在册人数',
 						'prison_totalnumber' =>'0',
-						'#',
+						base_url().'adminpanel/manage/lostpeople/',
 						'失联人数',
 						'prison_lostconnection'=>'0',
-						'#',
+						base_url().'adminpanel/manage/outpeople/',
 						'外出人数',
 						'prison_outer' =>'0',
-						'#',
+						base_url().'adminpanel/manage/insidepeople/',
 						'实到人数',
 						'prison_avaliable'=> '0',
-						'#',
-						'重点区域',
+						base_url().'adminpanel/manage/index/',
+						'NOTUSED',
 						'prison_monarea_person'=> '0'
-						// 						'工间',
-		// 						'prison_working_person'=> '0',
-		// 						'监舍',
-		// 						'prison_house_person'=> '0',
-		// 						'其他区域',
-		// 						'prison_otherarea_person'=> '0'
 				),
 		),
 );
@@ -460,10 +454,6 @@ $config['watch_status'] = array(
 		'断线',
 		'电量低',
 		'外出'
-);
-
-$config['prcs_system'] = array(
-		"reloadtime" => 300
 );
 
 $config['prisonerdetail_status'] = array(

@@ -2,15 +2,10 @@
 class Prisonerinfo_model extends Base_model{
 	public function __construct() {
 		parent::__construct();
-		$this->table_name = 'tb_people_info';
+		$this->table_name = 'people_view';
 	}
 	
 	public function getall() {
-		$data = $this->query("select * from tb_people_info");
-		return $data;
-	}
-	
-	public function getallfromview() {
 		$data = $this->query("select * from people_view");
 		return $data;
 	}
@@ -27,5 +22,20 @@ class Prisonerinfo_model extends Base_model{
 			$data = $this->query("select * from people_view");
 		
 		return $data;
+	}
+	
+	public function getoutpeople(){
+	    $data = $this->query("select * from people_view where status <> 0 ");
+	    return $data;
+	}
+
+	public function getlostpeople(){
+	    $data = $this->query("select * from people_view where status <> 0 or watch_status <> 0");
+	    return $data;
+	}
+	
+	public function getinsidepeople(){
+	    $data = $this->query("select * from people_view where status = 0 and watch_status = 0");
+	    return $data;
 	}
 }
