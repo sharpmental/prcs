@@ -6,7 +6,9 @@
 		<div class='panel-tools'>
 			<div class='btn-group'>
 			<?php aci_ui_a($folder_name,'manage','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
-            <div class="btn"><span class="glyphicon glyphicon-refresh">刷新</span></div>
+            <div class="btn" id="refreshBtnF">
+            <span class="glyphicon glyphicon-refresh">刷新</span>
+            </div>
             </div>
         </div>
         

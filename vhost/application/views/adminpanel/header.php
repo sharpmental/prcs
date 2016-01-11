@@ -5,7 +5,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="robots" content="noindex,nofollow" />
-<meta http-equiv="refresh" content="<?php echo $this->config->item('prcs_system')['reloadtime'] ?>">
  
 <title><?php echo SITE_NAME?></title>
 <link href="<?php echo base_url('css/bootstrap.min.css')?>" rel="stylesheet">
@@ -16,6 +15,7 @@
 <![endif]-->
 <link type="text/css" href="<?php echo base_url('css/jquery-ui.css')?>" rel="stylesheet" />
 <link rel="stylesheet" href="<?php echo base_url(ADMIN_CSS_PATH.'style.css')?>">
+
 <?php if(isset($require_js)):?>
 <script src="<?php echo base_url('/scripts/require.js')?>" data-main="/scripts/common"></script>
 <?php else:?>
@@ -26,6 +26,7 @@
 <script src="<?php echo base_url('/scripts/lib/jquery.validationEngine.js')?>" ></script>
 <script src="<?php echo base_url('/scripts/lib/global.js')?>"></script>
 <?php endif;?>
+
  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="<?php echo base_url(ADMIN_CSS_PATH.'ie8-responsive-file-warning.js')?>"></script><![endif]-->
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

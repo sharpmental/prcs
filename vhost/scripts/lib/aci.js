@@ -1,5 +1,4 @@
 define(function() {
-	
 	return {
 		ReverseChecked:	function (name)
 		{
@@ -51,3 +50,32 @@ define(function() {
 		}
 	}
 });
+
+var reloadtime = 5000;
+var startreload = 1;
+
+function myrefresh()
+{
+	if (startreload > 0){
+		$.scojs_message('自动刷新', $.scojs_message.TYPE_OK);
+		window.location.reload();
+	}
+}
+
+function mytogglerefresh()
+{
+	startreload = !startreload;
+	
+	if (startreload>0)
+		{
+		$('#refreshBtn>span').text('刷新');
+		$('#refreshBtnF>span').text('刷新');
+		}
+	else
+		{
+		$('#refreshBtn>span').text('停止刷新');
+		$('#refreshBtnF>span').text('停止刷新');
+		}
+}
+
+setTimeout('myrefresh()',reloadtime); 
