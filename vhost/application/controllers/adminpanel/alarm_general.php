@@ -8,7 +8,7 @@ class Alarm_general extends Admin_Controller
     }
     
     public function clear ($id='0'){
-        $status = $this->Alarm_general_model->update(array('alarm_state'=> '0'), array('watch_id'=>$id));
+        $status = $this->Alarm_general_model->update(array('alarm_state'=> '0', 'watch_working_state' => '0'), array('watch_id'=>$id));
         if($status)
         {
             $this->showmessage('删除成功');

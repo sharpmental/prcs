@@ -631,26 +631,26 @@ class Admin_Controller extends Member_Controller
         $menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
         $menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
         
-        $menu1 = $this->Monarea_info_model->getall()->result_array();
-        $menu2 = $this->Locarea_info_model->getall()->result_array();
+//         $menu1 = $this->Monarea_info_model->getall()->result_array();
+//         $menu2 = $this->Locarea_info_model->getall()->result_array();
         
-        if (isset($menu1)) {
-            foreach ($menu1 as $k => $v) {
-                array_push($menu_notify['person_count']['submenu'], '#');
-                array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
-                $number = $this->Watch_area_info_model->count('monarea_id = ' . $v['monarea_id']);
-                array_push($menu_notify['person_count']['submenu'], $number);
-            }
-        }
+//         if (isset($menu1)) {
+//             foreach ($menu1 as $k => $v) {
+//                 array_push($menu_notify['person_count']['submenu'], '#');
+//                 array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
+//                 $number = $this->Watch_area_info_model->count('monarea_id = ' . $v['monarea_id']);
+//                 array_push($menu_notify['person_count']['submenu'], $number);
+//             }
+//         }
         
-        if (isset($menu2)) {
-            foreach ($menu2 as $k => $v) {
-                array_push($menu_notify['person_count']['submenu'], '#');
-                array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
-                $number = $this->Watch_area_info_model->count('locarea_id = ' . $v['locarea_id']);
-                array_push($menu_notify['person_count']['submenu'], $number);
-            }
-        }
+//         if (isset($menu2)) {
+//             foreach ($menu2 as $k => $v) {
+//                 array_push($menu_notify['person_count']['submenu'], '#');
+//                 array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
+//                 $number = $this->Watch_area_info_model->count('locarea_id = ' . $v['locarea_id']);
+//                 array_push($menu_notify['person_count']['submenu'], $number);
+//             }
+//         }
         
         // Setup the 2nd menu
         

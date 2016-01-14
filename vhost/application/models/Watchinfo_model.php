@@ -11,7 +11,7 @@ class Watchinfo_model extends Base_model{
 	}
 	
 	public function getlist(){
-	    $data = $this->query("select watch_id from ".$this->table_name);
+	    $data = $this->query("select watch_id from ".$this->table_name.' where watch_status = 0');
 	    
 	    if($data)
 	        return $data->result_array();

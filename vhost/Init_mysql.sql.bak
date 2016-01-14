@@ -232,27 +232,27 @@ create table `tb_table_edit_list` (
 )engine=myisam default charset=utf8;
 
 insert into `tb_table_edit_list` values
-	(1, 'tb_people_info', 0, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表', 'fa-user', '#0AC0FC',3),
-	(2, 'tb_people_detail', 0, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息', 'fa-user-plus', '#0AC0FC',3),
-	(3, 'tb_watch_info', 0, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息', 'fa-circle-o-notch', '#0AC0FC',0),
-	(4, 'tb_department_info', 0, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表', 'fa-building', '#0AC0FC',4),
-	(5, 'tb_locarea_info', 0, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表', 'fa-crosshairs', '#0AC0FC',4),
-	(6, 'tb_recvunit_info', 0, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表', 'fa-cubes', '#0AC0FC',0),
-	(7, 'tb_loccoor_info', 0, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表', 'fa-area-chart', '#0AC0FC',4),
-	(8, 'tb_monarea_info', 0, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息', 'fa-crosshairs', '#0AC0FC',4),
-	(9, 'tb_watch_area_info', 0, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息', 'fa-crosshairs', '#0AC0FC',4),
+	(1, 'tb_people_info', 2, 'people_info/add', '增加', 'people_info/modify', '修改', 'people_info/delete', '删除', '人员和对应腕表', 'fa-user', '#0AC0FC',3),
+	(2, 'tb_people_detail', 2, 'people_detail/add', '增加', 'people_detail/modify', '修改', 'people_detail/delete', '删除', '人员详细信息', 'fa-user-plus', '#0AC0FC',3),
+	(3, 'tb_watch_info', 2, 'watch_info/add', '增加', 'watch_info/modify', '修改', 'watch_info/delete',  '删除', '腕表启用信息', 'fa-circle-o-notch', '#0AC0FC',0),
+	(4, 'tb_department_info', 2, 'department_info/add', '增加', 'department_info/modify', '修改', 'department_info/delete',  '删除', '部门信息表', 'fa-building', '#0AC0FC',4),
+	(5, 'tb_locarea_info', 2, 'locarea_info/add', '增加', 'locarea_info/modify', '修改', 'locarea_info/delete',  '删除', '定位区域信息表', 'fa-crosshairs', '#0AC0FC',4),
+	(6, 'tb_recvunit_info', 2, 'recvunit_info/add', '增加', 'recvunit_info/modify', '修改', 'recvunit_info/delete',  '删除', '接收单元信息表', 'fa-cubes', '#0AC0FC',0),
+	(7, 'tb_loccoor_info', 2, 'loccoor_info/add', '增加', 'loccoor_info/modify', '修改', 'loccoor_info/delete',  '删除', '定位坐标信息表', 'fa-area-chart', '#0AC0FC',4),
+	(8, 'tb_monarea_info', 2, 'monarea_info/add', '增加', 'monarea_info/modify', '修改', 'monarea_info/delete',  '删除', '监控区域信息', 'fa-crosshairs', '#0AC0FC',4),
+	(9, 'tb_watch_area_info', 2, 'watch_area_info/add', '增加', 'watch_area_info/modify', '修改', 'watch_area_info/delete',  '删除', '重点区域信息', 'fa-crosshairs', '#0AC0FC',4),
 	(10, 'tb_people_inout_detail', 0, '#', '无', '#', '无', '#',  '无', '人员出入信息', 'fa-user', '#0AC0FC',3),
-	(11, 'tb_dep_locarea_param', 0, 'dep_locarea_param/add', '增加', 'dep_locarea_param/modify', '修改', 'dep_locarea_param/delete',  '删除', '部门定位参数表', 'fa-database', '#0AC0FC',4),
+	(11, 'tb_dep_locarea_param', 2, 'dep_locarea_param/add', '增加', 'dep_locarea_param/modify', '修改', 'dep_locarea_param/delete',  '删除', '部门定位参数表', 'fa-database', '#0AC0FC',4),
 	(12, 'tb_alarm_general', 0,  '#', '无', '#', '无', 'alarm_general/clear',  '清除报警', '腕表基础状态', 'fa-warning', '#DF0101',1),
 	(13, 'tb_alarm_loc', 0, '#', '无', '#', '无', 'alarm_loc/clear', '清除报警',  '腕表定位信息表', 'fa-warning', '#DF0101',1),
 	(14, 'tb_alarm_prohibit', 0, '#', '无', '#', '无', 'alarm_prohibit/clear', '清除报警',  '腕表警戒信息表', 'fa-warning', '#DF0101',1),
 	(15, 'tb_alarm_enter', 0, '#', '无', '#', '无', 'alarm_enter/clear', '清除报警',  '腕表进入信息表', 'fa-warning', '#DF0101',1),
 	(16, 'tb_alarm_mon', 0, '#', '无', '#', '无', 'alarm_mon/clear',  '清除报警', '腕表监控信息表', 'fa-warning', '#DF0101',1),
-	(17, 'tb_dep_ru_location', 0, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息', 'fa-wifi', '#0B610B',0),
-	(18, 'tb_dep_ru_prohibit', 0, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息', 'fa-wifi', '#0B610B',0),
-	(19, 'tb_dep_ru_enter', 0, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息', 'fa-wifi', '#0B610B',0),
-	(20, 'tb_dep_ru_door', 0, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息', 'fa-wifi', '#0B610B',0),
-	(21, 'tb_dep_ru_monitor', 0, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息', 'fa-wifi', '#0B610B',0);
+	(17, 'tb_dep_ru_location', 2, 'dep_ru_location/add', '增加', 'dep_ru_location/modify', '修改', 'dep_ru_location/delete',  '删除', '接收单元定位信息', 'fa-wifi', '#0B610B',0),
+	(18, 'tb_dep_ru_prohibit', 2, 'dep_ru_prohibit/add', '增加', 'dep_ru_prohibit/modify', '修改', 'dep_ru_prohibit/delete',  '删除', '接收单元警戒信息', 'fa-wifi', '#0B610B',0),
+	(19, 'tb_dep_ru_enter', 2, 'dep_ru_enter/add', '增加', 'dep_ru_enter/modify', '修改', 'dep_ru_enter/delete',  '删除', '接收单元进入信息', 'fa-wifi', '#0B610B',0),
+	(20, 'tb_dep_ru_door', 2, 'dep_ru_door/add', '增加', 'dep_ru_door/modify', '修改', 'dep_ru_door/delete',  '删除', '接收单元门禁信息', 'fa-wifi', '#0B610B',0),
+	(21, 'tb_dep_ru_monitor', 2, 'dep_ru_monitor/add', '增加', 'dep_ru_monitor/modify', '修改', 'dep_ru_monitor/delete',  '删除', '接收单元监控信息', 'fa-wifi', '#0B610B',0);
 
 # Dump of table tb_sessions
 # ------------------------------------------------------------

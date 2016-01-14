@@ -442,9 +442,9 @@ $config['menu_notify'] = array(
 						base_url().'adminpanel/manage/insidepeople/',
 						'实到人数',
 						'prison_avaliable'=> '0',
-						base_url().'adminpanel/manage/index/',
-						'NOTUSED',
-						'prison_monarea_person'=> '0'
+// 						base_url().'adminpanel/manage/index/',
+// 						'NOTUSED',
+// 						'prison_monarea_person'=> '0'
 				),
 		),
 );
