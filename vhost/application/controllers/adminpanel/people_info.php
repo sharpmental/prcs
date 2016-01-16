@@ -140,6 +140,215 @@ class People_info extends Admin_Controller
         } else
             $this->showmessage('删除失败');
     }
+    
+    public function allregpeople(){
+        
+        $this->load->model('People_info_model');
+        $this->load->model('People_detail_model');
+        
+        $data = array();
+        
+        $data1 = $this->People_detail_model->getallreg();
+        
+        foreach ($data1 as $k=>$v){
+            $data2 = $this->People_info_model->get_one("people_id = ".$v['people_id']);
+            
+            if ($data2){
+                array_push($data, array($v['people_id'], $v['name'], $data2['dep_id'], $data2['watch_id']));
+            }
+        }
+        
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '姓名', '部门号码', '腕带编号');
+        
+        $table_data = $this->table->generate($data);
+        
+        // create pageination
+        $this->load->library('pagination');
+        
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/allregpeople';
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+        
+        $this->pagination->initialize($pconfig);
+        
+        $pageslink = $this->pagination->create_links();
+        
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
+    }
+    
+    public function outpeople(){
+    
+        $this->load->model('People_info_model');
+        $this->load->model('Prisonerinout_model');
+    
+        $data = array();
+    
+        $data1 = $this->Prisonerinout_model->select("status <> 0");
+    
+        foreach ($data1 as $k=>$v){
+            $data2 = $this->People_info_model->get_one("people_id = ".$v['people_id']);
+    
+            if ($data2){
+                array_push($data, array($v['people_id'], "外出", $data2['watch_id'], $v['outtime']));
+            }
+        }
+    
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '状态', '腕带编号', '时间');
+    
+        $table_data = $this->table->generate($data);
+    
+        // create pageination
+        $this->load->library('pagination');
+    
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/outpeople';
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+    
+        $this->pagination->initialize($pconfig);
+    
+        $pageslink = $this->pagination->create_links();
+    
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
+    }
+    
+    public function lostpeople(){
+        $this->load->model('People_info_model');
+        $this->load->model('Alarm_general_model');
+        
+        $data = array();
+        
+        $data1 = $this->Alarm_general_model->select("alarm_state = 1  and watch_working_state <> 0");
+        
+        foreach ($data1 as $k=>$v){
+            $data2 = $this->People_info_model->get_one("watch_id = ".$v['watch_id']);
+        
+            if ($data2){
+                array_push($data, array($data2['people_id'], $data2['watch_id'], $v['alarm_state'], $v['watch_working_state']));
+            }
+        }
+        
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '腕带编号', '腕表状态', '工作状态');
+        
+        $table_data = $this->table->generate($data);
+        
+        // create pageination
+        $this->load->library('pagination');
+        
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/lostpeople';
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+        
+        $this->pagination->initialize($pconfig);
+        
+        $pageslink = $this->pagination->create_links();
+        
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
+    }
+    
+    public function insidepeople(){
+        $this->load->model('People_info_model');
+        
+        $data = array();
+        
+        $data1 = $this->People_info_model->select();
+        
+        foreach ($data1 as $k=>$v){
+                array_push($data, array($v['people_id'], $v['watch_id'], $v['dep_id']));
+        }
+        
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '部门号码', '腕带编号');
+        
+        $table_data = $this->table->generate($data);
+        
+        // create pageination
+        $this->load->library('pagination');
+        
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/insidepeople';
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+        
+        $this->pagination->initialize($pconfig);
+        
+        $pageslink = $this->pagination->create_links();
+        
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
+    }
+    
+    public function monalarm($id = 0){
+        $this->load->model('People_info_model');
+        $this->load->model('Monarea_info_model');
+        $this->load->model('Alarm_mon_model');
+        
+        $data = array();
+        
+        $data1 = $this->People_info_model->select();
+        
+        foreach ($data1 as $k=>$v){
+            array_push($data, array($v['people_id'], $v['watch_id'], $v['dep_id']));
+        }
+        
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '部门号码', '腕带编号');
+        
+        $table_data = $this->table->generate($data);
+        
+        // create pageination
+        $this->load->library('pagination');
+        
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/insidepeople';
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+        
+        $this->pagination->initialize($pconfig);
+        
+        $pageslink = $this->pagination->create_links();
+        
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
+    }
 }
 
 ?>

@@ -52,7 +52,7 @@ define(function() {
 });
 
 var reloadtime = 5000;
-var startreload = 1;
+var startreload = 0;
 
 function myrefresh()
 {

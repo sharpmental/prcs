@@ -147,5 +147,6 @@ $autoload['model'] = array('Member_model',
 		'Prisonerinout_model',
 		'Watch_area_info_model',
 		'Peoplecountview_model',
-		'Alarmcountview_model'
+		'Alarmcountview_model',
+        'Alarm_loc_model'
 );

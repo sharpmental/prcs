@@ -617,40 +617,40 @@ class Admin_Controller extends Member_Controller
             $prison_totalnumber = $row['people_reg_count'];
             $prison_outer = $row['people_out'];
             $prison_watch_error = $row['watch_alarm'];
+            $prison_avaliable = $row['people_withwatch_count'];
         } else {
             $prison_totalnumber = 0;
             $prison_outer = 0;
             $prison_watch_error = 0;
+            $prison_avaliable = 0;
         }
-        
-        $prison_lostconnection = $prison_watch_error + $prison_outer;
-        $prison_avaliable = $prison_totalnumber - $prison_lostconnection;
+
         
         $menu_notify['person_count']['submenu']['prison_totalnumber'] = $prison_totalnumber;
-        $menu_notify['person_count']['submenu']['prison_lostconnection'] = $prison_lostconnection;
+        $menu_notify['person_count']['submenu']['prison_lostconnection'] = $prison_watch_error;
         $menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
         $menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
         
-//         $menu1 = $this->Monarea_info_model->getall()->result_array();
-//         $menu2 = $this->Locarea_info_model->getall()->result_array();
+        $menu1 = $this->Monarea_info_model->getall()->result_array();
+        $menu2 = $this->Locarea_info_model->getall()->result_array();
         
-//         if (isset($menu1)) {
-//             foreach ($menu1 as $k => $v) {
-//                 array_push($menu_notify['person_count']['submenu'], '#');
-//                 array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
-//                 $number = $this->Watch_area_info_model->count('monarea_id = ' . $v['monarea_id']);
-//                 array_push($menu_notify['person_count']['submenu'], $number);
-//             }
-//         }
+        if (isset($menu1)) {
+            foreach ($menu1 as $k => $v) {
+                array_push($menu_notify['person_count']['submenu'], base_url($this->page_data['folder_name']."/people_info/monalarm/".$v['monarea_id']));
+                array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
+                $number = $this->Alarm_loc_model->count('monarea_id = ' . $v['monarea_id'].' and alarm_type = 0');
+                array_push($menu_notify['person_count']['submenu'], $number);
+            }
+        }
         
-//         if (isset($menu2)) {
-//             foreach ($menu2 as $k => $v) {
-//                 array_push($menu_notify['person_count']['submenu'], '#');
-//                 array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
-//                 $number = $this->Watch_area_info_model->count('locarea_id = ' . $v['locarea_id']);
-//                 array_push($menu_notify['person_count']['submenu'], $number);
-//             }
-//         }
+        if (isset($menu2)) {
+            foreach ($menu2 as $k => $v) {
+                array_push($menu_notify['person_count']['submenu'], base_url($this->page_data['folder_name']."/people_info/localarm/".$v['locarea_id']));
+                array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
+                $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'].' and alarm_type = 0');
+                array_push($menu_notify['person_count']['submenu'], $number);
+            }
+        }
         
         // Setup the 2nd menu
         

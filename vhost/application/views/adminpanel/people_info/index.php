@@ -12,7 +12,10 @@
 	</div>
 
 	<div class="panel-body">
-    </div>
+		<?php echo $table_data;?>
+        <?php echo $pagelink;?>
+	</div>
+</div>
 </div>
 </div>
 

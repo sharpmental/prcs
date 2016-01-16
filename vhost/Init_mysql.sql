@@ -978,7 +978,9 @@ on a.people_id = c.people_id
 left join tb_alarm_loc d
 on a.watch_id = d.watch_id
 left join tb_people_detail e
-on a.people_id = e.people_id;
+on a.people_id = e.people_id
+left join tb_alarm_general f
+on a.watch_id = f.watch_id;
 
 drop view if exists `people_count_view`;
 
@@ -1002,9 +1004,9 @@ select
 	(select count(watch_id) from tb_alarm_enter where alarm_state <> 0 ) as enter_count,
 	(select count(watch_id) from tb_alarm_mon where alarm_state <> 0 ) as mon_count;
 
-drop view if exists `watch_view`;
+drop view if exists `view_active_watch`;
 
-create view `watch_view` as
+create view `view_active_watch` as
 select 
 	a.watch_id,
 	a.watch_status,
@@ -1012,3 +1014,22 @@ select
 from tb_watch_info a
 left join tb_people_info b
 on a.watch_id = b.watch_id;
+
+drop procedure Init_alarm_info;
+
+DELIMITER //
+create procedure Init_alarm_info()
+begin
+TRUNCATE TABLE tb_alarm_general;
+insert into tb_alarm_general (WATCH_ID) select WATCH_ID from view_active_watch;
+TRUNCATE TABLE tb_alarm_loc;
+insert into tb_alarm_loc (WATCH_ID) select WATCH_ID from view_active_watch;
+TRUNCATE TABLE tb_alarm_prohibit;
+insert into tb_alarm_prohibit (WATCH_ID) select WATCH_ID from view_active_watch;
+TRUNCATE TABLE tb_alarm_enter;
+insert into tb_alarm_enter (WATCH_ID) select WATCH_ID from view_active_watch;
+TRUNCATE TABLE tb_alarm_mon;
+insert into tb_alarm_mon (WATCH_ID) select WATCH_ID from view_active_watch;
+end;
+//
+DELIMITER ;
