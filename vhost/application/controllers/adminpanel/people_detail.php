@@ -62,8 +62,16 @@ class People_detail extends Admin_Controller
                 )));
             }
         } else {
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_people_detail");
+            if ($data)
+                $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
             $this->view("add", array(
                 "require_js" => true,
+                "type" => $type
             ));
         }
     }
@@ -111,8 +119,18 @@ class People_detail extends Admin_Controller
         } else {
             $data = $this->People_detail_model->get_one(array('people_id' => intval($id)));
             if(isset($data)){
-                
-                $this->view("modify", array("require_js" => true, "data_info" => $data));
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_people_detail");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                    
+                $this->view("modify", array(
+                    "require_js" => true, 
+                    "data_info" => $data,
+                    "type" => $type
+                ));
             }
             else{
                 $this->showmessage('找不到对应的数据！');

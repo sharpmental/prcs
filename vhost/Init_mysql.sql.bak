@@ -1015,9 +1015,9 @@ from tb_watch_info a
 left join tb_people_info b
 on a.watch_id = b.watch_id;
 
-DELIMITER //
 drop procedure Init_alarm_info;
 
+DELIMITER //
 create procedure Init_alarm_info()
 begin
 TRUNCATE TABLE tb_alarm_general;

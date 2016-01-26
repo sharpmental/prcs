@@ -24,12 +24,12 @@ class Locarea_info extends Admin_Controller
                     'tips' => '信息新增失败, no ID'
                 )));
             
-            $arr['locarea_name'] = isset($_POST['locarea_name'])?$_POST['locarea_name']:'';
-            $arr['coor_id'] = isset($_POST['coor_id'])?$_POST['coor_id']:0;
-            $arr['cent_x'] = isset($_POST['cent_x'])?$_POST['cent_x']:0;
-            $arr['cent_y'] = isset($_POST['cent_y'])?$_POST['cent_y']:0;
-            $arr['size_x'] = isset($_POST['size_x'])?$_POST['size_x']:0;
-            $arr['size_y'] = isset($_POST['size_y'])?$_POST['size_y']:0;
+            $arr['locarea_name'] = isset($_POST['locarea_name']) ? $_POST['locarea_name'] : '';
+            $arr['coor_id'] = isset($_POST['coor_id']) ? $_POST['coor_id'] : 0;
+            $arr['cent_x'] = isset($_POST['cent_x']) ? $_POST['cent_x'] : 0;
+            $arr['cent_y'] = isset($_POST['cent_y']) ? $_POST['cent_y'] : 0;
+            $arr['size_x'] = isset($_POST['size_x']) ? $_POST['size_x'] : 0;
+            $arr['size_y'] = isset($_POST['size_y']) ? $_POST['size_y'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->insert($arr);
@@ -50,9 +50,17 @@ class Locarea_info extends Admin_Controller
             $this->load->model("Loccoor_info_model");
             $loccoor_list = $this->Loccoor_info_model->getlist();
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_locarea_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+            else
+                $type = 0;
+            
             $this->view("add", array(
                 "require_js" => true,
-                "loccoor_list" => $loccoor_list
+                "loccoor_list" => $loccoor_list,
+                "type" => $type
             ));
         }
     }
@@ -61,12 +69,12 @@ class Locarea_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['locarea_name'] = isset($_POST['locarea_name'])?$_POST['locarea_name']:'';
-            $arr['coor_id'] = isset($_POST['coor_id'])?$_POST['coor_id']:0;
-            $arr['cent_x'] = isset($_POST['cent_x'])?$_POST['cent_x']:0;
-            $arr['cent_y'] = isset($_POST['cent_y'])?$_POST['cent_y']:0;
-            $arr['size_x'] = isset($_POST['size_x'])?$_POST['size_x']:0;
-            $arr['size_y'] = isset($_POST['size_y'])?$_POST['size_y']:0;
+            $arr['locarea_name'] = isset($_POST['locarea_name']) ? $_POST['locarea_name'] : '';
+            $arr['coor_id'] = isset($_POST['coor_id']) ? $_POST['coor_id'] : 0;
+            $arr['cent_x'] = isset($_POST['cent_x']) ? $_POST['cent_x'] : 0;
+            $arr['cent_y'] = isset($_POST['cent_y']) ? $_POST['cent_y'] : 0;
+            $arr['size_x'] = isset($_POST['size_x']) ? $_POST['size_x'] : 0;
+            $arr['size_y'] = isset($_POST['size_y']) ? $_POST['size_y'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->update($arr, 'locarea_id = ' . $id);
@@ -91,10 +99,18 @@ class Locarea_info extends Admin_Controller
                 $this->load->model("Loccoor_info_model");
                 $loccoor_list = $this->Loccoor_info_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_locarea_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
-                    "loccoor_list" => $loccoor_list
+                    "loccoor_list" => $loccoor_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

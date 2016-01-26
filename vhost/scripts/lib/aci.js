@@ -52,7 +52,7 @@ define(function() {
 });
 
 var reloadtime = 5000;
-var startreload = 0;
+var startreload = 1;
 
 function myrefresh()
 {
@@ -78,4 +78,4 @@ function mytogglerefresh()
 		}
 }
 
-setTimeout('myrefresh()',reloadtime); 
+setTimeout('myrefresh()', reloadtime); 

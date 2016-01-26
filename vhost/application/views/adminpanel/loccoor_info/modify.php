@@ -75,4 +75,5 @@
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
     var id = "<?php echo $data_info['coor_id']?>";
+    var type = "<?php echo $type ?>";
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/modify.js']); </script>

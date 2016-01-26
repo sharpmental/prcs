@@ -53,11 +53,19 @@ class Watch_area_info extends Admin_Controller
             $this->load->model('Monarea_info_model');
             $monarea_list = $this->Monarea_info_model->getlist();
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_watch_area_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
             $this->view("add", array(
                 "require_js" => true,
                 "watch_list" => $watch_list,
                 "locarea_list" => $locarea_list,
-                "monarea_list" =>$monarea_list
+                "monarea_list" =>$monarea_list,
+                "type" => $type
             ));
         }
     }
@@ -100,12 +108,20 @@ class Watch_area_info extends Admin_Controller
                 $this->load->model('Monarea_info_model');
                 $monarea_list = $this->Monarea_info_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_watch_area_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                    
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "watch_list" => $watch_list,
                     "locarea_list" => $locarea_list,
-                    "monarea_list" => $monarea_list
+                    "monarea_list" => $monarea_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

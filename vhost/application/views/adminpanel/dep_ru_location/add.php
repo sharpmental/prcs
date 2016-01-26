@@ -70,4 +70,5 @@
 
 <script language="javascript" type="text/javascript"> var folder_name = "<?php echo $folder_name?>";
     var controller_name = "<?php echo $controller_name?>";
+    var type = "<?php echo $type ?>";
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add.js']); </script>

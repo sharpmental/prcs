@@ -24,8 +24,8 @@ class Department_info extends Admin_Controller
                     'tips' => '信息新增失败, no ID'
                 )));
             
-            $arr['dep_name'] = isset($_POST['dep_name'])?$_POST['dep_name']:"";
-            $arr['update_timestamp'] = date('Y-m-d H:i:s'); 
+            $arr['dep_name'] = isset($_POST['dep_name']) ? $_POST['dep_name'] : "";
+            $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Department_info_model->insert($arr);
             if ($new_id) {
@@ -43,8 +43,16 @@ class Department_info extends Admin_Controller
             }
         } else {
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_department_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+            else
+                $type = 0;
+            
             $this->view("add", array(
                 "require_js" => true,
+                "type" => $type
             ));
         }
     }
@@ -53,7 +61,7 @@ class Department_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['dep_name'] = isset($_POST['dep_name'])?$_POST['dep_name']:"";
+            $arr['dep_name'] = isset($_POST['dep_name']) ? $_POST['dep_name'] : "";
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Department_info_model->update($arr, 'dep_id = ' . $id);
@@ -75,10 +83,18 @@ class Department_info extends Admin_Controller
                 'dep_id' => intval($id)
             ));
             if (isset($data)) {
-                               
+                
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_department_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

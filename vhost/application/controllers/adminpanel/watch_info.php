@@ -42,9 +42,16 @@ class Watch_info extends Admin_Controller
                 )));
             }
         } else {
-            
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_watch_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
             $this->view("add", array(
                 "require_js" => true,
+                "type" => $type
             ));
         }
     }
@@ -75,10 +82,17 @@ class Watch_info extends Admin_Controller
                 'watch_id' => intval($id)
             ));
             if (isset($data)) {
-                               
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_watch_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                    
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

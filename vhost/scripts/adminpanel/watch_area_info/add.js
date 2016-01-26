@@ -31,7 +31,7 @@ requirejs([ 'jquery', 'jquery-ui-dialog-extend', 'aci', 'bootstrapValidator',
 							$.scojs_message('操作成功,3秒后将返回列表页...',
 									$.scojs_message.TYPE_OK);
 							aci.GoUrl(SITE_URL + folder_name
-									+ '/edittable/index/', 1);
+									+ '/edittable/index/'+ type, 1);
 						} else {
 							$.scojs_message(dataObj.tips,
 									$.scojs_message.TYPE_ERROR);

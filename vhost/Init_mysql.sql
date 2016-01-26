@@ -966,7 +966,7 @@ select
 	a.watch_id,
 	a.init_locarea_id,
 	b.watch_status,
-	b.update_timestamp,
+	d.update_timestamp,
 	c.status,
 	d.locarea_id,
 	d.monarea_id

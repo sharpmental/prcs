@@ -88,4 +88,5 @@
     <?php foreach($people_list as $k => $v){ ?>
         people_list['<?php echo $v["people_id"]?>'] = '<?php echo $v["name"]?>';
     <?php }?>
+    var type = "<?php echo $type ?>";
     require(['/scripts/<?php echo $folder_name?>/<?php echo $controller_name?>/add.js']); </script>

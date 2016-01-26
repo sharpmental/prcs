@@ -49,17 +49,16 @@
                         </div>
                     <?php endforeach; ?>
                     
-                     <?php if ($notification) 
-                         foreach ($notification as $k => $v): ?>
+                     <?php if ($notification) foreach ($notification as $k => $v): ?>
                         <div class="list-group dropdown">
-                            <a href=# class="list-group-item active" id = "hidbtn_<?php echo $k ?>" ><?php echo $v['title'] ?></a>
+                            <a class="list-group-item active " ><?php echo $v['title'] ?></a>
                             <?php
                             $sub_array = $v['submenu'];
                             if ($sub_array){
                             	$i=0;
                                 foreach ($sub_array as $key => $m) {
                                     if ($i%3==0){?>
-                                    <a href=<?php echo $m ?> class="list-group-item well-sm hid_<?php echo $k ?>">
+                                    <a href=<?php echo $m ?> class="list-group-item well-sm">
                                     <?php
                                 	}
                                 	else if($i%3==1){
@@ -98,15 +97,3 @@
     </style>
     <?php echo $sub_page ?>
 <?php endif; ?>
-
-<script type="text/javascript">
-<?php
-    if ($notification) 
-    foreach ($notification as $k => $v): 
-?>
-$("#hidbtn_<?php echo $k ?>").click(function(){
-	$(".hid_<?php echo $k ?>").hide();
-});   
-
-<?php endforeach; ?>
-</script>

@@ -40,4 +40,8 @@ class Tablelist_model extends Base_model{
 		return $data;
 	}
 	
+	public function gettypebyname($table_name){
+	    $data = $this->query("select type from ".$this->table_name." where table_name = '".$table_name."'");
+	    return $data;
+	}
 }

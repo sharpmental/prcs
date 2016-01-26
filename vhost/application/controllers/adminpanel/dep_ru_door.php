@@ -45,18 +45,26 @@ class Dep_ru_door extends Admin_Controller
         } else {
             $this->load->model('Department_info_model');
             $dep_list = $this->Department_info_model->getlist();
-
+            
             $this->load->model('Recvunit_info_model');
             $recvunit_list = $this->Recvunit_info_model->getlist();
             
             $this->load->model('Monarea_info_model');
             $monarea_list = $this->Monarea_info_model->getlist();
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_door");
+            if ($data)
+                $type = $data->row_array()['type'];
+            else
+                $type = 0;
+            
             $this->view("add", array(
                 "require_js" => true,
                 "dep_list" => $dep_list,
                 "recvunit_list" => $recvunit_list,
-                "monarea_list" =>$monarea_list
+                "monarea_list" => $monarea_list,
+                "type" => $type
             ));
         }
     }
@@ -69,7 +77,7 @@ class Dep_ru_door extends Admin_Controller
             $arr['monarea_id'] = isset($_POST['monarea_id']) ? $_POST['monarea_id'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->Dep_ru_door_model->update($arr, ' ru_id = '.$id);
+            $new_id = $this->Dep_ru_door_model->update($arr, ' ru_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -98,12 +106,20 @@ class Dep_ru_door extends Admin_Controller
                 $this->load->model('Monarea_info_model');
                 $monarea_list = $this->Monarea_info_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_door");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                    
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "dep_list" => $dep_list,
                     "recvunit_list" => $recvunit_list,
-                    "monarea_list" => $monarea_list
+                    "monarea_list" => $monarea_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

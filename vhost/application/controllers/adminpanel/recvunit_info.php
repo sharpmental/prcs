@@ -54,10 +54,19 @@ class Recvunit_info extends Admin_Controller
             $this->load->model('Loccoor_info_model');
             $loccoor_list = $this->Loccoor_info_model->getlist();
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_recvunit_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+            
+                    
             $this->view("add", array(
                 "require_js" => true,
                 "locarea_list" => $locarea_list,
-                "loccoor_list" => $loccoor_list
+                "loccoor_list" => $loccoor_list,
+                "type" => $type
             ));
         }
     }
@@ -100,11 +109,19 @@ class Recvunit_info extends Admin_Controller
                 $this->load->model('Loccoor_info_model');
                 $loccoor_list = $this->Loccoor_info_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_recvunit_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                    
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "locarea_list" => $locarea_list,
-                    "loccoor_list" => $loccoor_list
+                    "loccoor_list" => $loccoor_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

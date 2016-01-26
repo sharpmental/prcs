@@ -46,14 +46,22 @@ class Dep_ru_location extends Admin_Controller
         } else {
             $this->load->model('Department_info_model');
             $dep_list = $this->Department_info_model->getlist();
-
+            
             $this->load->model('Recvunit_info_model');
             $recvunit_list = $this->Recvunit_info_model->getlist();
+            
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_location");
+            if ($data)
+                $type = $data->row_array()['type'];
+            else
+                $type = 0;
             
             $this->view("add", array(
                 "require_js" => true,
                 "dep_list" => $dep_list,
-                "recvunit_list" => $recvunit_list
+                "recvunit_list" => $recvunit_list,
+                "type" => $type
             ));
         }
     }
@@ -67,7 +75,7 @@ class Dep_ru_location extends Admin_Controller
             $arr['rssi_weight'] = isset($_POST['rssi_weight']) ? $_POST['rssi_weight'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->Dep_ru_location_model->update($arr, 'ru_id = '. $id);
+            $new_id = $this->Dep_ru_location_model->update($arr, 'ru_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -93,11 +101,19 @@ class Dep_ru_location extends Admin_Controller
                 $this->load->model('Recvunit_info_model');
                 $recvunit_list = $this->Recvunit_info_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_location");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "dep_list" => $dep_list,
-                    "recvunit_list" => $recvunit_list
+                    "recvunit_list" => $recvunit_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');

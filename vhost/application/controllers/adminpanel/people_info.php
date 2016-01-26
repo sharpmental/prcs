@@ -57,12 +57,20 @@ class People_info extends Admin_Controller
             $this->load->model('People_detail_model');
             $people_list = $this->People_detail_model->getlist();
             
+            $this->load->model('Tablelist_model');
+            $data = $this->Tablelist_model->gettypebyname("tb_people_info");
+            if ($data)
+                $type = $data->row_array()['type'];
+                else
+                    $type = 0;
+                
             $this->view("add", array(
                 "require_js" => true,
                 "dep_list" => $dep_list,
                 "watch_list" => $watch_list,
                 "locarea_list" => $locarea_list,
-                "people_list" => $people_list 
+                "people_list" => $people_list,
+                "type" => $type
             ));
         }
     }
@@ -108,13 +116,21 @@ class People_info extends Admin_Controller
                 $this->load->model('People_detail_model');
                 $people_list = $this->People_detail_model->getlist();
                 
+                $this->load->model('Tablelist_model');
+                $data = $this->Tablelist_model->gettypebyname("tb_people_info");
+                if ($data)
+                    $type = $data->row_array()['type'];
+                    else
+                        $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
                     "dep_list" => $dep_list,
                     "watch_list" => $watch_list,
                     "locarea_list" => $locarea_list,
-                    "people_list" => $people_list
+                    "people_list" => $people_list,
+                    "type" => $type
                 ));
             } else {
                 $this->showmessage('找不到对应的数据！');
