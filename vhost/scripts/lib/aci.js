@@ -51,6 +51,7 @@ define(function() {
 	}
 });
 
+/* For auto refresh control */
 var reloadtime = 5000;
 var startreload = 1;
 
@@ -78,4 +79,12 @@ function mytogglerefresh()
 		}
 }
 
-setTimeout('myrefresh()', reloadtime); 
+setTimeout(myrefresh, reloadtime); 
+
+/* For hide control */
+
+for (m in hid_ctrl){
+	$('#hidbtn_'+hid_ctrl[m]).click(function(){
+		$('.hid_'+hid_ctrl[m]).hide();
+	});
+}
