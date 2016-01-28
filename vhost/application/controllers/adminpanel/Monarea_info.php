@@ -84,9 +84,9 @@ class Monarea_info extends Admin_Controller
             if (isset($data)) {
                 
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_monarea_info");
-                if ($data)
-                    $type = $data->row_array()['type'];
+                $datat = $this->Tablelist_model->gettypebyname("tb_monarea_info");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
                     else
                         $type = 0;
                     

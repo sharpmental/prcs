@@ -55,7 +55,7 @@ class Dep_locarea_param extends Admin_Controller
             $data = $this->Tablelist_model->gettypebyname("tb_dep_locarea_param");
             if ($data)
                 $type = $data->row_array()['type'];
-            else 
+            else
                 $type = 0;
             
             $this->view("add", array(
@@ -70,7 +70,7 @@ class Dep_locarea_param extends Admin_Controller
     public function modify($id)
     {
         if ($this->input->is_ajax_request()) {
-
+            
             $arr['dep_id'] = isset($_POST['dep_id']) ? $_POST['dep_id'] : "";
             $arr['locarea_id'] = isset($_POST['locarea_id']) ? $_POST['locarea_id'] : "";
             $arr['delay_ratio'] = isset($_POST['delay_ratio']) ? $_POST['delay_ratio'] : "";
@@ -92,23 +92,24 @@ class Dep_locarea_param extends Admin_Controller
                 )));
             }
         } else {
-            $this->load->model('Department_info_model');
-            $dep_list = $this->Department_info_model->getlist();
-            
-            $this->load->model('Locarea_info_model');
-            $locarea_list = $this->Locarea_info_model->getlist();
-            
-            $this->load->model('Tablelist_model');
-            $datat = $this->Tablelist_model->gettypebyname('tb_dep_locarea_param');
-            if ($datat)
-                $type = $datat->row_array()['type'];
-            else
-                $type = 0;
-            
             $data = $this->Dep_locarea_param_model->get_one(array(
                 'param_id' => intval($id)
             ));
+            
             if (isset($data)) {
+                $this->load->model('Department_info_model');
+                $dep_list = $this->Department_info_model->getlist();
+                
+                $this->load->model('Locarea_info_model');
+                $locarea_list = $this->Locarea_info_model->getlist();
+                
+                $this->load->model('Tablelist_model');
+                $datat = $this->Tablelist_model->gettypebyname('tb_dep_locarea_param');
+                if ($datat)
+                    $type = $datat->row_array()['type'];
+                else
+                    $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,
@@ -124,7 +125,6 @@ class Dep_locarea_param extends Admin_Controller
 
     public function delete($id)
     {
-              
         $data_info = $this->Dep_locarea_param_model->get_one(array(
             'param_id' => intval($id)
         ));

@@ -57,14 +57,14 @@ class Watch_area_info extends Admin_Controller
             $data = $this->Tablelist_model->gettypebyname("tb_watch_area_info");
             if ($data)
                 $type = $data->row_array()['type'];
-                else
-                    $type = 0;
-                
+            else
+                $type = 0;
+            
             $this->view("add", array(
                 "require_js" => true,
                 "watch_list" => $watch_list,
                 "locarea_list" => $locarea_list,
-                "monarea_list" =>$monarea_list,
+                "monarea_list" => $monarea_list,
                 "type" => $type
             ));
         }
@@ -79,7 +79,7 @@ class Watch_area_info extends Admin_Controller
             $arr['monarea_id'] = isset($_POST['monarea_id']) ? $_POST['monarea_id'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
-            $new_id = $this->Watch_area_info_model->update($arr, ' watch_id = '.$id);
+            $new_id = $this->Watch_area_info_model->update($arr, ' watch_id = ' . $id);
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
@@ -109,12 +109,12 @@ class Watch_area_info extends Admin_Controller
                 $monarea_list = $this->Monarea_info_model->getlist();
                 
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_watch_area_info");
-                if ($data)
-                    $type = $data->row_array()['type'];
-                    else
-                        $type = 0;
-                    
+                $datat = $this->Tablelist_model->gettypebyname("tb_watch_area_info");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
+                else
+                    $type = 0;
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,

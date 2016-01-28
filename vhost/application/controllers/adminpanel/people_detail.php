@@ -120,9 +120,9 @@ class People_detail extends Admin_Controller
             $data = $this->People_detail_model->get_one(array('people_id' => intval($id)));
             if(isset($data)){
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_people_detail");
-                if ($data)
-                    $type = $data->row_array()['type'];
+                $datat = $this->Tablelist_model->gettypebyname("tb_people_detail");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
                     else
                         $type = 0;
                     

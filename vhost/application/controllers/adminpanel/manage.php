@@ -70,13 +70,18 @@ class Manage extends Admin_Controller
             else
                 $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
             
+            if (isset($this->config->item('watch_status')[$v['watch_status']]))
+                $status = $this->config->item('watch_status')[$v['watch_status']];
+            else 
+                $status = "Unknow!";
+            
             $temp = array(
                 $v['people_id'],
                 $v['people_name'],
                 $btn_out,
                 $v['dep_id'],
                 $v['watch_id'],
-                $this->config->item('watch_status')[$v['watch_status']],
+                $status,
                 $v['update_timestamp'],
                 '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
                 $v['locarea_id'],

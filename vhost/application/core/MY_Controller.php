@@ -1,5 +1,4 @@
 <?php
-
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -97,7 +96,7 @@ class MY_Controller extends CI_Controller
     /**
      * 模板
      * ...
-     * 
+     *
      * @param unknown_type $module            
      * @param unknown_type $template            
      * @param unknown_type $style            
@@ -379,7 +378,7 @@ class Member_Controller extends Front_Controller
 
     /**
      * 按父ID查找菜单子项
-     * 
+     *
      * @param integer $parentid
      *            父菜单ID
      * @param integer $with_self
@@ -424,8 +423,8 @@ class Member_Controller extends Front_Controller
                     'method' => $v['method'],
                     'role_id' => $this->group_id
                 ));
-//                 if ($r)
-                    $array[] = $v;
+                // if ($r)
+                $array[] = $v;
             }
         }
         
@@ -624,51 +623,62 @@ class Admin_Controller extends Member_Controller
             $prison_watch_error = 0;
             $prison_avaliable = 0;
         }
-
         
-        $menu_notify['person_count']['submenu']['prison_totalnumber'] = $prison_totalnumber;
-        $menu_notify['person_count']['submenu']['prison_lostconnection'] = $prison_watch_error;
-        $menu_notify['person_count']['submenu']['prison_outer'] = $prison_outer;
-        $menu_notify['person_count']['submenu']['prison_avaliable'] = $prison_avaliable;
+        $menu_notify['person_count']['allregpeple']['prison_totalnumber'] = $prison_totalnumber;
+        $menu_notify['person_count']['lostpeople']['prison_lostconnection'] = $prison_watch_error;
+        $menu_notify['person_count']['outpeople']['prison_outer'] = $prison_outer;
+        $menu_notify['person_count']['insidepeople']['prison_avaliable'] = $prison_avaliable;
         
-        $menu1 = $this->Monarea_info_model->getall()->result_array();
+        // $menu1 = $this->Monarea_info_model->getall()->result_array();
         $menu2 = $this->Locarea_info_model->getall()->result_array();
         
-        if (isset($menu1)) {
-            foreach ($menu1 as $k => $v) {
-                array_push($menu_notify['person_count']['submenu'], base_url($this->page_data['folder_name']."/people_info/monalarm/".$v['monarea_id']));
-                array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
-                $number = $this->Alarm_loc_model->count('monarea_id = ' . $v['monarea_id'].' and alarm_type = 0');
-                array_push($menu_notify['person_count']['submenu'], $number);
-            }
-        }
-        
+        // if (isset($menu1)) {
+        // foreach ($menu1 as $k => $v) {
+        // array_push($menu_notify['person_count']['submenu'], base_url($this->page_data['folder_name']."/people_info/monalarm/".$v['monarea_id']));
+        // array_push($menu_notify['person_count']['submenu'], $v['monarea_name']);
+        // $number = $this->Alarm_loc_model->count('monarea_id = ' . $v['monarea_id'].' and alarm_type = 0');
+        // array_push($menu_notify['person_count']['submenu'], $number);
+        // }
+        // }
+        $t = array();
         if (isset($menu2)) {
             foreach ($menu2 as $k => $v) {
-                array_push($menu_notify['person_count']['submenu'], base_url($this->page_data['folder_name']."/people_info/localarm/".$v['locarea_id']));
-                array_push($menu_notify['person_count']['submenu'], $v['locarea_name']);
-                $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'].' and alarm_type = 0');
-                array_push($menu_notify['person_count']['submenu'], $number);
+                if ($v['show'] != 0) {
+                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type = 0');
+                    $menu_notify['person_count'][$v['locarea_name']] = array(
+                        'url' => base_url($this->page_data['folder_name'] . "/people_info/localarm/" . $v['locarea_id']),
+                        'name' => $v['locarea_name'],
+                        'number' => $number
+                    );
+                    $t[$v['locarea_id']] = $v['locarea_name'];
+                } else {
+                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['parentid'] . ' and alarm_type = 0');
+                    
+                    try {
+                        $name = $t[$v['parentid']];
+                        $menu_notify['person_count'][$name]['number'] += $number;
+                    } catch (Exception $e) {}
+                }
             }
         }
         
         // Setup the 2nd menu
         
-        $menu_notify['device_count']['submenu']['prison_watch_error'] = $prison_watch_error;
+        $menu_notify['device_count']['url1']['prison_watch_error'] = $prison_watch_error;
         
         $alarm_count = $this->Alarmcountview_model->getall();
         
         if (isset($alarm_count)) {
             $row = $alarm_count->row_array();
-            $menu_notify['device_count']['submenu']['loc_alarm'] = $row['loc_count'];
-            $menu_notify['device_count']['submenu']['prohibit_alarm'] = $row['prohibit_count'];
-            $menu_notify['device_count']['submenu']['enter_alarm'] = $row['enter_count'];
-            $menu_notify['device_count']['submenu']['mon_alarm'] = $row['mon_count'];
+            $menu_notify['device_count']['url2']['loc_alarm'] = $row['loc_count'];
+            $menu_notify['device_count']['url3']['prohibit_alarm'] = $row['prohibit_count'];
+            $menu_notify['device_count']['url4']['enter_alarm'] = $row['enter_count'];
+            $menu_notify['device_count']['url5']['mon_alarm'] = $row['mon_count'];
         } else {
-            $menu_notify['device_count']['submenu']['loc_alarm'] = 0;
-            $menu_notify['device_count']['submenu']['prohibit_alarm'] = 0;
-            $menu_notify['device_count']['submenu']['enter_alarm'] = 0;
-            $menu_notify['device_count']['submenu']['mon_alarm'] = 0;
+            $menu_notify['device_count']['url2']['loc_alarm'] = 0;
+            $menu_notify['device_count']['url3']['prohibit_alarm'] = 0;
+            $menu_notify['device_count']['url4']['enter_alarm'] = 0;
+            $menu_notify['device_count']['url5']['mon_alarm'] = 0;
         }
         
         $page_data['notification'] = $menu_notify;

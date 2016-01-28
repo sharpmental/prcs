@@ -107,9 +107,9 @@ class Dep_ru_prohibit extends Admin_Controller
                 $monarea_list = $this->Monarea_info_model->getlist();
                 
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_prohibit");
-                if ($data)
-                    $type = $data->row_array()['type'];
+                $datat = $this->Tablelist_model->gettypebyname("tb_dep_ru_prohibit");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
                 else
                     $type = 0;
                 

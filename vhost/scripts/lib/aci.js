@@ -52,8 +52,8 @@ define(function() {
 });
 
 /* For auto refresh control */
-var reloadtime = 5000;
-var startreload = 1;
+var reloadtime = 50000;
+var startreload = 0;
 
 function myrefresh()
 {
@@ -83,8 +83,8 @@ setTimeout(myrefresh, reloadtime);
 
 /* For hide control */
 
-for (m in hid_ctrl){
-	$('#hidbtn_'+hid_ctrl[m]).click(function(){
-		$('.hid_'+hid_ctrl[m]).hide();
-	});
-}
+//for (m in hid_ctrl){
+//	$('#hidbtn_'+hid_ctrl[m]).click(function(){
+//		$('.hid_'+hid_ctrl[m]).hide();
+//	});
+//}

@@ -102,9 +102,9 @@ class Dep_ru_location extends Admin_Controller
                 $recvunit_list = $this->Recvunit_info_model->getlist();
                 
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_dep_ru_location");
-                if ($data)
-                    $type = $data->row_array()['type'];
+                $datat = $this->Tablelist_model->gettypebyname("tb_dep_ru_location");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
                 else
                     $type = 0;
                 

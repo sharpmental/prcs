@@ -100,9 +100,9 @@ class Locarea_info extends Admin_Controller
                 $loccoor_list = $this->Loccoor_info_model->getlist();
                 
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_locarea_info");
-                if ($data)
-                    $type = $data->row_array()['type'];
+                $datat = $this->Tablelist_model->gettypebyname("tb_locarea_info");
+                if ($datat)
+                    $type = $datat->row_array()['type'];
                 else
                     $type = 0;
                 

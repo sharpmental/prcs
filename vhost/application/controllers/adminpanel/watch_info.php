@@ -24,7 +24,7 @@ class Watch_info extends Admin_Controller
                     'tips' => '信息新增失败, no watch ID'
                 )));
             
-            $arr['watch_status'] = isset($_POST['watch_status'])?$_POST['watch_status']:0;
+            $arr['watch_status'] = isset($_POST['watch_status']) ? $_POST['watch_status'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->insert($arr);
@@ -46,9 +46,9 @@ class Watch_info extends Admin_Controller
             $data = $this->Tablelist_model->gettypebyname("tb_watch_info");
             if ($data)
                 $type = $data->row_array()['type'];
-                else
-                    $type = 0;
-                
+            else
+                $type = 0;
+            
             $this->view("add", array(
                 "require_js" => true,
                 "type" => $type
@@ -60,7 +60,7 @@ class Watch_info extends Admin_Controller
     {
         if ($this->input->is_ajax_request()) {
             
-            $arr['watch_status'] = isset($_POST['watch_status'])?$_POST['watch_status']:0;
+            $arr['watch_status'] = isset($_POST['watch_status']) ? $_POST['watch_status'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->update($arr, 'watch_id = ' . $id);
@@ -83,12 +83,12 @@ class Watch_info extends Admin_Controller
             ));
             if (isset($data)) {
                 $this->load->model('Tablelist_model');
-                $data = $this->Tablelist_model->gettypebyname("tb_watch_info");
-                if ($data)
-                    $type = $data->row_array()['type'];
-                    else
-                        $type = 0;
-                    
+                $datat = $this->Tablelist_model->gettypebyname("tb_watch_info");
+                
+                $type = 0;
+                if ($datat)
+                    $type = $datat->row_array()['type'];
+                
                 $this->view("modify", array(
                     "require_js" => true,
                     "data_info" => $data,

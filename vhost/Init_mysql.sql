@@ -712,15 +712,12 @@ create table `tb_locarea_info` (
   `locarea_id` int(11) not null,
   `locarea_name` varchar(64) not null,
   `coor_id` int(11) not null,
-  #坐标编号
   `cent_x` int(11) not null,
-   #含义未知
   `cent_y` int(11) not null,
-   #含义未知
   `size_x` int(11) not null,
-   #含义未知
   `size_y` int(11) not null,
-   #含义未知
+  `show` int(11) default 0,
+  `parentid` int(11) default 0,
   `update_timestamp` datetime not null,
   primary key  (`locarea_id`)
 ) engine=myisam default charset=utf8 comment='定位区域表';
@@ -729,8 +726,39 @@ create table `tb_locarea_info` (
 -- 导出表中的数据 `tb_locarea_info`
 -- 
 
-insert into `tb_locarea_info` values (1, '工厂一区', 0, 0, 0, 0, 0, '2015-10-22 14:24:00');
-insert into `tb_locarea_info` values (2, '工厂二区', 0, 0, 0, 0, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010000, '监舍区', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010001, '监舍区中的1号监舍', 0, 0, 0, 0, 0, 0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010002, '监舍区中的3号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010003, '监舍区中的3号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010004, '监舍区中的4号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010005, '监舍区中的5号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010006, '监舍区中的6号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010007, '监舍区中的7号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010008, '监舍区中的8号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010009, '监舍区中的9号监舍', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010010, '监舍区中的晒衣间', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010011, '监舍区中的储藏室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010012, '监舍区中的淋浴间', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010013, '监舍区中的活动室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010014, '监舍区中的阅览室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010015, '监舍区中的谈话室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010016, '监舍区中的反省室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010017, '监舍区中的宣泄室', 0, 0, 0, 0, 0,  0, 2010000, '2015-10-22 14:24:27');
+
+insert into `tb_locarea_info` values (2010400, '伙房', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010500, '教育中心', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010600, '医院', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010700, '会见室', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+
+insert into `tb_locarea_info` values (2010800, '工厂区', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010801, '厂房内', 0, 0, 0, 0, 0, 0, 2010800, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010802, '厂区大门内', 0, 0, 0, 0, 0, 0, 2010800, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010803, '厂区大门外', 0, 0, 0, 0, 0, 0, 2010800,  '2015-10-22 14:24:27');
+
+insert into `tb_locarea_info` values (2010900, '严管中心', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010901, '严管区', 0, 0, 0, 0, 0, 0, 2010900, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010902, '监管区', 0, 0, 0, 0, 0,  0, 2010900, '2015-10-22 14:24:27');
+insert into `tb_locarea_info` values (2010903, '洗涮区', 0, 0, 0, 0, 0,  0, 2010900, '2015-10-22 14:24:27');
 
 # dump of table receive_unit_info 接收天线表
 # ------------------------------------------------------------

@@ -712,12 +712,15 @@ create table `tb_locarea_info` (
   `locarea_id` int(11) not null,
   `locarea_name` varchar(64) not null,
   `coor_id` int(11) not null,
+  #坐标编号
   `cent_x` int(11) not null,
+   #含义未知
   `cent_y` int(11) not null,
+   #含义未知
   `size_x` int(11) not null,
+   #含义未知
   `size_y` int(11) not null,
-  `show` int default 0,
-  `parentid` int default 0,
+   #含义未知
   `update_timestamp` datetime not null,
   primary key  (`locarea_id`)
 ) engine=myisam default charset=utf8 comment='定位区域表';
