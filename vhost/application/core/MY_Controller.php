@@ -654,10 +654,9 @@ class Admin_Controller extends Member_Controller
                 } else {
                     $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['parentid'] . ' and alarm_type = 0');
                     
-                    try {
+                    if (isset($t[$v['parentid']])){
                         $name = $t[$v['parentid']];
-                        $menu_notify['person_count'][$name]['number'] += $number;
-                    } catch (Exception $e) {}
+                        $menu_notify['person_count'][$name]['number'] += $number;}
                 }
             }
         }

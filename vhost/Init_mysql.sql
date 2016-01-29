@@ -174,6 +174,7 @@ VALUES
 	(11,'人员信息',0,11,1,'manage','adminpanel','go_11','0',1,0,1,1,'user-times','0','11',1,1),
 	(12,'区域信息',0,12,1,'manage','adminpanel','go_12','0',1,0,1,1,'map-marker','0','12',1,1),
 	(13,'其他功能',0,13,1,'manage','adminpanel','go_13','0',1,0,1,1,'gears','0','13',1,1),
+	(14,'监狱地图',0,14,1,'manage','adminpanel','go_14','0',1,0,1,1,'photo','0','14',1,1),
 	(16,'栏目列表',9,16,1,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,2,9','16,17,18,19,20',1,1),
 	(17,'数据表',3,17,1,'edittable','adminpanel','index/0','0',1,0,1,1,'','0,3','',1,1),
 	(18,'数据表',4,18,1,'edittable','adminpanel','index/1','0',1,0,1,1,'','0,4','',1,1),
@@ -203,7 +204,8 @@ VALUES
 	(48,'修改People_detail', 38, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '48', 0, 1),
 	(49,'服务器相关设置', 10, 49, 1, 'manage', 'adminpanel', 'go_49', '0', 1, 0, 1, 1, '', '0,10', '50,51', 0, 1),
 	(50,'服务器设置', 49, 50, 1, 'server_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '50', 0, 1),
-	(51,'日志', 49, 51, 1, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1)
+	(51,'日志', 49, 51, 1, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1),
+	(52,'主地图',14,52,1,'showmap','adminpanel','index','0',1,0,1,1,'','0,14','52',0,1)
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;
@@ -974,6 +976,25 @@ create table `tb_server_info` (
   `update_timestamp` datetime not null default current_timestamp on update current_timestamp
 ) engine=myisam default charset=utf8;
 
+
+drop table if exists `tb_mapdraw_info`;
+
+create table `tb_mapdraw_info` (
+`locarea_id`  int(11) not null,
+`pos_x` int default 0 not null,
+`pos_y` int default 0 not null,
+`width` int default 100 not null,
+`height` int default 100 not null,
+`level` int default 10 not null, #=1 will be shown in main map
+`link` varchar(128) not null,
+`filename` varchar(64) not null
+) engine=myisam default charset=utf8 comment='';
+
+insert into `tb_mapdraw_info` values (2010000, 100, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
+insert into `tb_mapdraw_info` values (2010400, 200, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
+insert into `tb_mapdraw_info` values (2010500, 300, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
+insert into `tb_mapdraw_info` values (2010600, 400, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
+insert into `tb_mapdraw_info` values (2010700, 500, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

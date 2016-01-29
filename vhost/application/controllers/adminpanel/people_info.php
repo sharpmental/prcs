@@ -377,7 +377,7 @@ class People_info extends Admin_Controller
         // create pageination
         $this->load->library('pagination');
         
-        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/insidepeople';
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/monalarmpeople';
         $pconfig['total_rows'] = count($data);
         $pconfig['per_page'] = 20;
         
@@ -393,7 +393,58 @@ class People_info extends Admin_Controller
     }
     
     public function localarm($id=0){
-    
+        
+        $this->load->model('People_info_model');
+        $this->load->model('Locarea_info_model');
+        $this->load->model('Alarm_loc_model');
+        
+        $data = array();
+        
+        $data1 = $this->Locarea_info_model->select("locarea_id = ".$id."or parentid = ".$id);
+        
+        foreach ($data1 as $k => $v){
+            $data2 = $this->Alarm_loc_model->select("locarea_id = ".$v['locarea_id']);
+            if($data2){
+                foreach($data2 as $kk => $vv){
+                    $data3 = $this->People_info_model->get_one("watch_id = ".$vv['watch_id']);
+                    if ($data3){
+                        array_push($data, array(
+                            $v['people_id'],
+                            $v['watch_id'],
+                            $v['dep_id'],
+                            $v['locarea_id']
+                        ));
+                    }
+                }
+            }
+        }
+        
+        
+        $this->load->library('table');
+        $template = array(
+            'table_open' => '<table class="table table-hover dataTable">'
+        );
+        $this->table->set_template($template);
+        $this->table->set_heading('编号', '部门号码', '腕带编号', '区域号码');
+        
+        $table_data = $this->table->generate($data);
+        
+        // create pageination
+        $this->load->library('pagination');
+        
+        $pconfig['base_url'] = base_url() . 'adminpanel/people_info/localarm/'.$id;
+        $pconfig['total_rows'] = count($data);
+        $pconfig['per_page'] = 20;
+        
+        $this->pagination->initialize($pconfig);
+        
+        $pageslink = $this->pagination->create_links();
+        
+        $this->view('index', array(
+            'require_js' => true,
+            'table_data' => $table_data,
+            'pagelink' => $pageslink
+        ));
     }
 }
 

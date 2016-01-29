@@ -74,6 +74,20 @@
 							class="form-control validate[required]" placeholder="请输入">
 					</div>
 				</div>
+				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">是否显示</label>
+					<div class="col-sm-9">
+						<input type="text" name="show" id="show" value='<?php echo $data_info['show']; ?>'
+							class="form-control validate[required]" placeholder="0">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="description" class="col-sm-2 control-label">上级区域号码</label>
+					<div class="col-sm-9">
+						<input type="text" name="parentid" id="parentid" value='<?php echo $data_info['parentid']; ?>'
+							class="form-control validate[required]" placeholder="0">
+					</div>
+				</div>
 			</fieldset>
 
 			<div class='form-actions'>
