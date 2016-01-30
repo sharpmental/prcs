@@ -12,9 +12,9 @@
 	</div>
 
 	<div class="panel-body" style="position:relative;">
-		<img alt="MAINIMAGE" src="/areaimage/mainmap.jpg" width=900 height=500 class="img-responsive img-thumbnail" style="z-index:-1;opacity:1">
+		<img alt="MAINIMAGE" src="/areaimage/"<?php echo $submap?>.jpg" width=900 height=500 class="img-responsive img-thumbnail" style="z-index:-1;opacity:1">
 		<?php foreach($div_list as $k => $v) {?>
-		<?php echo "<a href=".base_url().$folder_name.'/'.$v['link'] ?> 
+		<a href="<?php base_url($folder_name.$v['link'])?>"	
 		style="position: absolute;
 		left: <?php echo $v['pos_x']?>px;
 		top: <?php echo $v['pos_y']?>px; 

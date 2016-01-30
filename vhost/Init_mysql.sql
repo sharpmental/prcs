@@ -986,15 +986,16 @@ create table `tb_mapdraw_info` (
 `width` int default 100 not null,
 `height` int default 100 not null,
 `level` int default 10 not null, #=1 will be shown in main map
-`link` varchar(128) not null,
-`filename` varchar(64) not null
+`link` varchar(128) not null, #link to its next page
+`filename` varchar(64) not null,
+`bgcolor` varchar(12) not null default '#4FA0FF'
 ) engine=myisam default charset=utf8 comment='';
 
-insert into `tb_mapdraw_info` values (2010000, 100, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
-insert into `tb_mapdraw_info` values (2010400, 200, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
-insert into `tb_mapdraw_info` values (2010500, 300, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
-insert into `tb_mapdraw_info` values (2010600, 400, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
-insert into `tb_mapdraw_info` values (2010700, 500, 100, 100, 100, 1, 'showmap/index', 'mainmap.jpg');
+insert into `tb_mapdraw_info` values (2010000, 100, 100, 100, 100, 1, 'showmap/submap/2010000', 'mainmap.jpg', '#4FA01F');
+insert into `tb_mapdraw_info` values (2010400, 200, 100, 100, 100, 1, 'showmap/submap/2010400', 'mainmap.jpg', '#4FA02F');
+insert into `tb_mapdraw_info` values (2010500, 300, 100, 100, 100, 1, 'showmap/submap/2010500', 'mainmap.jpg', '#4FA03F');
+insert into `tb_mapdraw_info` values (2010600, 400, 100, 100, 100, 1, 'showmap/submap/2010600', 'mainmap.jpg', '#4FA04F');
+insert into `tb_mapdraw_info` values (2010700, 500, 100, 100, 100, 1, 'showmap/submap/2010700', 'mainmap.jpg', '#4FA05F');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
