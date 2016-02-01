@@ -399,12 +399,12 @@ a.square {
   background-color: #FAFAFA;
   color: #333;
   line-height: 20px;
-  padding: 20px;
+  padding: 5px;
   margin-bottom: 10px;
   text-align: center;
   display: block;
   text-decoration: none;
-  font-size: 14px;
+  font-size: 8px;
   opacity:0.2
 }
 

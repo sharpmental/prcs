@@ -21,11 +21,12 @@
 		width:<?php echo $v['width']?>px; 
 		height:<?php echo $v['height']?>px;
 		z-index: 1;
-		text-align:center;"
+		text-align:center;
+		word-break:keep-all"
 		class="square">
 		<?php echo $v['locarea_name'];?>
 		<br>
-		<?php echo $v['count']?>
+		警报人数:<?php echo $v['count']?>
 		</a>
 		<?php }?>
 	</div>

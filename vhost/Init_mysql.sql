@@ -762,6 +762,8 @@ insert into `tb_locarea_info` values (2010901, '严管区', 0, 0, 0, 0, 0, 0, 20
 insert into `tb_locarea_info` values (2010902, '监管区', 0, 0, 0, 0, 0,  0, 2010900, '2015-10-22 14:24:27');
 insert into `tb_locarea_info` values (2010903, '洗涮区', 0, 0, 0, 0, 0,  0, 2010900, '2015-10-22 14:24:27');
 
+insert into `tb_locarea_info` values (2010905, 'TESTTEST', 0, 0, 0, 0, 0, 1, 0, '2015-10-22 14:24:27');
+
 # dump of table receive_unit_info 接收天线表
 # ------------------------------------------------------------
 drop table if exists `tb_recvunit_info`;
@@ -991,11 +993,39 @@ create table `tb_mapdraw_info` (
 `bgcolor` varchar(12) not null default '#4FA0FF'
 ) engine=myisam default charset=utf8 comment='';
 
-insert into `tb_mapdraw_info` values (2010000, 100, 100, 100, 100, 1, 'showmap/submap/2010000', 'mainmap.jpg', '#4FA01F');
-insert into `tb_mapdraw_info` values (2010400, 200, 100, 100, 100, 1, 'showmap/submap/2010400', 'mainmap.jpg', '#4FA02F');
-insert into `tb_mapdraw_info` values (2010500, 300, 100, 100, 100, 1, 'showmap/submap/2010500', 'mainmap.jpg', '#4FA03F');
-insert into `tb_mapdraw_info` values (2010600, 400, 100, 100, 100, 1, 'showmap/submap/2010600', 'mainmap.jpg', '#4FA04F');
-insert into `tb_mapdraw_info` values (2010700, 500, 100, 100, 100, 1, 'showmap/submap/2010700', 'mainmap.jpg', '#4FA05F');
+insert into `tb_mapdraw_info` values (2010000, 705, 225, 150, 50, 1, 'showmap/submap/2010000', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010400, 680, 125, 150, 50, 1, 'showmap/submap/2010400', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010500, 750, 125, 150, 50, 1, 'showmap/submap/2010500', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010600, 825, 150, 150, 50, 1, 'showmap/submap/2010600', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010700, 825, 300, 150, 50, 1, 'showmap/submap/2010700', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010800, 500, 225, 150, 50, 1, 'showmap/submap/2010700', 'mainmap.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010900, 680, 300, 150, 50, 1, 'showmap/submap/2010700', 'mainmap.jpg', '#808080');
+
+insert into `tb_mapdraw_info` values (2010001, 825, 150, 50, 50, 0, 'showmap/submap/2010001', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010002, 680, 125, 50, 50, 0, 'showmap/submap/2010002', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010003, 750, 125, 50, 50, 0, 'showmap/submap/2010003', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010004, 825, 150, 50, 50, 0, 'showmap/submap/2010004', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010005, 825, 300, 50, 50, 0, 'showmap/submap/2010005', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010006, 500, 225, 50, 50, 0, 'showmap/submap/2010006', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010007, 680, 300, 50, 50, 0, 'showmap/submap/2010007', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010008, 825, 150, 50, 50, 0, 'showmap/submap/2010008', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010009, 680, 125, 50, 50, 0, 'showmap/submap/2010009', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010010, 750, 125, 50, 50, 0, 'showmap/submap/2010010', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010011, 825, 150, 50, 50, 0, 'showmap/submap/2010011', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010012, 825, 300, 50, 50, 0, 'showmap/submap/2010012', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010013, 500, 225, 50, 50, 0, 'showmap/submap/2010013', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010014, 680, 300, 50, 50, 0, 'showmap/submap/2010014', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010015, 825, 150, 50, 50, 0, 'showmap/submap/2010015', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010016, 825, 300, 50, 50, 0, 'showmap/submap/2010016', '2010000.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010017, 500, 225, 50, 50, 0, 'showmap/submap/2010017', '2010000.jpg', '#808080');
+
+insert into `tb_mapdraw_info` values (2010801, 825, 150, 50, 50, 0, 'showmap/submap/2010801', '2010800.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010802, 825, 300, 50, 50, 0, 'showmap/submap/2010802', '2010800.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010803, 500, 225, 50, 50, 0, 'showmap/submap/2010803', '2010800.jpg', '#808080');
+
+insert into `tb_mapdraw_info` values (2010901, 825, 150, 50, 50, 0, 'showmap/submap/2010901', '2010900.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010902, 825, 300, 50, 50, 0, 'showmap/submap/2010902', '2010900.jpg', '#808080');
+insert into `tb_mapdraw_info` values (2010903, 500, 225, 50, 50, 0, 'showmap/submap/2010903', '2010900.jpg', '#808080');
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
