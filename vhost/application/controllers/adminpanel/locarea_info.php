@@ -30,6 +30,8 @@ class Locarea_info extends Admin_Controller
             $arr['cent_y'] = isset($_POST['cent_y']) ? $_POST['cent_y'] : 0;
             $arr['size_x'] = isset($_POST['size_x']) ? $_POST['size_x'] : 0;
             $arr['size_y'] = isset($_POST['size_y']) ? $_POST['size_y'] : 0;
+            $arr['show'] = isset($_POST['show']) ? $_POST['show'] : 0;
+            $arr['parentid'] = isset($_POST['parentid']) ? $_POST['parentid'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->insert($arr);
@@ -75,6 +77,8 @@ class Locarea_info extends Admin_Controller
             $arr['cent_y'] = isset($_POST['cent_y']) ? $_POST['cent_y'] : 0;
             $arr['size_x'] = isset($_POST['size_x']) ? $_POST['size_x'] : 0;
             $arr['size_y'] = isset($_POST['size_y']) ? $_POST['size_y'] : 0;
+            $arr['show'] = isset($_POST['show']) ? $_POST['show'] : 0;
+            $arr['parentid'] = isset($_POST['parentid']) ? $_POST['parentid'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Locarea_info_model->update($arr, 'locarea_id = ' . $id);

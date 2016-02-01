@@ -400,7 +400,7 @@ class People_info extends Admin_Controller
         
         $data = array();
         
-        $data1 = $this->Locarea_info_model->select("locarea_id = ".$id."or parentid = ".$id);
+        $data1 = $this->Locarea_info_model->select("locarea_id = ".$id." or parentid = ".$id);
         
         foreach ($data1 as $k => $v){
             $data2 = $this->Alarm_loc_model->select("locarea_id = ".$v['locarea_id']);
