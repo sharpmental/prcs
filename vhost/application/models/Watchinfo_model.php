@@ -18,4 +18,22 @@ class Watchinfo_model extends Base_model{
 	    else
 	        return null;
 	}
+	
+	public function setstatus($id=0){
+	    $data = $this->update(array(
+	        'watch_status' => 1
+	    ),
+	        'watch_id = '.$id);
+	    
+	    return $data;
+	}
+	
+	public function unsetstatus($id=0){
+	    $data = $this->update(array(
+	        'watch_status' => 0
+	    ),
+	        'watch_id = '.$id);
+	     
+	    return $data;
+	}
 }

@@ -19,6 +19,18 @@ class People_info_model extends Base_Model
         else
             return null;
     }
+    
+    public function getpeoplelist(){
+        $data = $this->select("", "people_id");
+        if($data){
+            $l = array();
+            foreach($data as $k => $v){
+                array_push($l, $v['people_id']);            }
+                return $l;
+        }
+        else
+            return null;
+    }
 }
 
 ?>

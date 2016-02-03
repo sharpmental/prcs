@@ -31,28 +31,32 @@ class People_info extends Admin_Controller
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->People_info_model->insert($arr);
+            
+            $this->load->model("Watchinfo_model");
+            $this->Watchinfo_model->setstatus($arr['watch_id']);
+            
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
-                    'tips' => '信息新增成功',
+                    'tips' => 'Success',
                     'new_id' => $new_id
                 )));
             } else {
                 exit(json_encode(array(
                     'status' => false,
-                    'tips' => '信息新增失败, DB failure.',
+                    'tips' => 'DB failure.',
                     'new_id' => $new_id
                 )));
             }
         } else {
+            
+            $used_watch_list = $this->People_info_model->getwatchlist();
+            
             $this->load->model('Department_info_model');
             $dep_list = $this->Department_info_model->getlist();
             
             $this->load->model('Watchinfo_model');
             $all_watch_list = $this->Watchinfo_model->getlist();
-            
-            $this->load->model('People_info_model');
-            $used_watch_list = $this->People_info_model->getwatchlist();
             
             $watch_list = array();
             foreach($all_watch_list as $k => $v ){
@@ -65,7 +69,15 @@ class People_info extends Admin_Controller
             $locarea_list = $this->Locarea_info_model->getlist();
             
             $this->load->model('People_detail_model');
-            $people_list = $this->People_detail_model->getlist();
+            $all_people_list = $this->People_detail_model->getlist();
+            $used_people_list = $this->People_info_model->getpeoplelist();
+            
+            $people_list = array();
+            foreach($all_people_list as $k => $v ){
+                if (!in_array($v['people_id'], $used_people_list)){
+                    array_push($people_list, $v);
+                }
+            }
             
             $this->load->model('Tablelist_model');
             $data = $this->Tablelist_model->gettypebyname("tb_people_info");
@@ -95,7 +107,22 @@ class People_info extends Admin_Controller
             $arr['init_locarea_id'] = isset($_POST['init_locarea_id']) ? $_POST['init_locarea_id'] : 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
+            $data = $this->People_info_model->get_one("people_id = ".$id);
+            if(!$data){
+                exit(json_encode(array(
+                    'status' => false,
+                    'tips' => 'Can not find this Person!',
+                    'new_id' => 0
+                )));
+            }
+            $old_watch_id = $data['watch_id'];
+            
             $new_id = $this->People_info_model->update($arr, 'people_id = ' . $id);
+            
+            $this->load->model("Watchinfo_model");
+            $this->Watchinfo_model->setstatus($arr['watch_id']);
+            $this->Watchinfo_model->unsetstatus($old_watch_id);
+            
             if ($new_id) {
                 exit(json_encode(array(
                     'status' => true,
