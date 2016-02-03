@@ -8,6 +8,17 @@ class People_info_model extends Base_Model
         $this->table_name = "tb_people_info";
     }
     
+    public function getwatchlist(){
+        $data = $this->select("", "watch_id");
+        if($data){
+            $l = array();
+            foreach($data as $k => $v){
+                array_push($l, $v['watch_id']);            }
+            return $l;
+        }
+        else
+            return null;
+    }
 }
 
 ?>

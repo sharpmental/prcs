@@ -49,8 +49,18 @@ class People_info extends Admin_Controller
             $dep_list = $this->Department_info_model->getlist();
             
             $this->load->model('Watchinfo_model');
-            $watch_list = $this->Watchinfo_model->getlist();
+            $all_watch_list = $this->Watchinfo_model->getlist();
             
+            $this->load->model('People_info_model');
+            $used_watch_list = $this->People_info_model->getwatchlist();
+            
+            $watch_list = array();
+            foreach($all_watch_list as $k => $v ){
+                if (!in_array($v['watch_id'], $used_watch_list)){
+                    array_push($watch_list, $v);
+                }
+            }
+                
             $this->load->model('Locarea_info_model');
             $locarea_list = $this->Locarea_info_model->getlist();
             
@@ -409,9 +419,9 @@ class People_info extends Admin_Controller
                     $data3 = $this->People_info_model->get_one("watch_id = ".$vv['watch_id']);
                     if ($data3){
                         array_push($data, array(
-                            $v['people_id'],
-                            $v['watch_id'],
-                            $v['dep_id'],
+                            $data3['people_id'],
+                            $data3['watch_id'],
+                            $data3['watch_id'],
                             $v['locarea_id']
                         ));
                     }

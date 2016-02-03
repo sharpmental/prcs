@@ -9,7 +9,7 @@
 			<div class='panel-tools'>
 
 				<div class='btn-group'>
-				<?php aci_ui_a($folder_name,'edittable','index'/3,'',' class="btn  btn-sm pull-right"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
+				<?php aci_ui_a($folder_name,'edittable','index/3','',' class="btn  btn-sm pull-right"','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
 
 			</div>
 			</div>
@@ -19,7 +19,7 @@
 				<div class="form-group">
 					<label for="role_name" class="col-sm-2 control-label">人员标识</label>
 					<div class="col-sm-9">
-						<select class="form-control validate[required] " name="people_id"
+						<select class="form-control validate[required]" name="people_id" disabled="disable"
 							id="people_id">
 							<option value="">==请选择==</option>
 						<?php
