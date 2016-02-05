@@ -54,7 +54,7 @@ class Manage extends Admin_Controller
             $keyword = $_GET['keyword'];
             $data = $this->Prisonerinfo_model->getfromkeyword($keyword);
         } else
-            $data = $this->Prisonerinfo_model->getfromview($startnum, 20);
+            $data = $this->Prisonerinfo_model->getfromview($startnum, 2000);
         
         $this->load->library('table');
         $template = array(
