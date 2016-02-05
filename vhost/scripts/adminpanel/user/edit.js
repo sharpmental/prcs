@@ -143,12 +143,10 @@ requirejs(['jquery','jquery-ui-dialog-extend','aci','bootstrapValidator','bootst
 			e.preventDefault();
 
 			$("#dosubmit").attr("disabled","disabled");
-
-
 			$.scojs_message('请稍候...', $.scojs_message.TYPE_WAIT);
 			$.ajax({
 				type: "POST",
-				url: edit?SITE_URL+folder_name+"/user/edit/"+id:SITE_URL+folder_name+"/user/add/",
+				url: edit?(SITE_URL+folder_name+"/user/edit/"+id):(SITE_URL+folder_name+"/user/add/"+id),
 				data:  $("#validateform").serialize(),
 				success:function(response){
 					var dataObj=jQuery.parseJSON(response);

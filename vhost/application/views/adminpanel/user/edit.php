@@ -68,7 +68,7 @@
 
 </form>
 <script language="javascript" type="text/javascript">
-	var id = <?php echo $data_info['user_id']?>;
+	var id = <?php echo $data_info['operator_id']?>;
 	var edit= <?php echo $is_edit?"true":"false"?>;
 	var folder_name = "<?php echo $folder_name?>";
 	function getThumb(v,s,w,h){

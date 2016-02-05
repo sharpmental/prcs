@@ -385,7 +385,7 @@ $config['menu_notify'] = array(
     'person_count' => array(
         'title' => '人数统计',
         'allregpeple' => array(
-            base_url() . 'adminpanel/people_info/allregpeople/',
+            '#',
             '在册人数',
             'prison_totalnumber' => '0'
         ),

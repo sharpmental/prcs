@@ -15,7 +15,7 @@
 		<img alt="IMAGE" src="/areaimage/<?php echo $mapname?>" width=900 height=500 class="img-responsive img-thumbnail" style="z-index:-1;opacity:1">
 		<?php if (!$mapname) echo '<br><div class="alert alert-warning" role="alert">没有子地图!</div>' ?>
 		<?php foreach($div_list as $k => $v) {?>
-		<a href=#	
+		<a href="<?php echo base_url().$folder_name.'/'.$v['link'] ?>"
 		style="position: absolute;
 		left: <?php echo $v['pos_x']?>px;
 		top: <?php echo $v['pos_y']?>px; 
@@ -27,7 +27,7 @@
 		class="square">
 		<?php echo $v['locarea_name'];?>
 		<br>
-		警报人数:<?php echo $v['count']?>
+		人数:<?php echo $v['count']?>
 		</a>
 		<?php }?>
 	</div>
