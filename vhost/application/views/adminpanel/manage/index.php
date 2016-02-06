@@ -35,7 +35,13 @@
 		<div class="pull-left">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" id="refreshBtn">
-					<span class="glyphicon glyphicon-refresh">刷新</span>
+					<span class="glyphicon glyphicon-refresh">&nbsp刷新</span>
+                </button>
+				<button type="button" class="btn btn-default" id="outBtn">
+					<span class="glyphicon glyphicon-log-out">&nbsp外出</span>
+                </button>
+				<button type="button" class="btn btn-default" id="backBtn">
+					<span class="glyphicon glyphicon-log-in">&nbsp返回</span>
                 </button>
 			</div>
 		</div>

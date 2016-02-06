@@ -1,5 +1,4 @@
 <?php
-
 if (! defined('BASEPATH'))
     exit('No direct script access allowed');
 
@@ -61,21 +60,27 @@ class Manage extends Admin_Controller
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
-        $this->table->set_heading('编号', '姓名', '操作', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
+        $this->table->set_heading('#', '编号', '姓名', '出入状态', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
         
         $data_t = array();
         foreach ($data->result_array() as $k => $v) {
+            // if ($v['status'] == '1')
+            // $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
+            // else
+            // $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
+            
             if ($v['status'] == '1')
-                $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
+                $btn_out = '在外';
             else
-                $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
+                $btn_out = '在监';
             
             if (isset($this->config->item('watch_status')[$v['watch_status']]))
                 $status = $this->config->item('watch_status')[$v['watch_status']];
-            else 
+            else
                 $status = "Unknow!";
             
             $temp = array(
+                "<input type='checkbox' name='pid' class='pid_sel' value='" . $v['people_id'] . "' />",
                 $v['people_id'],
                 $v['people_name'],
                 $btn_out,
@@ -311,166 +316,210 @@ class Manage extends Admin_Controller
             'pagelink' => $pageslink
         ));
     }
-    
+
     function outpeople()
     {
         $data = $this->Prisonerinfo_model->getoutpeople();
-    
+        
         $this->load->library('table');
         $template = array(
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
         $this->table->set_heading('编号', '姓名', '操作', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
-    
+        
         $data_t = array();
         foreach ($data->result_array() as $k => $v) {
             if ($v['status'] == '1')
                 $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
-                else
-                    $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
-    
-                    $temp = array(
-                        $v['people_id'],
-                        $v['people_name'],
-                        $btn_out,
-                        $v['dep_id'],
-                        $v['watch_id'],
-                        $this->config->item('watch_status')[$v['watch_status']],
-                        $v['update_timestamp'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
-                        $v['locarea_id'],
-                        $v['monarea_id'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
-                    );
-                    array_push($data_t, $temp);
+            else
+                $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
+            
+            $temp = array(
+                $v['people_id'],
+                $v['people_name'],
+                $btn_out,
+                $v['dep_id'],
+                $v['watch_id'],
+                $this->config->item('watch_status')[$v['watch_status']],
+                $v['update_timestamp'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
+                $v['locarea_id'],
+                $v['monarea_id'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
+            );
+            array_push($data_t, $temp);
         }
-    
+        
         $table_data = $this->table->generate($data_t);
-    
+        
         // create pageination
         $this->load->library('pagination');
-    
+        
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
-    
+        
         $this->pagination->initialize($pconfig);
-    
+        
         $pageslink = $this->pagination->create_links();
-    
+        
         $this->view('index', array(
             'require_js' => true,
             'table_data' => $table_data,
             'pagelink' => $pageslink
         ));
     }
-    
+
     function lostpeople()
     {
         $data = $this->Prisonerinfo_model->getlostpeople();
-    
+        
         $this->load->library('table');
         $template = array(
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
         $this->table->set_heading('编号', '姓名', '操作', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
-    
+        
         $data_t = array();
         foreach ($data->result_array() as $k => $v) {
             if ($v['status'] == '1')
                 $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
-                else
-                    $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
-    
-                    $temp = array(
-                        $v['people_id'],
-                        $v['people_name'],
-                        $btn_out,
-                        $v['dep_id'],
-                        $v['watch_id'],
-                        $this->config->item('watch_status')[$v['watch_status']],
-                        $v['update_timestamp'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
-                        $v['locarea_id'],
-                        $v['monarea_id'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
-                    );
-                    array_push($data_t, $temp);
+            else
+                $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
+            
+            $temp = array(
+                $v['people_id'],
+                $v['people_name'],
+                $btn_out,
+                $v['dep_id'],
+                $v['watch_id'],
+                $this->config->item('watch_status')[$v['watch_status']],
+                $v['update_timestamp'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
+                $v['locarea_id'],
+                $v['monarea_id'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
+            );
+            array_push($data_t, $temp);
         }
-    
+        
         $table_data = $this->table->generate($data_t);
-    
+        
         // create pageination
         $this->load->library('pagination');
-    
+        
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
-    
+        
         $this->pagination->initialize($pconfig);
-    
+        
         $pageslink = $this->pagination->create_links();
-    
+        
         $this->view('index', array(
             'require_js' => true,
             'table_data' => $table_data,
             'pagelink' => $pageslink
         ));
     }
-    
+
     function insidepeople()
     {
         $data = $this->Prisonerinfo_model->getinsidepeople();
-    
+        
         $this->load->library('table');
         $template = array(
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
         $this->table->set_heading('编号', '姓名', '操作', '部门号码', '腕带编号', '腕带状态', '更新时间', '详情', '定位信息LOC', '定位信息MON', '活动轨迹');
-    
+        
         $data_t = array();
         foreach ($data->result_array() as $k => $v) {
             if ($v['status'] == '1')
                 $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">返回</a>';
-                else
-                    $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
-    
-                    $temp = array(
-                        $v['people_id'],
-                        $v['people_name'],
-                        $btn_out,
-                        $v['dep_id'],
-                        $v['watch_id'],
-                        $this->config->item('watch_status')[$v['watch_status']],
-                        $v['update_timestamp'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
-                        $v['locarea_id'],
-                        $v['monarea_id'],
-                        '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
-                    );
-                    array_push($data_t, $temp);
+            else
+                $btn_out = '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/leave/' . $v['people_id'] . '" role="button">外出</a>';
+            
+            $temp = array(
+                $v['people_id'],
+                $v['people_name'],
+                $btn_out,
+                $v['dep_id'],
+                $v['watch_id'],
+                $this->config->item('watch_status')[$v['watch_status']],
+                $v['update_timestamp'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/detailinfo/' . $v['people_id'] . '" role="button">详情</a>',
+                $v['locarea_id'],
+                $v['monarea_id'],
+                '<a class="btn btn-info btn-sm" href="' . base_url() . 'adminpanel/manage/trace/' . $v['people_id'] . '" role="button">活动轨迹</a>'
+            );
+            array_push($data_t, $temp);
         }
-    
+        
         $table_data = $this->table->generate($data_t);
-    
+        
         // create pageination
         $this->load->library('pagination');
-    
+        
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
-    
+        
         $this->pagination->initialize($pconfig);
-    
+        
         $pageslink = $this->pagination->create_links();
-    
+        
         $this->view('index', array(
             'require_js' => true,
             'table_data' => $table_data,
             'pagelink' => $pageslink
         ));
+    }
+
+    public function out($str = "")
+    {
+        if (isset($_POST['id'])) {
+            
+            $ids = explode("_", $_POST['id']);
+            
+            foreach ($ids as $k => $v) {
+                $this->Prisonerinout_model->setstatusout(intval($v));
+            }
+            
+            exit(json_encode(array(
+                'status' => true,
+                'tips' => '成功'
+            )));
+        } else {
+            exit(json_encode(array(
+                'status' => false,
+                'tips' => '失败'
+            )));
+        }
+    }
+    
+    public function back($str = "")
+    {
+        if (isset($_POST['id'])) {
+    
+            $ids = explode("_", $_POST['id']);
+    
+            foreach ($ids as $k => $v) {
+                $this->Prisonerinout_model->setstatusin(intval($v));
+            }
+    
+            exit(json_encode(array(
+                'status' => true,
+                'tips' => '成功'
+            )));
+        } else {
+            exit(json_encode(array(
+                'status' => false,
+                'tips' => '失败'
+            )));
+        }
     }
 }
