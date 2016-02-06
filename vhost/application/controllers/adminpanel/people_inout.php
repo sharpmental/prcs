@@ -20,7 +20,7 @@ class People_inout extends Admin_Controller
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
-        $this->table->set_heading('人员编号', '腕表编号', '区域号码', '返回时间', '离开时间', '备注', '状态', '更新时间');
+        $this->table->set_heading('编号', '人员编号', '腕表编号', '区域号码', '返回时间', '离开时间', '备注', '状态', '更新时间');
         
         $table_data = $this->table->generate($data);
         
