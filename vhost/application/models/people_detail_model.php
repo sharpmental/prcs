@@ -30,6 +30,11 @@ class People_detail_model extends Base_Model
         else
             return null;
     }
+    
+    public function getbyid($id){
+        $data = $this->query('select * from '.$this->table_name.' where people_id = '.$id);
+        return $data;
+    }
 }
 
 ?>

@@ -192,20 +192,22 @@ VALUES
 	(35,'删除',31,35,1,'user','adminpanel','delete','0',1,0,1,1,'','0,2,9,31','35',0,1),
 	(36,'锁定/解锁',31,36,1,'user','adminpanel','lock','0',1,0,1,1,'','0,2,9,31','36',0,1),
 	(37,'上传头像',31,37,1,'user','adminpanel','upload','0',1,0,1,1,'','0,2,9,31','37',0,1),
-	(38,'数据表',13,38,1,'edittable','adminpanel','index/5','0',1,0,1,1,'','0,13','38',0,1),
+	(38,'其他功能',13,38,1,'manage','adminpanel','go_38','0',1,0,1,1,'','0,13','38',0,1),
 	(40,'全局缓存',5,40,1,'manage','adminpanel','cache','0',1,0,1,1,'','0,1,5','40',0,1),
 	(41,'详细信息', 4, 41, 0, 'manage', 'adminpanel', 'detailinfo', '0', 1, 0, 1, 1, '', '0,4,41', '41', 0, 1),
 	(42,'外出', 4, 42, 0, 'manage', 'adminpanel', 'leave', '0', 1, 0, 1, 1, '', '0,4,42', '42', 0, 1),
 	(43,'轨迹', 4, 43, 0, 'manage', 'adminpanel', 'trace', '0', 1, 0, 1, 1, '', '0,4,43', '43', 0, 1),
-	(44,'显示数据表', 38, 44, 0, 'edittable', 'adminpanel', 'viewtable', '0', 1, 0, 1, 1, '', '0,4,15,38', '44', 0, 1),
-	(45,'添加People_info', 38, 45, 0, 'people_info', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,15,38', '45', 0, 1),
-	(46,'修改People_info', 38, 46, 0, 'people_info', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '46', 0, 1),
-	(47,'添加People_detail', 38, 47, 0, 'people_detail', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,15,38', '47', 0, 1),
-	(48,'修改People_detail', 38, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,15,38', '48', 0, 1),
+	(44,'显示数据表', 19, 44, 0, 'edittable', 'adminpanel', 'viewtable', '0', 1, 0, 1, 1, '', '0,4,19', '44', 0, 1),
+	(45,'添加People_info', 19, 45, 0, 'people_info', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,19', '45', 0, 1),
+	(46,'修改People_info', 19, 46, 0, 'people_info', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,19', '46', 0, 1),
+	(47,'添加People_detail', 19, 47, 0, 'people_detail', 'adminpanel', 'add', '0', 1, 0, 1, 1, '', '0,4,19', '47', 0, 1),
+	(48,'修改People_detail', 19, 48, 0, 'people_detail', 'adminpanel', 'modify', '0', 1, 0, 1, 1, '', '0,4,19', '48', 0, 1),
 	(49,'服务器相关设置', 10, 49, 1, 'manage', 'adminpanel', 'go_49', '0', 1, 0, 1, 1, '', '0,10', '50,51', 0, 1),
 	(50,'服务器设置', 49, 50, 1, 'server_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '50', 0, 1),
 	(51,'日志', 49, 51, 1, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1),
-	(52,'主地图',14,52,1,'showmap','adminpanel','index','0',1,0,1,1,'','0,14','52',0,1)
+	(52,'主地图',14,52,1,'showmap','adminpanel','index','0',1,0,1,1,'','0,14','52',0,1),
+	(53,'出入记录查询',38,53,1,'people_inout','adminpanel','index','0',1,0,1,1,'','0,13,38','53',0,1),
+	(54,'登录记录查询',49,54,1,'Logging_info','adminpanel','search','0',1,0,1,1,'','0,10,49','54',0,1)
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;

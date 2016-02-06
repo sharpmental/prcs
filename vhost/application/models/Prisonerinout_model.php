@@ -112,4 +112,11 @@ class Prisonerinout_model extends Base_model{
 	        $this->query("insert into tb_people_inout_detail (people_id, watch_id, area_id, outtime, status, update_timestamp) "." values (".$id.", ".$watch_id.", 0, '".date("Y-m-d h:i:s")."', 0,'".date("Y-m-d h:i:s")."')");
 	    }
 	}
+	
+    public function getwithlimit($offset = '0', $limit = '2000')
+    {
+        $data = $this->db->get($this->table_name, intval($limit), intval($offset));
+        return $data;
+    }
+	
 }

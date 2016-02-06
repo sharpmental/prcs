@@ -118,8 +118,8 @@ class Manage extends Admin_Controller
 
     public function detailinfo($id = '0')
     {
-        $this->load->model('Prisonerdetailinfo_model');
-        $data_i = $this->Prisonerdetailinfo_model->getbyid($id);
+        $this->load->model('People_detail_model');
+        $data_i = $this->People_detail_model->getbyid($id);
         
         if ($data_i->num_rows()) {
             $this->view('detail', array(
@@ -249,6 +249,19 @@ class Manage extends Admin_Controller
             $this->session->set_userdata('user_fullname', $r['operator_name']);
             $this->session->set_userdata('user_name', $username);
             $this->session->set_userdata('group_id', $r['operator_power']);
+            
+            //insert a new login record
+            $this->load->model("Logging_info_model");
+            $r = array(
+                "operator_id" => $r['operator_id'],
+                "name" => $r['operator_name'],
+                "user" => $username,
+                "action" => "登录",
+                "content" => "登录成功",
+                "ip" => $ip,
+                'login_time' => SYS_DATETIME
+            );
+            $this->Logging_info_model->insert($r);
             
             exit(json_encode(array(
                 'status' => true,
