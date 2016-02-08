@@ -24,4 +24,26 @@ class Logging_info_model extends \Base_Model
         
         return $data;
     }
+    
+    public function getbyKeyandDate($key, $start, $end, $limit = 2000)
+    {
+        $res = array();
+        $s = strtotime($start);
+        $e = strtotime($end);
+    
+        $data = $this->select("operator_id like '" . $key."' or name like '".$key."'", '*', $limit);
+        if ($data) {
+            foreach ($data as $k => $v) {
+                $i = strtotime($v['login_time']);
+                $j = strtotime($v['logout_time']);
+                if (($i >= $s) && ($i <= $e)) {
+                    array_push($res, $v);
+                } elseif (($j >= $s) && ($j <= $e)) {
+                    array_push($res, $v);
+                } else;
+            }
+        }
+    
+        return $res;
+    }
 }

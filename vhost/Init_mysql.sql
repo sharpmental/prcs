@@ -454,15 +454,15 @@ drop table if exists `tb_people_inout_detail`;
 
 create table `tb_people_inout_detail` (
   `inout_id` int(11) not null auto_increment,
-  `people_id` int(11) not null,
-  `watch_id` int(11) default null,
-  `area_id` int(11) default null,
-  `intime` datetime default null,
-  `outtime` datetime default null,
-  `memo` varchar(200) default null,
-  `status` smallint default 0,
+  `people_id` int(11) not null, #人员编号
+  `watch_id` int(11) default null,#腕表编号
+  `area_id` int(11) default null,#区域号码
+  `intime` datetime default null,#返回时间
+  `outtime` datetime default null,#离开时间
+  `memo` varchar(200) default null,#备注
+  `status` smallint default 0,#状态
   #0=返回 1=外出
-  `update_timestamp` datetime default null,
+  `update_timestamp` datetime default null,#更新时间
   primary key  (`inout_id`)
 ) engine=myisam default charset=utf8 comment='人员出入历史记录表';
 

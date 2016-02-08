@@ -16,11 +16,11 @@
 
 			<form class="form-inline" role="form" method="get" name="searchform" action="<?php echo current_url();?>">
 				<div class="form-group">
-					<label for="keyword" class="form-control-static control-label">关键词(人名或id)</label>
+					<label for="keyword" class="form-control-static control-label">关键词(人名id或腕表id)</label>
 					<input class="form-control input-sm" type="text" name="keyword" id="keyword" placeholder="请输入关键词" />
-					<label for="keyword" class="form-control-static control-label">日期（起始）</label>
+					<label for="startdate" class="form-control-static control-label">日期（起始）</label>
 					<input class="form-control input-sm" type="text" name="startdate" id="startdate" placeholder="请输入" />
-					<label for="keyword" class="form-control-static control-label">日期（结束）</label>
+					<label for="enddate" class="form-control-static control-label">日期（结束）</label>
 					<input class="form-control input-sm" type="text" name="enddate" id="enddate" placeholder="请输入" />
 				</div>
 				<button type="submit" name="dosubmit" value="搜索" class="btn btn-success">
@@ -41,6 +41,7 @@
 				<button type="button" class="btn btn-default" id="refreshBtn">
 					<span class="glyphicon glyphicon-refresh">刷新</span>
                 </button>
+                <span><?php echo $debug ?></span>
 			</div>
 		</div>
 	</div>

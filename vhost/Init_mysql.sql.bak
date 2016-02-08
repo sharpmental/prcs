@@ -207,7 +207,7 @@ VALUES
 	(51,'日志', 49, 51, 1, 'logging_info', 'adminpanel', 'index', '0', 1, 0, 1, 1, '', '0,10,49', '51', 1, 1),
 	(52,'主地图',14,52,1,'showmap','adminpanel','index','0',1,0,1,1,'','0,14','52',0,1),
 	(53,'出入记录查询',38,53,1,'people_inout','adminpanel','index','0',1,0,1,1,'','0,13,38','53',0,1),
-	(54,'登录记录查询',49,54,1,'Logging_info','adminpanel','search','0',1,0,1,1,'','0,10,49','54',0,1),
+	(54,'登录记录查询',49,54,1,'Logging_info','adminpanel','search','0',1,0,1,1,'','0,10,49','54',0,1)
 	;
 
 /*!40000 ALTER TABLE `tb_module_menu` ENABLE KEYS */;

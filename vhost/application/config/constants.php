@@ -55,7 +55,7 @@ define('INTALL_UPLOAD_TEMP_PATH',''.FCPATH.'/uploadfile/temp/install');
 
 define('SYS_TIME', time());
 define('SYS_DATETIME', date('Y-m-d H:i:s'));
-
+define('SYS_DATE', date('Y-m-d'));
 define('SITE_NAME','PRCS管理系统 ');
 define('WEBSITE_BASE_NAME','PRCS管理系统');
 

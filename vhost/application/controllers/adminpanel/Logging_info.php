@@ -49,7 +49,20 @@ class Logging_info extends Admin_Controller
 
     public function search()
     {
-        $data = $this->Logging_info_model->getfromview(0, 2000);
+        if (isset($_GET['keyword']) && isset($_GET['startdate']) && isset($_GET['enddate'])) {
+        
+            $key = ($_GET['keyword']) ? $_GET['keyword'] : "%";
+            $start = ($_GET['startdate']) ? $_GET['startdate'] : "1900-01-01";
+            $end = ($_GET['enddate']) ? $_GET['enddate'] : SYS_DATE;
+        
+            $data = $this->Logging_info_model->getbyKeyandDate($key, $start, $end);
+            $str = "search line is: key = ".$key.", startday = ".$start.", end = ".$end;
+        } else {
+            $data = $this->Logging_info_model->getfromview(0, 2000);
+            $str = "default page";
+        }
+        
+        
         $this->load->library('table');
         $template = array(
             'table_open' => '<table class="table table-hover dataTable">'
@@ -63,7 +76,7 @@ class Logging_info extends Admin_Controller
         $this->load->library('pagination');
         
         $pconfig['base_url'] = base_url() . 'adminpanel/logging_info/search';
-        $pconfig['total_rows'] = $data->num_rows();
+        $pconfig['total_rows'] = count($data);
         $pconfig['per_page'] = 20;
         
         $this->pagination->initialize($pconfig);
@@ -72,7 +85,8 @@ class Logging_info extends Admin_Controller
         $this->view('search', array(
             'require_js' => true,
             'table_data' => $table_data,
-            'pagelink' => $pageslink
+            'pagelink' => $pageslink,
+            'debug' => $str
         ));
     }
 }
