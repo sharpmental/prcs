@@ -499,7 +499,7 @@ class Manage extends Admin_Controller
             $ids = explode("_", $_POST['id']);
             
             foreach ($ids as $k => $v) {
-                $this->Prisonerinout_model->setstatusout(intval($v));
+                $this->Prisonerinout_model->setstatusout($v);
             }
             
             exit(json_encode(array(
