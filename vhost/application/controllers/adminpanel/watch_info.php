@@ -24,7 +24,8 @@ class Watch_info extends Admin_Controller
                     'tips' => '信息新增失败, no watch ID'
                 )));
             
-            $arr['watch_status'] = isset($_POST['watch_status']) ? $_POST['watch_status'] : 0;
+//             $arr['watch_status'] = isset($_POST['watch_status']) ? $_POST['watch_status'] : 0;
+            $arr['watch_status'] = 0;
             $arr['update_timestamp'] = date('Y-m-d H:i:s');
             
             $new_id = $this->Watchinfo_model->insert($arr);

@@ -362,7 +362,7 @@ class People_info extends Admin_Controller
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
-        $this->table->set_heading('编号', '部门号码', '腕带编号');
+        $this->table->set_heading('编号', '腕带编号', '部门号码' );
         
         $table_data = $this->table->generate($data);
         
@@ -462,7 +462,7 @@ class People_info extends Admin_Controller
             'table_open' => '<table class="table table-hover dataTable">'
         );
         $this->table->set_template($template);
-        $this->table->set_heading('编号', '部门号码', '腕带编号', '区域号码');
+        $this->table->set_heading('编号', '腕带编号', '部门号码', '区域号码');
         
         $table_data = $this->table->generate($data);
         

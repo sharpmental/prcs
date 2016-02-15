@@ -23,13 +23,13 @@
 							class="form-control validate[required]" placeholder="请输入人员ID">
 					</div>
 				</div>
-				<div class="form-group">
+				<!-- div class="form-group">
 					<label for="description" class="col-sm-2 control-label">腕表状态</label>
 					<div class="col-sm-9">
 						<input type="text" name="watch_status" id="watch_status" value=''
 							class="form-control validate[required]" placeholder="请输入">
 					</div>
-				</div>
+				</div -->
 			</fieldset>
 
 			<div class='form-actions'>

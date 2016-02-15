@@ -103,7 +103,7 @@ class Edittable extends Admin_Controller
         $pconfig['base_url'] = current_url();
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
-        
+        $pconfig['attributes'] = array('class' => 'pagination');
         $this->pagination->initialize($pconfig);
         
         $pageslink = $this->pagination->create_links();

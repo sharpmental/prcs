@@ -644,7 +644,8 @@ class Admin_Controller extends Member_Controller
         if (isset($menu2)) {
             foreach ($menu2 as $k => $v) {
                 if ($v['show'] != 0) {
-                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+//                     $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id']);
                     $menu_notify['person_count'][$v['locarea_name']] = array(
                         'url' => base_url($this->page_data['folder_name'] . "/people_info/localarm/" . $v['locarea_id']),
                         'name' => $v['locarea_name'],
@@ -652,8 +653,8 @@ class Admin_Controller extends Member_Controller
                     );
                     $t[$v['locarea_id']] = $v['locarea_name'];
                 } else {
-                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
-                    
+//                     $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+                    $number = $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id']);
                     if (isset($t[$v['parentid']])){
                         $name = $t[$v['parentid']];
                         $menu_notify['person_count'][$name]['number'] += $number;}
