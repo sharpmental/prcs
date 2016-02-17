@@ -175,7 +175,7 @@ VALUES
 	(12,'区域信息',0,12,1,'manage','adminpanel','go_12','0',1,0,1,1,'map-marker','0','12',1,1),
 	(13,'其他功能',0,13,1,'manage','adminpanel','go_13','0',1,0,1,1,'gears','0','13',1,1),
 	(14,'监狱地图',0,14,1,'manage','adminpanel','go_14','0',1,0,1,1,'photo','0','14',1,1),
-	(16,'栏目列表',9,16,1,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,2,9','16,17,18,19,20',1,1),
+	(16,'栏目列表',9,16,0,'moduleMenu','adminpanel','index','0',1,0,1,1,'','0,2,9','16,17,18,19,20',1,1),
 	(17,'数据表',3,17,1,'edittable','adminpanel','index/0','0',1,0,1,1,'','0,3','',1,1),
 	(18,'数据表',4,18,1,'edittable','adminpanel','index/1','0',1,0,1,1,'','0,4','',1,1),
 	(19,'数据表',11,19,1,'edittable','adminpanel','index/3','0',1,0,1,1,'','0,11','',1,1),
@@ -454,15 +454,15 @@ drop table if exists `tb_people_inout_detail`;
 
 create table `tb_people_inout_detail` (
   `inout_id` int(11) not null auto_increment,
-  `people_id` int(11) not null,
-  `watch_id` int(11) default null,
-  `area_id` int(11) default null,
-  `intime` datetime default null,
-  `outtime` datetime default null,
-  `memo` varchar(200) default null,
-  `status` smallint default 0,
+  `people_id` int(11) not null, #人员编号
+  `watch_id` int(11) default null,#腕表编号
+  `area_id` int(11) default null,#区域号码
+  `intime` datetime default null,#返回时间
+  `outtime` datetime default null,#离开时间
+  `memo` varchar(200) default null,#备注
+  `status` smallint default 0,#状态
   #0=返回 1=外出
-  `update_timestamp` datetime default null,
+  `update_timestamp` datetime default null,#更新时间
   primary key  (`inout_id`)
 ) engine=myisam default charset=utf8 comment='人员出入历史记录表';
 

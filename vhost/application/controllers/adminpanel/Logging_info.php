@@ -86,7 +86,7 @@ class Logging_info extends Admin_Controller
             'require_js' => true,
             'table_data' => $table_data,
             'pagelink' => $pageslink,
-            'debug' => $str
+            'debug' => ""
         ));
     }
 }

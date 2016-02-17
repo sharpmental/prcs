@@ -7,7 +7,7 @@
 			<div class='btn-group'>
 			<?php aci_ui_a($folder_name,'manage','index','',' class="btn "','<span class="glyphicon glyphicon-arrow-left"></span> 返回')?>
             <div class="btn" id="refreshBtnF">
-            <span class="glyphicon glyphicon-refresh">刷新</span>
+            <span class="glyphicon glyphicon-refresh">停止刷新</span>
             </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
 		<div class="pull-left">
 			<div class="btn-group">
 				<button type="button" class="btn btn-default" id="refreshBtn">
-					<span class="glyphicon glyphicon-refresh">&nbsp刷新</span>
+					<span class="glyphicon glyphicon-refresh">&nbsp停止刷新</span>
                 </button>
 				<button type="button" class="btn btn-default" id="outBtn">
 					<span class="glyphicon glyphicon-log-out">&nbsp外出</span>
