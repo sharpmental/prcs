@@ -1,8 +1,12 @@
 requirejs([ 'jquery', 'aci', 'bootstrap', 'bootstrapValidator', 'message',
 		'jquery-ui' ], function($, aci) {
 
-	$('#refreshBtn').click(mytogglerefresh);
-	$('#refreshBtnF').click(mytogglerefresh);
+	$('#refreshBtn').click(myrefresh);
+	$('#refreshBtnF').click(myrefresh);
+	function myrefresh(){
+		windows.location.reload();
+	} 
+	
 	$('#startdate').datepicker({
 		dateFormat : "yy-mm-dd"
 	});
