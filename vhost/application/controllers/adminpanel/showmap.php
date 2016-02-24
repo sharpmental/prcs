@@ -25,11 +25,13 @@ class Showmap extends Admin_Controller
                 $v['count'] = 0;
                 
                 // get people count
-                $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+//                 $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+                $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] );
                 
                 $locarea_list = $this->Locarea_info_model->getbyparentid($v['locarea_id']);
                 foreach ($locarea_list as $kk => $vv) {
-                    $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $vv['locarea_id'] . ' and alarm_type <> 0');
+//                     $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $vv['locarea_id'] . ' and alarm_type <> 0');
+                    $v['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $vv['locarea_id'] );
                 }
                 
                 array_push($div_list, $v);
