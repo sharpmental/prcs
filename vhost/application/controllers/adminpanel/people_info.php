@@ -460,7 +460,7 @@ class People_info extends Admin_Controller
                             $data3['people_id'],
                             $data3['people_name'],
                             $data3['watch_id'],
-                            $data3['watch_id'],
+                            $data3['dep_id'],
                             $v['locarea_id']
                         ));
                     }
