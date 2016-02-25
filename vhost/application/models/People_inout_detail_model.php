@@ -29,9 +29,9 @@ class People_inout_detail_model extends Base_model
             foreach ($data as $k => $v) {
                 $i = strtotime($v['intime']);
                 $j = strtotime($v['outtime']);
-                if (($i >= $s) && ($i <= $e)) {
+                if ($i && ($i >= $s) && ($i <= $e)) {
                     array_push($res, $v);
-                } elseif (($j >= $s) && ($j <= $e)) {
+                } elseif ($j && ($j >= $s) && ($j <= $e)) {
                     array_push($res, $v);
                 } else;
             }

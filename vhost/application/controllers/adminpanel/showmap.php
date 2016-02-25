@@ -60,7 +60,8 @@ class Showmap extends Admin_Controller
                     $tmp['count'] = 0;
                     
                     // get people count
-                    $tmp['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+//                     $tmp['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] . ' and alarm_type <> 0');
+                    $tmp['count'] += $this->Alarm_loc_model->count('locarea_id = ' . $v['locarea_id'] );
                     array_push($div_list, $tmp);
                 }
             }
