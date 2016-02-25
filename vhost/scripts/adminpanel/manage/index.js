@@ -1,7 +1,7 @@
 requirejs([ 'jquery', 'aci', 'bootstrap', 'bootstrapValidator', 'message' ],
 		function($, aci) {
 			/* For auto refresh control */
-			var reloadtime = 5000;
+			var reloadtime = 15000;
 			var startreload = 1;
 
 			function myrefresh() {
