@@ -33,8 +33,31 @@ class People_inout_detail_model extends Base_model
                     array_push($res, $v);
                 } elseif ($j && ($j >= $s) && ($j <= $e)) {
                     array_push($res, $v);
-                } else;
+                } else{
+                    array_push($res, array(
+                        $v['inout_id'],
+                        $v['people_id'],
+                        'Not Added!',
+                        'Not Added!',
+                        $v['intime'],
+                        $v['outime'],
+                        'Not Added!',
+                        'Not Added!'
+                    ));
+                }
             }
+        }
+        else{
+            array_push($res, array(
+                'failed to get data',
+                'failed to get data',
+                'Not Added!',
+                'Not Added!',
+                'failed to get data',
+                'failed to get data',
+                'Not Added!',
+                'Not Added!'
+            ));
         }
         
         return $res;

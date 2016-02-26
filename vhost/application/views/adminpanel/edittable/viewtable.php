@@ -17,7 +17,7 @@
 
 	<div class="panel-body">
 		<?php echo $table_data;?>
-        <?php echo $pagelink;?>
+        <?php if($pagelink) echo $pagelink; else "No page link?" ?>
     </div>
     
     <div class="panel-footer">

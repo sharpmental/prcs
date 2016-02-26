@@ -104,6 +104,20 @@ class Manage extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/index';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
+        $pconfig['full_tag_open'] = '<ul class="pagination">';
+        $pconfig['full_tag_close'] = '</ul>';
+        $pconfig['first_tag_open'] = '<li>';
+        $pconfig['first_tag_close'] = '</li>';
+        $pconfig['last_tag_open'] = '<li>';
+        $pconfig['last_tag_close'] = '</li>';
+        $pconfig['next_tag_open'] = '<li>';
+        $pconfig['next_tag_close'] = '</li>';
+        $pconfig['prev_tag_open'] = '<li>';
+        $pconfig['prev_tag_close'] = '</li>';
+        $pconfig['cur_tag_open'] = '<li><a href="#" class="pagination">';
+        $pconfig['cur_tag_close'] = '</a></li>';
+        $pconfig['num_tag_open'] = '<li>';
+        $pconfig['num_tag_close'] = '</li>';
         
         $this->pagination->initialize($pconfig);
         
@@ -318,6 +332,20 @@ class Manage extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
+        $pconfig['full_tag_open'] = '<ul class="pagination">';
+        $pconfig['full_tag_close'] = '</ul>';
+        $pconfig['first_tag_open'] = '<li>';
+        $pconfig['first_tag_close'] = '</li>';
+        $pconfig['last_tag_open'] = '<li>';
+        $pconfig['last_tag_close'] = '</li>';
+        $pconfig['next_tag_open'] = '<li>';
+        $pconfig['next_tag_close'] = '</li>';
+        $pconfig['prev_tag_open'] = '<li>';
+        $pconfig['prev_tag_close'] = '</li>';
+        $pconfig['cur_tag_open'] = '<li><a href="#" class="pagination">';
+        $pconfig['cur_tag_close'] = '</a></li>';
+        $pconfig['num_tag_open'] = '<li>';
+        $pconfig['num_tag_close'] = '</li>';
         
         $this->pagination->initialize($pconfig);
         
@@ -372,6 +400,20 @@ class Manage extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
+        $pconfig['full_tag_open'] = '<ul class="pagination">';
+        $pconfig['full_tag_close'] = '</ul>';
+        $pconfig['first_tag_open'] = '<li>';
+        $pconfig['first_tag_close'] = '</li>';
+        $pconfig['last_tag_open'] = '<li>';
+        $pconfig['last_tag_close'] = '</li>';
+        $pconfig['next_tag_open'] = '<li>';
+        $pconfig['next_tag_close'] = '</li>';
+        $pconfig['prev_tag_open'] = '<li>';
+        $pconfig['prev_tag_close'] = '</li>';
+        $pconfig['cur_tag_open'] = '<li><a href="#" class="pagination">';
+        $pconfig['cur_tag_close'] = '</a></li>';
+        $pconfig['num_tag_open'] = '<li>';
+        $pconfig['num_tag_close'] = '</li>';
         
         $this->pagination->initialize($pconfig);
         
@@ -426,6 +468,20 @@ class Manage extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
+        $pconfig['full_tag_open'] = '<ul class="pagination">';
+        $pconfig['full_tag_close'] = '</ul>';
+        $pconfig['first_tag_open'] = '<li>';
+        $pconfig['first_tag_close'] = '</li>';
+        $pconfig['last_tag_open'] = '<li>';
+        $pconfig['last_tag_close'] = '</li>';
+        $pconfig['next_tag_open'] = '<li>';
+        $pconfig['next_tag_close'] = '</li>';
+        $pconfig['prev_tag_open'] = '<li>';
+        $pconfig['prev_tag_close'] = '</li>';
+        $pconfig['cur_tag_open'] = '<li><a href="#" class="pagination">';
+        $pconfig['cur_tag_close'] = '</a></li>';
+        $pconfig['num_tag_open'] = '<li>';
+        $pconfig['num_tag_close'] = '</li>';
         
         $this->pagination->initialize($pconfig);
         
@@ -480,6 +536,20 @@ class Manage extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/manage/allregpeople';
         $pconfig['total_rows'] = $data->num_rows();
         $pconfig['per_page'] = 20;
+        $pconfig['full_tag_open'] = '<ul class="pagination">';
+        $pconfig['full_tag_close'] = '</ul>';
+        $pconfig['first_tag_open'] = '<li>';
+        $pconfig['first_tag_close'] = '</li>';
+        $pconfig['last_tag_open'] = '<li>';
+        $pconfig['last_tag_close'] = '</li>';
+        $pconfig['next_tag_open'] = '<li>';
+        $pconfig['next_tag_close'] = '</li>';
+        $pconfig['prev_tag_open'] = '<li>';
+        $pconfig['prev_tag_close'] = '</li>';
+        $pconfig['cur_tag_open'] = '<li><a href="#" class="pagination">';
+        $pconfig['cur_tag_close'] = '</a></li>';
+        $pconfig['num_tag_open'] = '<li>';
+        $pconfig['num_tag_close'] = '</li>';
         
         $this->pagination->initialize($pconfig);
         
