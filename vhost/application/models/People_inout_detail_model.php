@@ -33,16 +33,16 @@ class People_inout_detail_model extends Base_model
                     array_push($res, $v);
                 } elseif ($j && ($j >= $s) && ($j <= $e)) {
                     array_push($res, $v);
-                } else{
-                    array_push($res, array(
+                } else{//Debug only
+                        array_push($res, array(
                         $v['inout_id'],
                         $v['people_id'],
-                        'Not Added!',
-                        'Not Added!',
+                        'start time stamp'.$s,
+                        'end time stamp'.$e,
                         $v['intime'],
-                        $v['outime'],
-                        'Not Added!',
-                        'Not Added!'
+                        $v['outtime'],
+                        'intime stamp'.$i,
+                        'outtime stamp'.$j
                     ));
                 }
             }
