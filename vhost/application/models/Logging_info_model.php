@@ -28,17 +28,19 @@ class Logging_info_model extends \Base_Model
     public function getbyKeyandDate($key, $start, $end, $limit = 2000)
     {
         $res = array();
-        $s = strtotime($start);
-        $e = strtotime($end);
-    
+        $s=date_create($start);
+        $e=date_create($end);
+        
+        $this->db->order_by("log_id", "ASC");
         $data = $this->select("operator_id like '" . $key."' or name like '".$key."'", '*', $limit);
         if ($data) {
             foreach ($data as $k => $v) {
-                $i = strtotime($v['login_time']);
-                $j = strtotime($v['logout_time']);
-                if (($i >= $s) && ($i <= $e)) {
+                $i = date_create($v['intime']);
+                $j = date_create($v['outtime']);
+                
+                if ($i && ($i >= $s) && ($i <= $e)) {
                     array_push($res, $v);
-                } elseif (($j >= $s) && ($j <= $e)) {
+                } elseif ($j && ($j >= $s) && ($j <= $e)) {
                     array_push($res, $v);
                 } else;
             }
