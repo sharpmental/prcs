@@ -35,8 +35,8 @@ class Logging_info_model extends \Base_Model
         $data = $this->select("operator_id like '" . $key."' or name like '".$key."'", '*', $limit);
         if ($data) {
             foreach ($data as $k => $v) {
-                $i = date_create($v['intime']);
-                $j = date_create($v['outtime']);
+                $i = date_create($v['login_time']);
+                $j = date_create($v['logout_time']);
                 
                 if ($i && ($i >= $s) && ($i <= $e)) {
                     array_push($res, $v);

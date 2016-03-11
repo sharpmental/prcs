@@ -61,16 +61,16 @@ class People_inout_detail_model extends Base_model
                     
                     
                 } else{//Debug only
-                        array_push($res, array(
-                        $v['inout_id'],
-                        'this is the removed items!',
-                        'start time stamp'.($s->format("Y-m-d H:i:s")),
-                        'end time stamp'.($e->format("Y-m-d H:i:s")),
-                        $v['intime'],
-                        $v['outtime'],
-                        'intime stamp'.($i->format("Y-m-d H:i:s")),
-                        'outtime stamp'.($j->format("Y-m-d H:i:s"))
-                        ));
+//                         array_push($res, array(
+//                         $v['inout_id'],
+//                         'this is the removed items!',
+//                         'start time stamp'.($s->format("Y-m-d H:i:s")),
+//                         'end time stamp'.($e->format("Y-m-d H:i:s")),
+//                         $v['intime'],
+//                         $v['outtime'],
+//                         'intime stamp'.($i->format("Y-m-d H:i:s")),
+//                         'outtime stamp'.($j->format("Y-m-d H:i:s"))
+//                         ));
                 }
             }
         }

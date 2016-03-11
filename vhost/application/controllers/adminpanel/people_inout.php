@@ -40,6 +40,7 @@ class People_inout extends Admin_Controller
         $pconfig['base_url'] = base_url() . 'adminpanel/people_inout/index';
         $pconfig['total_rows'] = count($data);
         $pconfig['per_page'] = 20;
+        $pconfig['attributes'] = array('class' => 'pagination');
         $pconfig['full_tag_open'] = '<ul class="pagination">';
         $pconfig['full_tag_close'] = '</ul>';
         $pconfig['first_tag_open'] = '<li>';
