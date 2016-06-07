@@ -172,7 +172,7 @@ if ( ! function_exists('reduce_multiples'))
 	 *
 	 * Reduces multiple instances of a particular character.  Example:
 	 *
-	 * Fred, Bill,, Joe, Jimmy
+	 * Fred, Bill, Joe, Jimmy
 	 *
 	 * becomes:
 	 *

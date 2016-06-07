@@ -347,7 +347,7 @@ class CI_Trackback {
 	public function extract_urls($urls)
 	{
 		// Remove the pesky white space and replace with a comma, then replace doubles.
-		$urls = str_replace(',,', ',', preg_replace('/\s*(\S+)\s*/', '\\1,', $urls));
+		$urls = str_replace(',', ',', preg_replace('/\s*(\S+)\s*/', '\\1,', $urls));
 
 		// Break into an array via commas and remove duplicates
 		$urls = array_unique(preg_split('/[,]/', rtrim($urls, ',')));

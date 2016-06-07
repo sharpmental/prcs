@@ -292,7 +292,7 @@ class Tree {
 		return json_encode($data);
 	}
 	private function have($list,$item){
-		return(strpos(',,'.$list.',',','.$item.','));
+		return(strpos(','.$list.',',','.$item.','));
 	}
 }
 ?>
